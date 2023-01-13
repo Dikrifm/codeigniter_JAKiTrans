@@ -217,16 +217,7 @@ class Payment_model extends CI_model
         }
         
         return $data;
-        //asdasdadasasddsadasdasdasdasdasdd
-//aasdsaasdasdasdasdsadasd
-//asdasdasasdasdasdasd
-//asdasdasdasdasdasdadasddad
-//asdasdadasdasdasdasd
-//asdasdasdas
-
-
-
-//dfgfdgdfgdfgfdgfdg
+        
     }
     
     function add_transfer($param)
