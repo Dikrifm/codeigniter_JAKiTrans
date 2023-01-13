@@ -231,7 +231,7 @@ class Payment_model extends CI_model
         return $data;
         
     }
-    
+    //cek1122
     function add_transfer($param)
     {
         $data = new stdClass();
