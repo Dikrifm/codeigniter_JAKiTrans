@@ -221,7 +221,12 @@ class Payment_model extends CI_model
 //aasdsaasdasdasdasdsadasd
 //asdasdasasdasdasdasd
 //asdasdasdasdasdasdadasddad
-//asdasdad
+//asdasdadasdasdasdasd
+//asdasdasdas
+
+
+
+//dfgfdgdfgdfgfdgfdg
     }
     
     function add_transfer($param)
