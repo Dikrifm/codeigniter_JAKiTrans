@@ -195,7 +195,7 @@ class Payment_model extends CI_model
             
         if(!empty($penerima_c)){
             
-            if($penerima->id == $param->id_user){
+            if($penerima_c->id == $param->id_user){
                 $data->error = "Tidak bisa melakukan transfer ke akun sendiri";
             
             }else{
@@ -205,13 +205,25 @@ class Payment_model extends CI_model
             }
                  
         }elseif(!empty($penerima_d)){
+
+            if($penerima_d->id == $param->id_user){
+                $data->error = "Tidak bisa melakukan transfer ke akun sendiri";
+
+            }else{
                 $data->nama_penerima = $penerima_d->nama_driver;
                 $data->id            = $penerima_d->id;
-                
+            }
+
         }elseif(!empty($penerima_m)){
+            
+            if($penerima_m->id == $param->id_user){
+                $data->error = "Tidak bisa melakukan transfer ke akun sendiri";
+
+            }else{
                 $data->nama_penerima = $penerima_m->nama_mitra;
                 $data->id            = $penerima_m->id_mitra;
-                
+            }
+            
         }else{
             $data->error = "Data penerima tidak ditemukan";
         }
