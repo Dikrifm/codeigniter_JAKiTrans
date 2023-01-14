@@ -15,7 +15,7 @@ class Digital extends REST_Controller
 
     function index_get()
     {
-        $this->response("Api for ppob kujek!", 200);
+        $this->response("Api for PPOB API JAKiTrans!", 200);
     }
     
     function kategori_get()
