@@ -89,8 +89,9 @@ class Payment_model extends CI_model
     }
     
     function get_all_jenis_payment()
-    {
+    {   
         $res = $this->db->get('payment_jenis')->result();
+
         if(count($res) > 0){
             foreach($res as $value){
                 $data[] = [
@@ -104,10 +105,41 @@ class Payment_model extends CI_model
         
         return $data;
     }
+
+    function get_all_wd_method(){
+        $this->where('tipe', 2);
+        $this->where('status', 1);
+        $this->where('jenis', 4);
+        $this->db->order_by('id', 'ASC');
+        $res = $this->db->get('payment_method');
+        if($res->num_rows() > 0){
+            foreach($res->result() as $value){
+                $data[] = [
+                    'id'         => $value->id,
+                    'tipe'       => $value->tipe,
+                    'jenis'      => $value->jenis,
+                    'nama'       => $value->nama,
+                    'keterangan' => $value->keterangan,
+                    'bank'       => $value->bank,
+                    'noRekening' => $value->no_rekening,
+                    'namaRekening' => $value->nama_rekening,
+                    'image'      => base_url().'images/promo/'.$value->image,
+                    'biaya'      => $value->biaya,
+                    'code'       => $value->channel_code
+                ];
+            }
+            
+        }else{
+            $data = [];
+        }
+        
+        return $data;
+    }
+
     
     function get_data_payment_group($jenis)
     {
-
+        $this->db->where('tipe', 1);
         $this->db->where('status', 1);
         $this->db->where('jenis', $jenis);
         $this->db->order_by('id', 'ASC');

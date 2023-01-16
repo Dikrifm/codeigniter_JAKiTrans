@@ -35,6 +35,22 @@ class Payment extends REST_Controller{
         $this->response($message, 200);
     }
     
+    function get_wd_method_get(){
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $wd = $this->Payment_model->get_all_wd_method();
+
+        $message = array(
+            'code' => '200',
+            'message' => 'success',
+            'data' => $wd
+        );
+        $this->response($message, 200);
+    }
     
     /*add api to transfer fitur and donate 040722*/
     
