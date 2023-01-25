@@ -997,4 +997,29 @@ class Payment_model extends CI_model
 
         return $data;
     }
+
+    //QR Payment Model ----------------------------------------------------------------------------------------------------------
+    function get_data_qr_payment()
+    {
+        $this->db->select('*');
+        $this->db->order_by('created_date', 'ASC');
+        return  $this->db->get('qr_event')->result_array();
+    }
+
+    function insert_qr_payment($data){
+        /*
+        $dataq = array(
+        
+            'id' => $data['id_qris'],
+            'nama_event' => $data['nama_event'],
+            $data['nominal'],
+            $data['tipe'],
+            $data['image_path'],
+            $data['expired_path']
+        );
+        */
+
+        return $this->db->insert('qr_event', $data);
+    
+    }
 }

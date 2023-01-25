@@ -577,5 +577,25 @@ class Payment extends REST_Controller{
         exit;
     }
     
+    //QR Payment Respones -------------------------------------------------------------------------------
+
+    function payment_qris_event(){
+        $input = file_get_contents("php://input");
+        log_message('debug',$input);
+
+        $req = json_decode($input, true);
+   
+        $data = $this->Payment_model->insert_qr_payment($req);
+        $resp['message'] = 'success';
+        $resp['data'] = $data;
+
+        if(!empty($data->error)){
+            $resp['message'] = $data->error;
+            $resp['data'] = null;
+        }
+
+        echo json_encode($data);
+        exit;
+    }
      
 }
