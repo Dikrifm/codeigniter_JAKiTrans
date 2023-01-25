@@ -593,7 +593,7 @@ class Payment extends REST_Controller{
         $config['cacheable']    = true; 
         $config['cachedir']     = './asset/log/'; 
         $config['errorlog']     = './asset/log/'; 
-        $config['imagedir']     = './asset/images/qr/'; 
+        $config['imagedir']     = './asset/images/'; 
         $config['quality']      = true; 
         $config['size']         = '1024'; 
         $config['black']        = array(224,255,255); 
