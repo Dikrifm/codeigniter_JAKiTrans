@@ -267,5 +267,57 @@ class Payments extends CI_Controller
             $this->load->view('includes/footer');
         }
     }
-    
+
+    //QR Payment Method ----------------------------------------------------------------------------
+    public function qr(){
+        $groupLevel = $this->session->userdata('role');
+        $userId = $this->session->userdata('id');
+
+        $data['menu'] = $this->group->get_menu_user($groupLevel);
+        $data['allmenu'] = $this->group->get_all_menu();
+        $data['qr_data'] = $this->payment->get_data_qr_payment();
+
+        $this->load->view('includes/header', $data);
+        $this->load->view('payment/qr', $data);
+        $this->load->view('includes/footer');
+    }
+
+    public function insert_qr(){
+
+        
+
+        /*
+        $this->input->post('nominal');        
+        $this->input->post('tipe');
+        $this->input->post('status');
+        $this->input->post('image_path');
+        $this->input->post('expired_date');
+
+        //$payload_qr = 
+
+        $this->load->library('ciqrcode');
+        
+        $config['cacheable']    = true; 
+        $config['cachedir']     = './asset/qr/'; 
+        $config['errorlog']     = './asset/qr/'; 
+        $config['imagedir']     = './asset/images/qr/'; 
+        $config['quality']      = true; 
+        $config['size']         = '1024'; 
+        $config['black']        = array(224,255,255); 
+        $config['white']        = array(70,130,180);
+
+        $this->ciqrcode->initialize($config);
+ 
+        $image_name = $nim.'.png'; //buat name dari qr code sesuai dengan nim
+ 
+        $params['data'] = $nim; //data yang akan di jadikan QR CODE
+        $params['level'] = 'H'; //H=High
+        $params['size'] = 10;
+        $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+        $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
+ 
+        $this->mahasiswa_model->simpan_mahasiswa($nim,$nama,$prodi,$image_name); //simpan ke database
+        redirect('mahasiswa'); //redirect ke mahasiswa usai simpan data
+        */       
+    }
 }
