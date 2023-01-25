@@ -583,9 +583,33 @@ class Payment extends REST_Controller{
         $input = file_get_contents("php://input");
         log_message('debug',$input);
 
-        $req = json_decode($input, true);
-   
+        $data_json = json_decode($input);
+        $req       = json_decode($input, true);
+        
         $data = $this->Payment_model->insert_qr_payment($req);
+
+        $this->load->library('ciqrcode'); 
+ 
+        $config['cacheable']    = true; 
+        $config['cachedir']     = './asset/log/'; 
+        $config['errorlog']     = './asset/log/'; 
+        $config['imagedir']     = './asset/images/qr/'; 
+        $config['quality']      = true; 
+        $config['size']         = '1024'; 
+        $config['black']        = array(224,255,255); 
+        $config['white']        = array(70,130,180); 
+        
+        $this->ciqrcode->initialize($config);
+ 
+        $image_name  = $req['id'].'.png'; 
+ 
+        $params['data'] = $data_json; 
+        $params['level'] = 'H'; 
+        $params['size'] = 10;
+        $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+        
+        $this->ciqrcode->generate($params);
+
         $resp['message'] = 'success';
         $resp['data'] = $data;
 
