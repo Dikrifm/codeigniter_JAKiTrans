@@ -579,7 +579,7 @@ class Payment extends REST_Controller{
     
     //QR Payment Respones -------------------------------------------------------------------------------
 
-    function payment_qris_event(){
+    function payment_qris_event_post(){
         $input = file_get_contents("php://input");
         log_message('debug',$input);
 
