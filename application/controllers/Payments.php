@@ -323,8 +323,6 @@ class Payments extends CI_Controller
     function edit_qr($id){
         $data = $this->payment->get_qr_event_by_id($id);
 
-        
-
         if(!empty($_POST)){
 
         }else{

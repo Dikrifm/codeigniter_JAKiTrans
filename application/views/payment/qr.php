@@ -99,7 +99,7 @@
                                                         <?= $qr['expired_date'] ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url(); ?>payments/editqr.php/<?= $qr['id']; ?>">
+                                                        <a href="<?= base_url(); ?>payments/edit_qr/<?= $qr['id']; ?>">
                                                             <button class="btn btn-primary">Edit</button>
                                                         </a>
                                                         <a href="<?= base_url(); ?>payments/delete_qr/<?= $qr['id']; ?>" onclick="return confirm ('Are you sure?')">
