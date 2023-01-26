@@ -284,14 +284,14 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    function qrr(){
+    function qrr($id){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
 
         $data['menu'] = $this->group->get_menu_user($groupLevel);
         $data['allmenu'] = $this->group->get_all_menu();
-        
-        $qr = $this->payment->get_qr_event_by_id($id);
+
+        $data = $this->payment->get_qr_event_by_id($id);
 
         $this->load->view('includes/header', $data);
         $this->load->view('payment/zoom_qr', $data);
