@@ -287,8 +287,9 @@ class Payments extends CI_Controller
     function insert_qr(){
     
     if(!empty($_POST)){
+
         $data_ins = array(
-            'id'            => $this->input->post('id'),
+            'nama_event'    => $this->input->post('nama_event'),
             'nominal'       => $this->input->post('nominal'),        
             'tipe'          => $this->input->post('tipe'),
             'status'        => $this->input->post('status'),
@@ -300,13 +301,12 @@ class Payments extends CI_Controller
         $image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
         
         $qr_body = array(
-            "id"         => $qr->id,
-            "nama_event" => $qr->nama_event,
-            "nominal"    => $qr->nominal,
-            "tipe"       => $qr->tipe,
-            "status"     => $qr->status,
-            "qrstring"   => $qr->qrstring,
-            "image_path" => $qr->image_path
+            "id"           => $qr->id,
+            "nama_event"   => $qr->nama_event,
+            "nominal"      => $qr->nominal,
+            "tipe"         => $qr->tipe,
+            "status"       => $qr->status,
+            "expired_date" => $qr->expired_date 
         );
 
         $qr_json = json_encode($qr_body);

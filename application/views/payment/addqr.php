@@ -12,13 +12,13 @@
                     <?= form_open_multipart('payments/insert_qr'); ?>
 
                     <div class="form-group">
-                        <label for="newstitle">Nama Event</label>
-                        <input type="text" class="form-control" id="nama_event" name="nama_event" value="<?= $nama_event ?>" required>
+                        <label for="nama_event">Nama Event</label>
+                        <input type="text"  id="nama_event" name="nama_event" required class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label for="newstitle">Nominal</label>
-                        <input type="text" class="form-control" id="nominal" name="nominal" value="<?= $nominal ?>" required>
+                        <label for="nominal">Nominal</label>
+                        <input type="number"  id="nominal" name="nominal" required class="form-control">
                     </div>
 
                     <div class="form-group">
