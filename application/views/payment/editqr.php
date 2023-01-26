@@ -6,10 +6,20 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title">
-                        Tambah QR Code Event
+                        Ubah Data QR Code Event
                     </h4>
 
-                    <?= form_open_multipart('payments/insert_qr'); ?>
+                    <?= form_open_multipart('payments/ubah/' . $id); ?>
+                    <input type="hidden" name="id" value='<?= $id ?>'>
+                    
+                    <div class="form-group">
+                        <input type="file" class="dropify" name="logo" data-max-file-size="3mb" data-default-file="<?= base_url('asset/images/qr/') . $id ?>"/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newstitle">ID QRIS</label>
+                        <input type="text" class="form-control" id="id" name="id" value="<?= $id ?>" required>
+                    </div>
 
                     <div class="form-group">
                         <label for="newstitle">Nama Event</label>
@@ -39,13 +49,11 @@
 
                     <div class="form-group">
                         <label fot="expired_date">Expired Date</label>
-                        <input type="date" name="expired_date" class="form-control custom-select  mt-15" required>
+                        <input type="date" name="expired_date" class="form-control custom-select  mt-15" value="<?= $expired_date ?>">
                     </div>
 
-                    
-
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="<?= base_url() ?>ppoboperator" class="btn btn-danger">Cancel</a>
+                    <a href="<?= base_url() ?>metode" class="btn btn-danger">Cancel</a>
                     <?= form_close(); ?>
                 </div>
             </div>
