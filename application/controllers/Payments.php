@@ -323,7 +323,19 @@ class Payments extends CI_Controller
         */       
     }
 
-    function QRcode($kodenya = "121212"){
+    function QRcode(){
+
+        $kodenya = '{
+            "id" : "2",
+            "id_saldo" : "1000", 
+            "nama_event" : "test QR 1",
+            "nominal" : "100023",	
+            "tipe" : "STATIS",
+            "status" : "1",
+            "qrstring" : "test QRSTR",
+            "expired_date" : "2024-01-01"
+        }';
+
         QRcode::png(
 
             $kodenya,
