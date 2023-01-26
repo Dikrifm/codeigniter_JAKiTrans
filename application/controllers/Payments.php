@@ -334,12 +334,12 @@ class Payments extends CI_Controller
 
     function print_qr(){
         //get qr code by id
-        //$qr = $this->payment->get_qr_event_by_id($id);
+        $qr = $this->payment->get_qr_event_by_id($id);
 
-        $data['qr'] = $qr;
+        $data = $qr;
 
         $this->load->view('includes/header', $data);
-        $this->load->view('payment/zoom_qr', $data);
+        $this->load->view('payment/addqr', $data);
         $this->load->view('includes/footer');
     }
 
