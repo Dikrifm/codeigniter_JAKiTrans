@@ -72,7 +72,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="badge badge-primary">
-                                                            <img width="80" height="80" class="avatar-img rounded-circle" src="<?= base_url('asset/images/qr/') . $qr['image_path']; ?>">
+                                                            <img width="80" height="80" class="avatar-img rounded-circle" src="<?= base_url('images/qr/') . $qr['id'].'.png'; ?>">
                                                         </div>
                                                     </td>
                                                     <td>
