@@ -1020,6 +1020,11 @@ class Payment_model extends CI_model
         */
 
         return $this->db->insert('qr_event', $data);
-    
+    }
+
+    function last_qr_item(){
+        $this->db->get('qr_event');
+
+        return $this->db->last_query();
     }
 }

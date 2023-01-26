@@ -286,41 +286,38 @@ class Payments extends CI_Controller
 
     function insert_qr(){
 
+        $data_ins = array(
+            'id'       => $this->input->post('id'),
+            'nominal'       => $this->input->post('nominal'),        
+            'tipe'          => $this->input->post('tipe'),
+            'status'        => $this->input->post('status'),
+            'expired_date'  => $this->input->post('expired_date') 
+        );
+        $this->payment_model->insert_qr_payment($data_ins); //simpan ke database
+        $qr = $this->payment_model->last_qr_item()->result();
+
+        $image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
         
+        $qr_body = array(
+            "id"         => $qr->id,
+            "nama_event" => $qr->nama_event,
+            "nominal"    => $qr->nominal,
+            "tipe"       => $qr->tipe,
+            "status"     => $qr->status,
+            "qrstring"   => $qr->qrstring,
+            "image_path" => $qr->image_path
+        );
 
-        /*
-        $this->input->post('nominal');        
-        $this->input->post('tipe');
-        $this->input->post('status');
-        $this->input->post('image_path');
-        $this->input->post('expired_date');
+        $qr_json = json_encode($qr_body);
 
-        //$payload_qr = 
-
-        $this->load->library('ciqrcode');
-        
-        $config['cacheable']    = true; 
-        $config['cachedir']     = './asset/qr/'; 
-        $config['errorlog']     = './asset/qr/'; 
-        $config['imagedir']     = './asset/images/qr/'; 
-        $config['quality']      = true; 
-        $config['size']         = '1024'; 
-        $config['black']        = array(224,255,255); 
-        $config['white']        = array(70,130,180);
-
-        $this->ciqrcode->initialize($config);
- 
-        $image_name = $nim.'.png'; //buat name dari qr code sesuai dengan nim
- 
-        $params['data'] = $nim; //data yang akan di jadikan QR CODE
+        $params['data'] = $qr_json; //data yang akan di jadikan QR CODE
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;
-        $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
+        $params['savename'] = FCPATH.'asset/images/qr/'.$image_name; //simpan image QR CODE ke folder assets/images/
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
  
-        $this->mahasiswa_model->simpan_mahasiswa($nim,$nama,$prodi,$image_name); //simpan ke database
-        redirect('mahasiswa'); //redirect ke mahasiswa usai simpan data
-        */       
+        redirect('payments/qr'); //redirect ke mahasiswa usai simpan data
+
     }
 
     function QRcode(){

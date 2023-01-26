@@ -15,6 +15,8 @@ class Payment extends REST_Controller{
         $this->load->model('Donasi_model');
         $this->load->model('Notification_model');
         date_default_timezone_set('Asia/Jakarta');
+
+        $this->load->library('Ciqrcode'); 
     }
     
     function index_get()
@@ -577,7 +579,7 @@ class Payment extends REST_Controller{
         exit;
     }
     
-    //QR Payment Respones -------------------------------------------------------------------------------
+    //QR Payment Method -------------------------------------------------------------------------------
 
     function payment_qris_event_post(){
         $input = file_get_contents("php://input");
@@ -588,7 +590,7 @@ class Payment extends REST_Controller{
         
         $data = $this->Payment_model->insert_qr_payment($req);
 
-        $this->load->library('ciqrcode'); 
+        
  
         $config['cacheable']    = true; 
         $config['cachedir']     = './asset/log/'; 
@@ -620,6 +622,10 @@ class Payment extends REST_Controller{
 
         echo json_encode($data);
         exit;
+    }
+
+    function QRcode(){
+
     }
      
 }
