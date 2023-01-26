@@ -332,7 +332,7 @@ class Payments extends CI_Controller
         }
     }
 
-    function print_qr(){
+    function qrr(){
         //get qr code by id
         $qr = $this->payment->get_qr_event_by_id($id);
 
