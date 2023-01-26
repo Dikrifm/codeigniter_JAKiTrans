@@ -285,9 +285,10 @@ class Payments extends CI_Controller
     }
 
     function insert_qr(){
-
+    
+    if(!empty($_POST)){
         $data_ins = array(
-            'id'       => $this->input->post('id'),
+            'id'            => $this->input->post('id'),
             'nominal'       => $this->input->post('nominal'),        
             'tipe'          => $this->input->post('tipe'),
             'status'        => $this->input->post('status'),
@@ -315,8 +316,13 @@ class Payments extends CI_Controller
         $params['size'] = 10;
         $params['savename'] = FCPATH.'asset/images/qr/'.$image_name; //simpan image QR CODE ke folder assets/images/
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
- 
+        
         redirect('payments/qr'); //redirect ke mahasiswa usai simpan data
+    }else{
+        $this->load->view('includes/header', $data);
+        $this->load->view('payment/addqr', $data);
+        $this->load->view('includes/footer');
+    }
 
     }
 
