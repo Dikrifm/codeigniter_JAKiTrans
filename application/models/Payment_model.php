@@ -1006,6 +1006,11 @@ class Payment_model extends CI_model
         return  $this->db->get('qr_event')->result_array();
     }
 
+    function get_qr_event_by_id($id){
+        $this->db->where('id', $id);
+        return $this->db->get('qr_event')->result_array();
+    }
+
     function insert_qr_payment($data){
         /*
         $dataq = array(
