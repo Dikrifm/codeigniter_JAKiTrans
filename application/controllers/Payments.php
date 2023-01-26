@@ -284,7 +284,7 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    function qrr($id){
+    function print_qr($id){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
 
@@ -344,17 +344,6 @@ class Payments extends CI_Controller
             $this->load->view('payment/editqr', $data);
             $this->load->view('includes/footer');
         }
-    }
-
-    function print_qr(){
-        //get qr code by id
-        $qr = $this->payment->get_qr_event_by_id($id);
-
-        $data = $qr;
-
-        $this->load->view('includes/header', $data);
-        $this->load->view('payment/addqr', $data);
-        $this->load->view('includes/footer');
     }
 
     function delete_qr($id){
