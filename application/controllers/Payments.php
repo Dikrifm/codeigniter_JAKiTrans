@@ -302,23 +302,6 @@ class Payments extends CI_Controller
         );
 
         $this->payment->insert_qr_payment($data_ins); //simpan ke database
-        
-        //$this->load->library('Ciqrcode');
-
-        //$qr = $this->payment->last_qr_item()->result();
-
-        //$image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
-        
-        /*
-        $qr_body = array(
-            "id"           => $qr->id,
-            "nama_event"   => $qr->nama_event,
-            "nominal"      => $qr->nominal,
-            "tipe"         => $qr->tipe,
-            "status"       => $qr->status,
-            "expired_date" => $qr->expired_date 
-        );
-        */
 
         $qr_json = json_encode($data_ins);
 
@@ -337,14 +320,28 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
+    function edit_qr($id){
+        $data = $this->payment->get_qr_event_by_id($id);
+
+        
+
+        if(!empty($_POST)){
+
+        }else{
+            $this->load->view('includes/header', $data);
+            $this->load->view('payment/editqr', $data);
+            $this->load->view('includes/footer');
+        }
+    }
+
     function print_qr(){
         //get qr code by id
         //$qr = $this->payment->get_qr_event_by_id($id);
 
-        //$data['qr'] = $qr;
+        $data['qr'] = $qr;
 
-        $this->load->view('includes/header');
-        $this->load->view('payment/success_payment');
+        $this->load->view('includes/header', $data);
+        $this->load->view('payment/zoom_qr', $data);
         $this->load->view('includes/footer');
     }
 

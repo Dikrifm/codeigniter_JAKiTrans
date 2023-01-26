@@ -9,11 +9,11 @@
                         Ubah Data QR Code Event
                     </h4>
 
-                    <?= form_open_multipart('payments/ubah/' . $id); ?>
+                    <?= form_open_multipart('payments/edit_qr/' . $id); ?>
                     <input type="hidden" name="id" value='<?= $id ?>'>
                     
                     <div class="form-group">
-                        <input type="file" class="dropify" name="logo" data-max-file-size="3mb" data-default-file="<?= base_url('asset/images/qr/') . $id ?>"/>
+                        <input type="file" class="dropify" name="logo" data-max-file-size="3mb" data-default-file="<?= base_url('images/qr/') . $image_path ?>"/>
                     </div>
                     
                     <div class="form-group">
@@ -34,8 +34,20 @@
                     <div class="form-group">
                         <label for="status">Tipe</label>
                         <select id="getFname" onchange="admSelectCheck(this);" class="form-control custom-select  mt-15" name="tipe">
-                            <option id="STATIC" value="STATIC" >"STATIC"</option>
-                            <option id="DYNAMIC" value="DYNAMIC" >"DYNAMIC"</option>
+                            <?php 
+                                if($tipe == 'STATIC'){
+                            ?>
+                                <option id="STATIC" value="STATIC" selected>"STATIC"</option>
+                                <option id="DYNAMIC" value="DYNAMIC" >"DYNAMIC"</option>
+                            <?php
+                                }else{
+                            ?>
+                                <option id="STATIC" value="STATIC" >"STATIC"</option>
+                                <option id="DYNAMIC" value="DYNAMIC" selected>"DYNAMIC"</option>
+                            <?php
+                                }
+                            ?>
+
                         </select>
                     </div>
 
@@ -43,7 +55,7 @@
                         <label for="status">Status</label>
                         <select id="getFname" onchange="admSelectCheck(this);" class="form-control custom-select  mt-15" name="status">
                             <option id="non-active" value="0" >non-Active</option>
-                            <option id="active" value="1" >Active</option>
+                            <option id="active" value="1" <?php if($status == 1) echo 'selected' ?>>Active</option>
                         </select>
                     </div>
 
@@ -53,7 +65,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="<?= base_url() ?>metode" class="btn btn-danger">Cancel</a>
+                    <a href="<?= base_url() ?>payments/qr" class="btn btn-danger">Cancel</a>
                     <?= form_close(); ?>
                 </div>
             </div>
