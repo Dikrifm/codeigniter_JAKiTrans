@@ -11,8 +11,10 @@ class Payments extends CI_Controller
             redirect(base_url() . "login");
         }
         $this->load->model('Payment_model', 'payment');
-         $this->load->model('Group_model', 'group');
+        $this->load->model('Group_model', 'group');
         $this->load->library('form_validation');
+
+        $this->load->library('ciqrcode');
     }
     
     public function index()
@@ -269,7 +271,7 @@ class Payments extends CI_Controller
     }
 
     //QR Payment Method ----------------------------------------------------------------------------
-    public function qr(){
+    function qr(){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
 
@@ -282,7 +284,7 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    public function insert_qr(){
+    function insert_qr(){
 
         
 
@@ -319,5 +321,17 @@ class Payments extends CI_Controller
         $this->mahasiswa_model->simpan_mahasiswa($nim,$nama,$prodi,$image_name); //simpan ke database
         redirect('mahasiswa'); //redirect ke mahasiswa usai simpan data
         */       
+    }
+
+    function QRcode($kodenya = "121212"){
+        QRcode::png(
+
+            $kodenya,
+            $outfile = false,
+            $level = QR_ECLEVEL_H,
+            $size = 5,
+            $margin = 2
+
+        );
     }
 }
