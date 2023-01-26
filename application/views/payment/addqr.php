@@ -23,7 +23,7 @@
 
                     <div class="form-group">
                         <label for="status">Tipe</label>
-                        <select id="getFname" onchange="admSelectCheck(this);" class="form-control custom-select  mt-15" name="tipe">
+                        <select id="getFname" class="form-control custom-select  mt-15" name="tipe" id='tipe'>
                             <option id="STATIC" value="STATIC" >"STATIC"</option>
                             <option id="DYNAMIC" value="DYNAMIC" >"DYNAMIC"</option>
                         </select>
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label for="status">Status</label>
-                        <select id="getFname" onchange="admSelectCheck(this);" class="form-control custom-select  mt-15" name="status">
+                        <select id="getFname" class="form-control custom-select  mt-15" name="status" id="status">
                             <option id="non-active" value="0" >non-Active</option>
                             <option id="active" value="1" >Active</option>
                         </select>
@@ -45,7 +45,7 @@
                     
 
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    <a href="<?= base_url() ?>ppoboperator" class="btn btn-danger">Cancel</a>
+                    <a href="<?= base_url() ?>payments/qr" class="btn btn-danger">Cancel</a>
                     <?= form_close(); ?>
                 </div>
             </div>
