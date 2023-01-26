@@ -99,14 +99,14 @@
                                                         <?= $qr['expired_date'] ?>
                                                     </td>
                                                     <td>
-                                                        <a href="<?= base_url(); ?>payments/editqr.php/<?= $qr['id']; ?>">
+                                                        <a href="<?= base_url(); ?>payment/editqr.php/<?= $qr['id']; ?>">
                                                             <button class="btn btn-primary">Edit</button>
                                                         </a>
-                                                        <a href="<?= base_url(); ?>payments/delete_qr/<?= $s['id']; ?>" onclick="return confirm ('Are you sure?')">
+                                                        <a href="<?= base_url(); ?>payment/delete_qr/<?= $qr['id']; ?>" onclick="return confirm ('Are you sure?')">
                                                             <button class="btn btn-outline-danger">Delete</button>
                                                         </a>
-                                                        <a href="<?= base_url(); ?>payments/zoom_qr/<?= $s['id']; ?>">
-                                                            <button class="btn btn-outline-seceondary">Cetak</button>
+                                                        <a href="<?= base_url(); ?>payment/zoom_qr/<?= $qr['id']; ?>">
+                                                            <button class="btn btn-outline-secondary">Cetak</button>
                                                         </a>
                                                     </td>
 
