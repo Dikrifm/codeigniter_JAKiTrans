@@ -293,9 +293,9 @@ class Payments extends CI_Controller
             'nominal'       => $this->input->post('nominal'),        
             'tipe'          => $this->input->post('tipe'),
             'status'        => $this->input->post('status'),
-            'expired_date'  => $this->input->post('expired_date') 
+            //'expired_date'  => $this->input->post('expired_date') 
         );
-        $this->payment_model->insert_qr_payment($data_ins); //simpan ke database
+        $this->payment->insert_qr_payment($data_ins); //simpan ke database
         /*
         $qr = $this->payment_model->last_qr_item()->result();
 
