@@ -102,8 +102,11 @@
                                                         <a href="<?= base_url(); ?>payments/editqr.php/<?= $qr['id']; ?>">
                                                             <button class="btn btn-primary">Edit</button>
                                                         </a>
-                                                        <a href="<?= base_url(); ?>payments/delete_qr/<?= $s['id']; ?>" onclick="return confirm ('are you sure?')">
+                                                        <a href="<?= base_url(); ?>payments/delete_qr/<?= $s['id']; ?>" onclick="return confirm ('Are you sure?')">
                                                             <button class="btn btn-outline-danger">Delete</button>
+                                                        </a>
+                                                        <a href="<?= base_url(); ?>payments/zoom_qr/<?= $s['id']; ?>">
+                                                            <button class="btn btn-outline-seceondary">Cetak</button>
                                                         </a>
                                                     </td>
 

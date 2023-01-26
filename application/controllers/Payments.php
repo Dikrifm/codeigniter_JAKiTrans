@@ -337,25 +337,30 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    function save_qr($id){
+    function zoom_qr($id){
         //get qr code by id
         $qr = $this->payment->get_qr_event_by_id($id);
+
+        $data['qr'] = $qr;
+
+        $this->load->view('payments/zoom_qr', $data);
+    }
+
+    function delete_qr($id){
+        $this->payment->delete_qr_payment($id);
+
+        $this->session->set_flashdata('hapus', 'QR Event berhasil dihapus');
+        
+        redirect('payments/qr');
     }
 
     }
 
     function QRcode(){
 
-        $kodenya = '{
-            "id" : "2",
-            "id_saldo" : "1000", 
-            "nama_event" : "test QR 1",
-            "nominal" : "100023",	
-            "tipe" : "STATIS",
-            "status" : "1",
-            "qrstring" : "test QRSTR",
-            "expired_date" : "2024-01-01"
-        }';
+        $qr = $this->payment->get_qr_event_by_id($id);
+
+        
 
         QRcode::png(
 
