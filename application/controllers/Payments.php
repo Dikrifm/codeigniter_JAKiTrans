@@ -343,7 +343,7 @@ class Payments extends CI_Controller
 
         $data['qr'] = $qr;
 
-        $this->load->view('payments/zoom_qr', $data);
+        $this->load->view('payment/zoom_qr', $data);
     }
 
     function delete_qr($id){
