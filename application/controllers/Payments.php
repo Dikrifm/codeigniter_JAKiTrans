@@ -298,11 +298,13 @@ class Payments extends CI_Controller
         $this->payment->insert_qr_payment($data_ins); //simpan ke database
         
         $this->load->library('Ciqrcode');
-        
-        $qr = $this->payment->last_qr_item()->result();
 
-        $image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
+        //$qr = $this->payment->last_qr_item()->result();
+
+        //$image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
         
+        $image_name = '1.png';
+        /*
         $qr_body = array(
             "id"           => $qr->id,
             "nama_event"   => $qr->nama_event,
@@ -311,13 +313,14 @@ class Payments extends CI_Controller
             "status"       => $qr->status,
             "expired_date" => $qr->expired_date 
         );
+        */
 
         $qr_json = json_encode($qr_body);
 
-        $params['data'] = $qr_json; //data yang akan di jadikan QR CODE
+        $params['data'] = "Cekcekcek : test"; //data yang akan di jadikan QR CODE
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;
-        $params['savename'] = FCPATH.'asset/images/qr/'.$image_name; //simpan image QR CODE ke folder assets/images/
+        $params['savename'] = FCPATH.'images/qr/'.$image_name; //simpan image QR CODE ke folder assets/images/
         
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
         
