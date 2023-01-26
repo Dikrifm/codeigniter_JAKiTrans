@@ -284,6 +284,19 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
+    function qrr(){
+        $groupLevel = $this->session->userdata('role');
+        $userId = $this->session->userdata('id');
+
+        $data['menu'] = $this->group->get_menu_user($groupLevel);
+        $data['allmenu'] = $this->group->get_all_menu();
+        //$data['qr_data'] = $this->payment->get_data_qr_payment();
+
+        $this->load->view('includes/header', $data);
+        $this->load->view('payment/qrr', $data);
+        $this->load->view('includes/footer');
+    }
+
     function insert_qr(){
     
     if(!empty($_POST)){
@@ -332,7 +345,7 @@ class Payments extends CI_Controller
         }
     }
 
-    function qrr(){
+    function print_qr(){
         //get qr code by id
         $qr = $this->payment->get_qr_event_by_id($id);
 
