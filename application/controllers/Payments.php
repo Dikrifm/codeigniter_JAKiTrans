@@ -290,7 +290,8 @@ class Payments extends CI_Controller
 
         $data['menu'] = $this->group->get_menu_user($groupLevel);
         $data['allmenu'] = $this->group->get_all_menu();
-        //$data['qr_data'] = $this->payment->get_data_qr_payment();
+        
+        $qr = $this->payment->get_qr_event_by_id($id);
 
         $this->load->view('includes/header', $data);
         $this->load->view('payment/zoom_qr', $data);
