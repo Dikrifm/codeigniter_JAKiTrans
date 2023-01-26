@@ -293,10 +293,10 @@ class Payments extends CI_Controller
             'nominal'       => $this->input->post('nominal'),        
             'tipe'          => $this->input->post('tipe'),
             'status'        => $this->input->post('status'),
-            'expired_date'  => $this->input->post('expired_date') 
+            //'expired_date'  => $this->input->post('expired_date') 
         );
         $this->payment->insert_qr_payment($data_ins); //simpan ke database
-        /*
+        
         $qr = $this->payment_model->last_qr_item()->result();
 
         $image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
@@ -316,8 +316,9 @@ class Payments extends CI_Controller
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;
         $params['savename'] = FCPATH.'asset/images/qr/'.$image_name; //simpan image QR CODE ke folder assets/images/
+        
         $this->ciqrcode->generate($params); // fungsi untuk generate QR CODE
-        */
+        
 
         redirect('payments/qr');
     }else{

@@ -39,7 +39,7 @@
 
                     <div class="form-group">
                         <label fot="expired_date">Expired Date</label>
-                        <input type="date" name="expired_date" class="form-control custom-select  mt-15" required>
+                        <input type="date" id="expired_date" name="expired_date" class="form-control custom-select  mt-15" required>
                     </div>
 
                     
