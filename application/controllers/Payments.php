@@ -287,7 +287,7 @@ class Payments extends CI_Controller
     function insert_qr(){
     
     if(!empty($_POST)){
-
+        
         $data_ins = array(
             'nama_event'    => $this->input->post('nama_event'),
             'nominal'       => $this->input->post('nominal'),        
@@ -297,7 +297,10 @@ class Payments extends CI_Controller
         );
         $this->payment->insert_qr_payment($data_ins); //simpan ke database
         
-        $qr = $this->payment_model->last_qr_item()->result();
+        //$qr = $this->payment_model->last_qr_item()->result();
+
+        $this->db->where('id', 1);
+        $qr = $this->db->get('qr_event')->result();
 
         $image_name = $qr->id . '.png'; //buat name dari qr code sesuai dengan nim
         
