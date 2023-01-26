@@ -344,7 +344,7 @@ class Payments extends CI_Controller
         //$data['qr'] = $qr;
 
         $this->load->view('includes/header', $data);
-        $this->load->view('payment/zoom_qr', $data);
+        $this->load->view('payment/success_payment', $data);
         $this->load->view('includes/footer');
     }
 
