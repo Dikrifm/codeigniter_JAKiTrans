@@ -16,7 +16,7 @@
 
 
             <div>
-                <a class="btn btn-info" href="<?= base_url(); ?>payments/addqr.php"><i class="mdi mdi-plus-circle-outline"></i>Tambah QR Code Event</a>
+                <a class="btn btn-info" href="<?= base_url(); ?>payments/insert_qr"><i class="mdi mdi-plus-circle-outline"></i>Tambah QR Code Event</a>
             </div>
             <br>
             
