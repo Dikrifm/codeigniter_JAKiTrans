@@ -2690,29 +2690,6 @@ public function merchantnearby($long, $lat)
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
         $query = $this->db->get()->result_array();
-        
-        $i = 1;
-        /*
-        foreach($query as $q){
-            
-                $q['id'];
-                $q['tipe'];
-                $q['invoice'];
-                $q['seender_wallet_id'];
-                $q['receiver_wallet_id'];
-                $q['sender_user_id'];
-                $q['receiver_user_id'];
-                $q['saldo_sender_awal'];
-                $q['saldo_receiver_awal'];
-                $q['nominal'];
-                $q['fee'];
-                $q['note'];
-                $q['status'];
-                $q['regtime'];
-                $i++;
-            
-        }
-        */
 
         //VALIDASI Receiver
         $num_item = count($query);

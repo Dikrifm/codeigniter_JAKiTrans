@@ -2997,91 +2997,72 @@ function update_saldo_post()
         $decoded_data = json_decode($data);
         
         $history = $this->Pelanggan_model->get_transaksi_saldo($decoded_data->id);
-        //$i = 1;
+
 
         //VALIDASI Receiver
         $num_item = count($history);
-            /*
-            foreach($history as $q){
-                $datax = array(
-                'id'                 => $q['id'],
-                'tipe'               => $q['tipe'],
-                'invoice'            => $q['invoice'],
-                'sender_wallet_id'   => $q['seender_wallet_id'],
-                'receiver_wallet_id' => $q['receiver_wallet_id'],
-                'sender_user_id'     => $q['sender_user_id'],
-                'receiver_user_id'   => $q['receiver_user_id'],
-                'saldo_sender_awal'  => $q['saldo_sender_awal'],
-                'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
-                'nominal'            => $q['nominal'],
-                'fee'                => $q['fee'],
-                'note'               => $q['note'],
-                'status'             => $q['status'],
-                'regtime'            => $q['regtime']
-                );
-            }
-            */
-        $i = 0;
+    
+        $i = 1;
         foreach($history as $q){
-            if($i == 0){
+            if($i == 1){
                 $j = 'first';
                 
                 $arr[$i] = array(
-                    'a' => $q['id'],
-                    'b' => $q['tipe'],
-                    'c' => $q['invoice'],
-                    'd' => $q['seender_wallet_id'],
-                    'e' => $q['receiver_wallet_id'],
-                    'f' => $q['sender_user_id'],
-                    'g' => $q['receiver_user_id'],
-                    'h' => $q['saldo_sender_awal'],
-                    'i' => $q['saldo_receiver_awal'],
-                    'j' => $q['nominal'],
-                    'k' => $q['fee'],
-                    'l' => $q['note'],
-                    'm' => $q['status'],
-                    'n' => $q['regtime'],
-                    'i' => 'first'
+                    'id'                 => $q['id'],
+                    'tipe'               => $q['tipe'],
+                    'invoice'            => $q['invoice'],
+                    'sender_wallet_id'   => $q['sender_wallet_id'],
+                    'receiver_wallet_id' => $q['receiver_wallet_id'],
+                    'sender_user_id'     => $q['sender_user_id'],
+                    'receiver_user_id'   => $q['receiver_user_id'],
+                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                    'nominal'            => $q['nominal'],
+                    'fee'                => $q['fee'],
+                    'note'               => $q['note'],
+                    'status'             => $q['status'],
+                    'regtime'            => $q['regtime'],
+                    'i'                  => 'first'
                 );
                 $i++;
 
-            }elseif($i == $num_item - 1){
+            }elseif($i == $num_item){
                 $arr[$i] = array(
-                    'a' => $q['id'],
-                    'b' => $q['tipe'],
-                    'c' => $q['invoice'],
-                    'd' => $q['seender_wallet_id'],
-                    'e' => $q['receiver_wallet_id'],
-                    'f' => $q['sender_user_id'],
-                    'g' => $q['receiver_user_id'],
-                    'h' => $q['saldo_sender_awal'],
-                    'i' => $q['saldo_receiver_awal'],
-                    'j' => $q['nominal'],
-                    'k' => $q['fee'],
-                    'l' => $q['note'],
-                    'm' => $q['status'],
-                    'n' => $q['regtime'],
-                    'i' => 'last'
+                    'id'                 => $q['id'],
+                    'tipe'               => $q['tipe'],
+                    'invoice'            => $q['invoice'],
+                    'sender_wallet_id'   => $q['seender_wallet_id'],
+                    'receiver_wallet_id' => $q['receiver_wallet_id'],
+                    'sender_user_id'     => $q['sender_user_id'],
+                    'receiver_user_id'   => $q['receiver_user_id'],
+                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                    'nominal'            => $q['nominal'],
+                    'fee'                => $q['fee'],
+                    'note'               => $q['note'],
+                    'status'             => $q['status'],
+                    'regtime'            => $q['regtime'],
+                    'i'                  => 'last'
                 );
                 $i++;
-                
+
             }else{
                 $arr[$i] = array(
-                    'a' => $q['id'],
-                    'b' => $q['tipe'],
-                    'c' => $q['invoice'],
-                    'd' => $q['seender_wallet_id'],
-                    'e' => $q['receiver_wallet_id'],
-                    'f' => $q['sender_user_id'],
-                    'g' => $q['receiver_user_id'],
-                    'h' => $q['saldo_sender_awal'],
-                    'i' => $q['saldo_receiver_awal'],
-                    'j' => $q['nominal'],
-                    'k' => $q['fee'],
-                    'l' => $q['note'],
-                    'm' => $q['status'],
-                    'n' => $q['regtime'],
-                    'i' => 'other'
+                    'id'                 => $q['id'],
+                    'tipe'               => $q['tipe'],
+                    'invoice'            => $q['invoice'],
+                    'sender_wallet_id'   => $q['sender_wallet_id'],
+                    'receiver_wallet_id' => $q['receiver_wallet_id'],
+                    'sender_user_id'     => $q['sender_user_id'],
+                    'receiver_user_id'   => $q['receiver_user_id'],
+                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                    'nominal'            => $q['nominal'],
+                    'fee'                => $q['fee'],
+                    'note'               => $q['note'],
+                    'status'             => $q['status'],
+                    'regtime'            => $q['regtime'],
+                    'i'                  => 'other'
                 );
                 $i++;
             }
