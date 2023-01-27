@@ -2997,10 +2997,51 @@ function update_saldo_post()
         $decoded_data = json_decode($data);
         
         $history = $this->Pelanggan_model->get_transaksi_saldo($decoded_data->id);
-        
+        $i = 1;
+
+        //VALIDASI Receiver
+        //$num_item = count($history);
+            /*
+            foreach($history as $q){
+                $datax = array(
+                'id'                 => $q['id'],
+                'tipe'               => $q['tipe'],
+                'invoice'            => $q['invoice'],
+                'sender_wallet_id'   => $q['seender_wallet_id'],
+                'receiver_wallet_id' => $q['receiver_wallet_id'],
+                'sender_user_id'     => $q['sender_user_id'],
+                'receiver_user_id'   => $q['receiver_user_id'],
+                'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                'nominal'            => $q['nominal'],
+                'fee'                => $q['fee'],
+                'note'               => $q['note'],
+                'status'             => $q['status'],
+                'regtime'            => $q['regtime']
+                );
+            }
+            */
+        foreach($history as $q){
+            $q['id'];
+            $q['tipe'];
+            $q['invoice'];
+            $q['seender_wallet_id'];
+            $q['receiver_wallet_id'];
+            $q['sender_user_id'];
+            $q['receiver_user_id'];
+            $q['saldo_sender_awal'];
+            $q['saldo_receiver_awal'];
+            $q['nominal'];
+            $q['fee'];
+            $q['note'];
+            $q['status'];
+            $q['regtime'];
+            $i++;
+        }
+
         $message = array(
             'status' => true,
-            'data' => $history->result_array()
+            'data' => $history
         );
         $this->response($message, 200);
     }

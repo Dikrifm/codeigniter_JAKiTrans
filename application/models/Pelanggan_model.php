@@ -8,6 +8,8 @@ class Pelanggan_model extends CI_model
     function __construct()
     {
         parent::__construct();
+
+        $this->load->helper('array');
     }
 
     public function count_user()
@@ -2680,8 +2682,6 @@ public function merchantnearby($long, $lat)
     //HISTORY TRANSFER Model : antar all user -----------------------------------------------------------------
     public function get_transaksi_saldo($id)
     {   
-        
-        
         $this->db->select('transaksi_saldo.*');
         
         $this->db->from('transaksi_saldo');
@@ -2689,7 +2689,35 @@ public function merchantnearby($long, $lat)
         $this->db->where('transaksi_saldo.sender_user_id', $id);
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
-        return $this->db->get();
+        $query = $this->db->get()->result_array();
+        
+        $i = 1;
+        /*
+        foreach($query as $q){
+            
+                $q['id'];
+                $q['tipe'];
+                $q['invoice'];
+                $q['seender_wallet_id'];
+                $q['receiver_wallet_id'];
+                $q['sender_user_id'];
+                $q['receiver_user_id'];
+                $q['saldo_sender_awal'];
+                $q['saldo_receiver_awal'];
+                $q['nominal'];
+                $q['fee'];
+                $q['note'];
+                $q['status'];
+                $q['regtime'];
+                $i++;
+            
+        }
+        */
+
+        //VALIDASI Receiver
+        $num_item = count($query);
+        
+        return $query;
     }
 
 }
