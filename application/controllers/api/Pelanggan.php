@@ -3000,7 +3000,7 @@ function update_saldo_post()
         
         $message = array(
             'status' => true,
-            'data' => $history->result()
+            'data' => $history->result_array()
         );
         $this->response($message, 200);
     }
