@@ -2682,12 +2682,9 @@ public function merchantnearby($long, $lat)
     {   
         
         
-        $this->db->select('transaksi_saldo.*,
-        pelanggan.id, pelanggan.fullnama');
+        $this->db->select('transaksi_saldo.*');
         
         $this->db->from('transaksi_saldo');
-        
-        $this->db->join('pelanggan', 'transaksi_saldo.receiver_user_id = pelanggan.id');
         
         $this->db->where('transaksi_saldo.sender_user_id', $id);
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
