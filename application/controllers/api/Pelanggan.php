@@ -3013,22 +3013,22 @@ function update_saldo_post()
                 'id' => $id_r
             );
             
-            if($initial_id == "p"){
+            if($initial_id == "D"){
                 //$data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
                 //$nama_r = $data_r->fullnama;
                 $role_r = 'Pengguna JAKiTrans';
                 
-            }/*elseif($initial_id == "D"){
-                $data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
-                $nama_r = $data_r->fullnama;
-                $role_r = 'Pengguna JAKiTrans';
+            }elseif($initial_id == "D"){
+                //$data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
+                //$nama_r = $data_r->fullnama;
+                $role_r = 'Driver JAKiTrans';
                 
             }else{
-                $data_r  = $this->driver_model->getmitrabyid($id_r);
-                $nama_r  = $data_r['nama_mitra'];
-                $role_r  = $data_r['nama_merchant']; 
+                //$data_r  = $this->driver_model->getmitrabyid($id_r);
+                //$nama_r  = $data_r['nama_mitra'];
+                $role_r  = 'KOCAK';//$data_r['nama_merchant']; 
                 
-            }*/
+            }
             
 
             $arr[$i] = array(
