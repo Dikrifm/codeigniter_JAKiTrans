@@ -14,6 +14,7 @@ class Pelanggan extends REST_Controller
         $this->load->model('Pelanggan_model');
         $this->load->model('Notification_model');
         $this->load->model('Driver_model');
+        $this->load->model('Mitra_model');
         $this->load->model('Digital_model');
         $this->load->model('Donasi_model');
         $this->load->model('Func_model');
@@ -3004,68 +3005,48 @@ function update_saldo_post()
     
         $i = 1;
         foreach($history as $q){
-            if($i == 1){
-                $j = 'first';
+
+            $id_r= $q['receiver_user_id'];
+            $initial_id  = substr($id_r, 0, 1);
+            
+            if($initial_id == "P"){
+                $data_r = $this->pelanggan_model->get_data_pelanggan(array("id" => $id_r))->result();
+                $nama_r = $data_r->fullnama;
+                $role_r = 'Pengguna JAKiTrans';
                 
-                $arr[$i] = array(
-                    'id'                 => $q['id'],
-                    'tipe'               => $q['tipe'],
-                    'invoice'            => $q['invoice'],
-                    'sender_wallet_id'   => $q['sender_wallet_id'],
-                    'receiver_wallet_id' => $q['receiver_wallet_id'],
-                    'sender_user_id'     => $q['sender_user_id'],
-                    'receiver_user_id'   => $q['receiver_user_id'],
-                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
-                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
-                    'nominal'            => $q['nominal'],
-                    'fee'                => $q['fee'],
-                    'note'               => $q['note'],
-                    'status'             => $q['status'],
-                    'regtime'            => $q['regtime'],
-                    'i'                  => 'first'
-                );
-                $i++;
-
-            }elseif($i == $num_item){
-                $arr[$i] = array(
-                    'id'                 => $q['id'],
-                    'tipe'               => $q['tipe'],
-                    'invoice'            => $q['invoice'],
-                    'sender_wallet_id'   => $q['seender_wallet_id'],
-                    'receiver_wallet_id' => $q['receiver_wallet_id'],
-                    'sender_user_id'     => $q['sender_user_id'],
-                    'receiver_user_id'   => $q['receiver_user_id'],
-                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
-                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
-                    'nominal'            => $q['nominal'],
-                    'fee'                => $q['fee'],
-                    'note'               => $q['note'],
-                    'status'             => $q['status'],
-                    'regtime'            => $q['regtime'],
-                    'i'                  => 'last'
-                );
-                $i++;
-
+            }elseif($initial_id == "D"){
+                $data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
+                $nama_r = $data_r->fullnama;
+                $role_r = 'Pengguna JAKiTrans';
+                
             }else{
-                $arr[$i] = array(
-                    'id'                 => $q['id'],
-                    'tipe'               => $q['tipe'],
-                    'invoice'            => $q['invoice'],
-                    'sender_wallet_id'   => $q['sender_wallet_id'],
-                    'receiver_wallet_id' => $q['receiver_wallet_id'],
-                    'sender_user_id'     => $q['sender_user_id'],
-                    'receiver_user_id'   => $q['receiver_user_id'],
-                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
-                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
-                    'nominal'            => $q['nominal'],
-                    'fee'                => $q['fee'],
-                    'note'               => $q['note'],
-                    'status'             => $q['status'],
-                    'regtime'            => $q['regtime'],
-                    'i'                  => 'other'
-                );
-                $i++;
+                $data_r  = $this->driver_model->getmitrabyid($id_r);
+                $nama_r  = $data_r['nama_mitra'];
+                $role_r  = $data_r['nama_merchant']; 
+                
             }
+
+            $arr[$i] = array(
+                'id'                 => $q['id'],
+                'tipe'               => $q['tipe'],
+                'invoice'            => $q['invoice'],
+                'sender_wallet_id'   => $q['sender_wallet_id'],
+                'receiver_wallet_id' => $id_r,
+                'receiver_name'      => $nama_r,
+                'receiver_role'      => $role_r,
+                
+                'sender_user_id'     => $q['sender_user_id'],
+                'receiver_user_id'   => $q['receiver_user_id'],
+                'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                'nominal'            => $q['nominal'],
+                'fee'                => $q['fee'],
+                'note'               => $q['note'],
+                'status'             => $q['status'],
+                'regtime'            => $q['regtime'],
+                'i'                  => 'first'
+            );
+            $i++;
            
         }
         
