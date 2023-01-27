@@ -3008,13 +3008,13 @@ function update_saldo_post()
 
             $id_r= $q['receiver_user_id'];
             $initial_id  = substr($id_r, 0, 1);
-            /*
+            
             if($initial_id == "P"){
                 $data_r = $this->pelanggan_model->get_data_pelanggan(array("id" => $id_r))->result();
                 $nama_r = $data_r->fullnama;
                 $role_r = 'Pengguna JAKiTrans';
                 
-            }elseif($initial_id == "D"){
+            }/*elseif($initial_id == "D"){
                 $data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
                 $nama_r = $data_r->fullnama;
                 $role_r = 'Pengguna JAKiTrans';
@@ -3024,8 +3024,8 @@ function update_saldo_post()
                 $nama_r  = $data_r['nama_mitra'];
                 $role_r  = $data_r['nama_merchant']; 
                 
-            }
-            */
+            }*/
+            
 
             $arr[$i] = array(
                 'id'                 => $q['id'],
@@ -3033,8 +3033,8 @@ function update_saldo_post()
                 'invoice'            => $q['invoice'],
                 'sender_wallet_id'   => $q['sender_wallet_id'],
                 'receiver_wallet_id' => $id_r,
-                //'receiver_name'      => $nama_r,
-                //'receiver_role'      => $role_r,
+                'receiver_name'      => $nama_r,
+                'receiver_role'      => $role_r,
                 
                 'sender_user_id'     => $q['sender_user_id'],
                 'receiver_user_id'   => $q['receiver_user_id'],
