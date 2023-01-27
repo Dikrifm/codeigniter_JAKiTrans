@@ -3013,7 +3013,7 @@ function update_saldo_post()
                 'id' => $id_r
             );
             
-            if($initial_id == "D"){
+            if($initial_id == "P"){
                 //$data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
                 //$nama_r = $data_r->fullnama;
                 $role_r = 'Pengguna JAKiTrans';
