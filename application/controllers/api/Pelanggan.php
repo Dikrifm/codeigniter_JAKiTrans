@@ -3041,7 +3041,7 @@ function update_saldo_post()
 
         $message = array(
             'status' => true,
-            'data' => $history
+            'data' => $q
         );
         $this->response($message, 200);
     }
