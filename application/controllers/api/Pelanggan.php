@@ -3021,27 +3021,31 @@ function update_saldo_post()
                 );
             }
             */
+
         foreach($history as $q){
-            $q['id'];
-            $q['tipe'];
-            $q['invoice'];
-            $q['seender_wallet_id'];
-            $q['receiver_wallet_id'];
-            $q['sender_user_id'];
-            $q['receiver_user_id'];
-            $q['saldo_sender_awal'];
-            $q['saldo_receiver_awal'];
-            $q['nominal'];
-            $q['fee'];
-            $q['note'];
-            $q['status'];
-            $q['regtime'];
-            $i++;
+            $arr = array(
+                'i' => $q['id'],
+                'i' => $q['tipe'],
+                'i' => $q['invoice'],
+                'i' => $q['seender_wallet_id'],
+                'i' => $q['receiver_wallet_id'],
+                'i' => $q['sender_user_id'],
+                'i' => $q['receiver_user_id'],
+                'i' => $q['saldo_sender_awal'],
+                'i' => $q['saldo_receiver_awal'],
+                'i' => $q['nominal'],
+                'i' => $q['fee'],
+                'i' => $q['note'],
+                'i' => $q['status'],
+                'i' => $q['regtime'],
+                'i' => $i++
+            );
         }
+        
 
         $message = array(
             'status' => true,
-            'data' => $q
+            'data' => $arr
         );
         $this->response($message, 200);
     }
