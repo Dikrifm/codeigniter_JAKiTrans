@@ -2984,4 +2984,24 @@ function update_saldo_post()
         $result = $this->Notification_model->send_wa($send);
         die();
     }
+
+    //HISTORY TRANSFER antar pengguna --------------------------------------------------------------------
+    function history_transfer_post()
+    {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+        $data = file_get_contents("php://input");
+        $decoded_data = json_decode($data);
+        
+        $history = $this->Pelanggan_model->get_transaksi_saldo($decoded_data->id);
+        
+        $message = array(
+            'status' => true,
+            'data' => $history->result()
+        );
+        $this->response($message, 200);
+    }
 }
