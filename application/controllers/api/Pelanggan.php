@@ -3036,7 +3036,7 @@ function update_saldo_post()
                 'tipe'               => $q['tipe'],
                 'invoice'            => $q['invoice'],
                 'sender_wallet_id'   => $q['sender_wallet_id'],
-                'receiver_wallet_id' => $id_r,
+                'receiver_wallet_id' => $q['receiver_wallet_id'],
                 'receiver_name'      => $nama_r,
                 'receiver_role'      => $role_r,
                 
