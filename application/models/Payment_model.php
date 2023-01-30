@@ -93,14 +93,18 @@ class Payment_model extends CI_model
         $res = $this->db->get('payment_jenis')->result();
 
         if(count($res) > 0){
+
             foreach($res as $value){
+
                 if($value->id_jenis == 1 || $value->id_jenis == 2){
+                    
                     $data[] = [
                         'jenis'  => $value->nama_jenis,
                         'method' => $this->get_data_payment_group($value->id_jenis)
                     ];
                 }
             }
+
         }else{
             $data = [];
         }
