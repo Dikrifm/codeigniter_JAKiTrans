@@ -401,20 +401,21 @@ class Pelanggan extends REST_Controller
         }
         $data = file_get_contents("php://input");
         $dec_data = json_decode($data);
-        $slider = $this->Pelanggan_model->sliderhome();
-        $fitur = $this->Pelanggan_model->fiturhome();
-        $allfitur = $this->Pelanggan_model->fiturhomeall();
-        $rating = $this->Pelanggan_model->ratinghome();
-        $saldo = $this->Pelanggan_model->saldouser($dec_data->id);
-        $app_settings = $this->Pelanggan_model->get_settings();
-        $berita = $this->Pelanggan_model->beritahome();
-        $advetorial = $this->Pelanggan_model->advetorialhome();
+
+        $slider           = $this->Pelanggan_model->sliderhome();
+        $fitur            = $this->Pelanggan_model->fiturhome();
+        $allfitur         = $this->Pelanggan_model->fiturhomeall();
+        $rating           = $this->Pelanggan_model->ratinghome();
+        $saldo            = $this->Pelanggan_model->saldouser($dec_data->id);
+        $app_settings     = $this->Pelanggan_model->get_settings();
+        $berita           = $this->Pelanggan_model->beritahome();
+        $advetorial       = $this->Pelanggan_model->advetorialhome();
         $kategorymerchant = $this->Pelanggan_model->kategorymerchant()->result();
-        $long = $dec_data->longitude;
-        $lat = $dec_data->latitude;
-        $merchantpromo = $this->Pelanggan_model->merchantpromo($long, $lat)->result();
-        $merchantnearby = $this->Pelanggan_model->merchantnearby($long, $lat);
-        $ppob = $this->Digital_model->get_data_kategori()->result();
+        $long             = $dec_data->longitude;
+        $lat              = $dec_data->latitude;
+        $merchantpromo    = $this->Pelanggan_model->merchantpromo($long, $lat)->result();
+        $merchantnearby   = $this->Pelanggan_model->merchantnearby($long, $lat);
+        $ppob             = $this->Digital_model->get_data_kategori()->result();
         
         $donasi = $this->Donasi_model->get_data_donasi_all();
 
@@ -3017,7 +3018,7 @@ function update_saldo_post()
             );
             
             if($initial_id == "P"){
-                $data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
+                $data_r = $this->Pelanggan_model->cek_login($id_r)->result();
                 $nama_r = $data_r['fullnama'];
                 $role_r = 'to Cust';
                 $i_c++;
