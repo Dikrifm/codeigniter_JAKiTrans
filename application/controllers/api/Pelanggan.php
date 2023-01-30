@@ -3031,7 +3031,7 @@ function update_saldo_post()
 
             }elseif($initial_id == "M"){
                 $data_r  = $this->Mitra_model->getmitrabyid($id_r);
-                $nama_r  = $data_r['nama_mitra'];// .' - ' . //$data_r['nama_merchant'];
+                $nama_r  = $data_r['nama_mitra'] . ' - ' . $data_r['nama_merchant'];
                 $role_r  = 'to Merch'; 
                 $i_m++;
 
