@@ -3081,8 +3081,8 @@ function update_saldo_post()
 
             //Error Handling!!
             if($data_r == NULL){
-                $e_msg  = $code410;
-                $nama_r = $code410;
+                $e_msg  = $this->code410;
+                $nama_r = $this->code410;
                 $e_code = TRUE;
             
             }
