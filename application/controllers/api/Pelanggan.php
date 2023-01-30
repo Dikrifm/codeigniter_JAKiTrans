@@ -3097,28 +3097,30 @@ function update_saldo_post()
             
             }
 
+            $bodyx[] = [
+
+                'id'                 => $q['id'],
+                'tipe'               => $q['tipe'],
+                'invoice'            => $q['invoice'],
+                '.',
+                'receiver_user_id'   => $q['receiver_user_id'],
+                'receiver_name'      => $nama_r,
+                'receiver_role'      => $role_r,
+                '.',
+                'sender_user_id'     => $q['sender_user_id'],
+                'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                'nominal'            => $q['nominal'],
+                'fee'                => $q['fee'],
+                'note'               => $q['note'],
+                '.',
+                'status'             => $q['status'],
+                'regtime'            => $q['regtime'],
+            ];
+
             $arr[] = [
                 'tipe_r' => $role_r,
-                'body'   => $bodyx[] = [
-
-                    'id'                 => $q['id'],
-                    'tipe'               => $q['tipe'],
-                    'invoice'            => $q['invoice'],
-                    '.',
-                    'receiver_user_id'   => $q['receiver_user_id'],
-                    'receiver_name'      => $nama_r,
-                    'receiver_role'      => $role_r,
-                    '.',
-                    'sender_user_id'     => $q['sender_user_id'],
-                    'saldo_sender_awal'  => $q['saldo_sender_awal'],
-                    'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
-                    'nominal'            => $q['nominal'],
-                    'fee'                => $q['fee'],
-                    'note'               => $q['note'],
-                    '.',
-                    'status'             => $q['status'],
-                    'regtime'            => $q['regtime'],
-                ]
+                'body'   => $bodyx
             ];
             $i++;
            
