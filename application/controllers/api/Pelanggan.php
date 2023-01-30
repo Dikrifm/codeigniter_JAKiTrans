@@ -3004,9 +3004,7 @@ function update_saldo_post()
         $num_item = count($history);
     
         $i   = 1;
-        $i_c = 0;
-        $i_d = 0;
-        $i_m = 0;
+        $i_c . $i_d . $i_m = 0;
 
         foreach($history as $q){
 
@@ -3020,7 +3018,7 @@ function update_saldo_post()
             
             if($initial_id == "P"){
                 $data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
-                $nama_r = $data_r->fullnama;
+                $nama_r = $data_r['fullnama'];
                 $role_r = 'to Cust';
                 $i_c++;
                 
