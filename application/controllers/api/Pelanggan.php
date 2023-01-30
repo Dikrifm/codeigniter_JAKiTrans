@@ -3029,11 +3029,15 @@ function update_saldo_post()
                 $role_r = 'to Driver';
                 $i_d++;
 
-            }else{
+            }elseif($initial_id == "M"){
                 //$data_r  = $this->driver_model->getmitrabyid($id_r);
                 //$nama_r  = $data_r['nama_mitra'] .' - ' . //$data_r['nama_merchant'];
                 $role_r  = 'to Merch'; 
                 $i_m++;
+
+            }else{
+                $nama_r = "Error Nama Receiver";
+                //$role_r = "Error role Receiver"
             }
             
             if($role_r == 'to Cust'){
