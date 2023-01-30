@@ -3003,8 +3003,13 @@ function update_saldo_post()
         //VALIDASI Receiver
         $num_item = count($history);
     
-        $i = 1;
+        $i   = 1;
+        $i_c = 0;
+        $i_d = 0;
+        $i_m = 0;
+
         foreach($history as $q){
+
 
             $id_r= $q['receiver_user_id'];
             $initial_id  = substr($id_r, 0, 1);
@@ -3016,22 +3021,39 @@ function update_saldo_post()
             if($initial_id == "P"){
                 //$data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
                 //$nama_r = $data_r->fullnama;
-                $role_r = 'Pengguna JAKiTrans';
+                $role_r = 'Customer JAKiTrans';
+                $i_c++;
                 
             }elseif($initial_id == "D"){
                 //$data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
                 //$nama_r = $data_r->fullnama;
                 $role_r = 'Driver JAKiTrans';
-                
+                $i_d++;
+
             }else{
                 //$data_r  = $this->driver_model->getmitrabyid($id_r);
                 //$nama_r  = $data_r['nama_mitra'];
-                $role_r  = 'KOCAK';//$data_r['nama_merchant']; 
-                
+                $role_r  = 'Merchant JAKiTrans';//$data_r['nama_merchant']; 
+                $i_m++;
             }
             
+            if($role_r == 'Customer JAKiTrans'){
+                $x = $role_r;
+                $y = $i_c;
 
-            $arr[$i] = array(
+            }elseif($role_r == 'Driver JAKiTrans'){
+                $x = $role_r;
+                $y = $i_d;
+
+            }elseif($role_r == 'Merchant JAKiTrans'){
+                $x = $role_r;
+                $y = $i_m;
+
+            }
+
+            $arr[$role_x][$y] = 
+            
+                array(
                 'id'                 => $q['id'],
                 'tipe'               => $q['tipe'],
                 'invoice'            => $q['invoice'],
@@ -3049,7 +3071,6 @@ function update_saldo_post()
                 'note'               => $q['note'],
                 'status'             => $q['status'],
                 'regtime'            => $q['regtime'],
-                'i'                  => 'first'
             );
             $i++;
            
