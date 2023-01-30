@@ -3099,7 +3099,7 @@ function update_saldo_post()
 
             $arr[] = [
                 'tipe_r' => $role_r,
-                'body'   => [
+                'body'   => $bodyx[] = [
 
                     'id'                 => $q['id'],
                     'tipe'               => $q['tipe'],
