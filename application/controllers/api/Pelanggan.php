@@ -3044,7 +3044,7 @@ function update_saldo_post()
             $initial_id  = substr($id_r, 0, 1);
 
             $cond = array(
-                'id' => $id_r
+                'id' => $id_r,
             );
             
             if($initial_id == "P"){
@@ -3068,9 +3068,6 @@ function update_saldo_post()
                 $role_r  = 'to Merch'; 
                 $i_m++;
 
-            }else{
-                $nama_r = "Error Nama Receiver";
-                //$role_r = "Error role Receiver"
             }
             
             //SORT 
@@ -3115,6 +3112,7 @@ function update_saldo_post()
                 '.',
                 'status'             => $q['status'],
                 'regtime'            => $q['regtime'],
+                'i'                  => $i
             );
 
             $arr[] = [

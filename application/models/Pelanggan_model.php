@@ -2683,13 +2683,13 @@ public function merchantnearby($long, $lat)
     public function get_transaksi_saldo($id)
     {   
         //$this->db->distinct('transaksi_saldo.regtime');
-        $this->db->select('transaksi_saldo.*');
+        $this->db->select('*');
         
         $this->db->from('transaksi_saldo');
         
-        $this->db->where('transaksi_saldo.sender_user_id', $id);
-        $this->db->group_by('transaksi_saldo.regtime');
-        $this->db->order_by('transaksi_saldo.regtime', 'DESC');
+        $this->db->where($id, $initial_id_r);
+        $this->db->group_by('regtime');
+        $this->db->order_by('regtime', 'DESC');
         
         $query = $this->db->get()->result_array();
 
