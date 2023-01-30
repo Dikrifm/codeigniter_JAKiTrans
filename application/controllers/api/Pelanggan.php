@@ -3021,55 +3021,54 @@ function update_saldo_post()
             if($initial_id == "P"){
                 //$data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
                 //$nama_r = $data_r->fullnama;
-                $role_r = 'Customer JAKiTrans';
+                $role_r = 'to Cust';
                 $i_c++;
                 
             }elseif($initial_id == "D"){
                 //$data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
                 //$nama_r = $data_r->fullnama;
-                $role_r = 'Driver JAKiTrans';
+                $role_r = 'to Driver';
                 $i_d++;
 
             }else{
                 //$data_r  = $this->driver_model->getmitrabyid($id_r);
-                //$nama_r  = $data_r['nama_mitra'];
-                $role_r  = 'Merchant JAKiTrans';//$data_r['nama_merchant']; 
+                //$nama_r  = $data_r['nama_mitra'] .' - ' . //$data_r['nama_merchant'];
+                $role_r  = 'to Merch'; 
                 $i_m++;
             }
             
-            if($role_r == 'Customer JAKiTrans'){
+            if($role_r == 'to Cust'){
                 $x = $role_r;
                 $y = $i_c;
 
-            }elseif($role_r == 'Driver JAKiTrans'){
+            }elseif($role_r == 'to Driver'){
                 $x = $role_r;
                 $y = $i_d;
 
-            }elseif($role_r == 'Merchant JAKiTrans'){
+            }elseif($role_r == 'to Merch'){
                 $x = $role_r;
                 $y = $i_m;
 
             }
 
-            //$j
             $arr[$x][$y] = 
             
                 array(
                 'id'                 => $q['id'],
                 'tipe'               => $q['tipe'],
                 'invoice'            => $q['invoice'],
-                'sender_wallet_id'   => $q['sender_wallet_id'],
-                'receiver_wallet_id' => $q['receiver_wallet_id'],
+                '.',
+                'receiver_user_id'   => $q['receiver_user_id'],
                 'receiver_name'      => $nama_r,
                 'receiver_role'      => $role_r,
-                
+                '.',
                 'sender_user_id'     => $q['sender_user_id'],
-                'receiver_user_id'   => $q['receiver_user_id'],
                 'saldo_sender_awal'  => $q['saldo_sender_awal'],
                 'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
                 'nominal'            => $q['nominal'],
                 'fee'                => $q['fee'],
                 'note'               => $q['note'],
+                '.',
                 'status'             => $q['status'],
                 'regtime'            => $q['regtime'],
             );
