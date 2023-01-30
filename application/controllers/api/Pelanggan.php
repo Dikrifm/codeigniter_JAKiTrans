@@ -3019,8 +3019,8 @@ function update_saldo_post()
             );
             
             if($initial_id == "P"){
-                //$data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
-                //$nama_r = $data_r->fullnama;
+                $data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->result();
+                $nama_r = $data_r->fullnama;
                 $role_r = 'to Cust';
                 $i_c++;
                 
