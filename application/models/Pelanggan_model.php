@@ -2724,7 +2724,7 @@ public function merchantnearby($long, $lat)
         }
 
 
-        $this->db->select('transaksi_saldo.*,', $s );
+        $this->db->select('transaksi_saldo.*,' . $s);
 
         $this->db->from('transaksi_saldo');
 

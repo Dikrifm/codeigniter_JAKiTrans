@@ -3027,7 +3027,7 @@ function update_saldo_post()
         $data = file_get_contents("php://input");
         $decoded_data = json_decode($data);
 
-        //$cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->$id, "P");
+        $cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->$id, "P");
 
         $message = array(
             'code'   => 200,
