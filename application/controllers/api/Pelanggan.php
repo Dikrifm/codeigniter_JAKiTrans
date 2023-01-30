@@ -3030,7 +3030,7 @@ function update_saldo_post()
                 $i_d++;
 
             }elseif($initial_id == "M"){
-                $data_r  = $this->driver_model->getmitrabyid($id_r);
+                $data_r  = $this->Mitra_model->getmitrabyid($id_r);
                 $nama_r  = $data_r['nama_mitra'];// .' - ' . //$data_r['nama_merchant'];
                 $role_r  = 'to Merch'; 
                 $i_m++;
