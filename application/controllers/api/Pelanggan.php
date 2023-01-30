@@ -3024,8 +3024,8 @@ function update_saldo_post()
                 $i_c++;
                 
             }elseif($initial_id == "D"){
-                $data_r = $this->driver_model->get_data_pelanggan($cond)->row();
-                $nama_r = $data_r->nama_driver;
+                //$data_r = $this->Driver_model->get_data_pelanggan($cond)->row();
+                //$nama_r = $data_r->nama_driver;
                 $role_r = 'to Driver';
                 $i_d++;
 
