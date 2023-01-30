@@ -20,8 +20,6 @@ class Pelanggan extends REST_Controller
         $this->load->model('Func_model');
         date_default_timezone_set('Asia/Jakarta');
 
-        $code410 = "The requested resource is no longer available at the server";
-        $code500 = "The server encountered an unexpected condition which prevented it from fulfilling the request.";
     }
 
     
@@ -31,6 +29,18 @@ class Pelanggan extends REST_Controller
         $this->response("Api for Gojasa!", 200);
     }
 
+    function code_error($code){
+        $code410 = "The requested resource is no longer available at the server";
+        $code500 = "The server encountered an unexpected condition which prevented it from fulfilling the request.";
+
+        if($code == 410){
+            return $code410;
+        }elseif($code == 500){
+            return $code500;
+        }else{
+            return false;
+        }
+    }
     function server_error(){
         try{
 
@@ -3081,8 +3091,8 @@ function update_saldo_post()
 
             //Error Handling!!
             if($data_r == NULL){
-                $e_msg  = $this->code410;
-                $nama_r = $this->code410;
+                $e_msg  = $this->code_error(410);
+                $nama_r = $e_msg;
                 $e_code = TRUE;
             
             }
@@ -3125,7 +3135,7 @@ function update_saldo_post()
             
         }elseif($this->server_error() != TRUE){
             $code = 500;
-            $e_msg = $code500;
+            $e_msg = $this->code_error($code);
 
             $message = array(
                 'code'   => $code,
