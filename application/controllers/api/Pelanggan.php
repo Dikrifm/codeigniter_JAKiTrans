@@ -3051,7 +3051,8 @@ function update_saldo_post()
 
             }
 
-            $arr[$role_x][$y] = 
+            //$j
+            $arr[$x][$y] = 
             
                 array(
                 'id'                 => $q['id'],
