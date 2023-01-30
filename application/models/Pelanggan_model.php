@@ -2724,11 +2724,11 @@ public function merchantnearby($long, $lat)
         }
 
 
-        $this->db->select('transaksi_saldo.*,' . $s);
+        $this->db->select('transaksi_saldo.*');
 
         $this->db->from('transaksi_saldo');
-
-        if($l_join1 == ""){
+        /*
+        if($l_join1 != ""){
             $this->db->join('mitra', $l_join1);
             $this->db->join('merchant', $l_join2);
         
@@ -2736,8 +2736,8 @@ public function merchantnearby($long, $lat)
             $this->db->join($f, $l_join);
 
         }
-
-        $this->db->where('transaksi_saldo.sender_user_id', $iduser);
+        */
+        $this->db->where('transaksi_saldo.sender_user_id', $id_user);
         $this->db->like('transaksi_saldo.receiver_user_id', $init, 'after');
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
