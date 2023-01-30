@@ -3024,8 +3024,8 @@ function update_saldo_post()
                 $i_c++;
                 
             }elseif($initial_id == "D"){
-                //$data_r = $this->driver_model->get_data_pelanggan(array("id" => $id_r))->result();
-                //$nama_r = $data_r->fullnama;
+                $data_r = $this->driver_model->get_data_pelanggan($cond)->row();
+                $nama_r = $data_r->nama_driver;
                 $role_r = 'to Driver';
                 $i_d++;
 
@@ -3040,6 +3040,7 @@ function update_saldo_post()
                 //$role_r = "Error role Receiver"
             }
             
+            //SORT 
             if($role_r == 'to Cust'){
                 $x = $role_r;
                 $y = $i_c;
