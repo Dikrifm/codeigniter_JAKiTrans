@@ -3040,7 +3040,6 @@ function update_saldo_post()
 
         foreach($history as $q){
 
-
             $id_r= $q['receiver_user_id'];
             $initial_id  = substr($id_r, 0, 1);
 
