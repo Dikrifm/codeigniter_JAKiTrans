@@ -3033,7 +3033,7 @@ function update_saldo_post()
             'code'   => 200,
             'message'=> 'Success',
             'status' => true,
-            'data'   => $cekdata
+            'data'   => 'test'
         );
 
         $this->response($message, $code);
