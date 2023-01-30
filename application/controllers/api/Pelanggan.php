@@ -3096,7 +3096,7 @@ function update_saldo_post()
             
             }
 
-            $bodyx[] = [
+            $bodyx = array(
 
                 'id'                 => $q['id'],
                 'tipe'               => $q['tipe'],
@@ -3115,7 +3115,7 @@ function update_saldo_post()
                 '.',
                 'status'             => $q['status'],
                 'regtime'            => $q['regtime'],
-            ];
+            );
 
             $arr[] = [
                 'tipe_r' => $role_r,
