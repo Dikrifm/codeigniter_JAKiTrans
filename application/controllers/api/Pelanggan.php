@@ -3017,6 +3017,30 @@ function update_saldo_post()
     }
 
     //HISTORY TRANSFER antar pengguna --------------------------------------------------------------------
+    function cek_cek_post(){
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $data = file_get_contents("php://input");
+        $decoded_data = json_decode($data);
+
+        $cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->$id, "P");
+
+        $message = array(
+            'code'   => 200,
+            'message'=> 'Success',
+            'status' => true,
+            'data'   => $cekdata
+        );
+
+        $this->response($message, $code);
+
+
+    }
+    
     function history_transfer_post()
     {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
@@ -3096,21 +3120,15 @@ function update_saldo_post()
             $bodyx = array(
 
                 'id'                 => $q['id'],
-                'tipe'               => $q['tipe'],
                 'invoice'            => $q['invoice'],
-                '.',
                 'receiver_user_id'   => $q['receiver_user_id'],
                 'receiver_name'      => $nama_r,
                 'receiver_role'      => $role_r,
-                '.',
                 'sender_user_id'     => $q['sender_user_id'],
                 'saldo_sender_awal'  => $q['saldo_sender_awal'],
                 'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
                 'nominal'            => $q['nominal'],
-                'fee'                => $q['fee'],
                 'note'               => $q['note'],
-                '.',
-                'status'             => $q['status'],
                 'regtime'            => $q['regtime'],
                 'i'                  => $i
             );

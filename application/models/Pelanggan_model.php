@@ -2659,6 +2659,7 @@ public function merchantnearby($long, $lat)
         $cutUser = $this->cutsaldo_byppob($dataC);
         return true;
     }
+
     function cutsaldo_byppob($dataC)
     {
         $saldo = $dataC['mysaldo'];
@@ -2695,6 +2696,53 @@ public function merchantnearby($long, $lat)
         $num_item = count($query);
         
         return $query;
+    }
+
+    public function get_transaksi_saldo_by_r($id_user, $initial_r){
+        $p  = 'pelanggan.*';
+        $d  = 'driver.*';
+        $m1 = 'mitra.*, merchant.*';
+
+        $l_join1 = "";
+
+        if($initial_r == "P"){
+            $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
+            $s      = $p;
+            $f      = "pelanggan";
+
+        }elseif($initial_r == "D"){
+            $l_join = "transaksi_saldo.receiver_user_id = driver.id";
+            $s      = $d;
+            $f      = "driver";
+
+        }elseif($initial_r == "M"){
+            $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
+            $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
+
+            $s = $m1;
+
+        }
+
+
+        $this->db->select('transaksi_saldo.*,', $s );
+
+        $this->db->from('transaksi_saldo');
+
+        if($l_join1 == ""){
+            $this->db->join('mitra', $l_join1);
+            $this->db->join('merchant', $l_join2);
+        
+        }else{
+            $this->db->join($f, $l_join);
+
+        }
+
+        $this->db->where('transaksi_saldo.sender_user_id', $iduser);
+        $this->db->like('transaksi_saldo.receiver_user_id', $init, 'after');
+
+        $this->db->order_by('transaksi_saldo.regtime', 'DESC');
+
+        return $this->db->get();
     }
 
 }
