@@ -19,11 +19,30 @@ class Pelanggan extends REST_Controller
         $this->load->model('Donasi_model');
         $this->load->model('Func_model');
         date_default_timezone_set('Asia/Jakarta');
+
+        $code410 = "The requested resource is no longer available at the server";
+        $code500 = "The server encountered an unexpected condition which prevented it from fulfilling the request.";
     }
+
+    
 
     function index_get()
     {
         $this->response("Api for Gojasa!", 200);
+    }
+
+    function server_error(){
+        try{
+
+            $app_settings = $this->Pelanggan_model->get_settings();
+
+            return TRUE;
+        
+        }catch(Exception $e){
+
+            return $e->getMessage();
+        }
+
     }
 
     function privacy_post()
@@ -2995,6 +3014,7 @@ function update_saldo_post()
             header("HTTP/1.0 401 Unauthorized");
             return false;
         }
+        
         $data = file_get_contents("php://input");
         $decoded_data = json_decode($data);
         
@@ -3004,6 +3024,7 @@ function update_saldo_post()
         //VALIDASI Receiver
         $num_item = count($history);
     
+        $e_code = 0;
         $i   = 1;
         $i_c . $i_d . $i_m = 0;
 
@@ -3020,18 +3041,21 @@ function update_saldo_post()
             if($initial_id == "P"){
                 $data_r = $this->Pelanggan_model->get_data_pelanggan($cond)->row();
                 $nama_r = $data_r->fullnama;
+                
                 $role_r = 'to Cust';
                 $i_c++;
                 
             }elseif($initial_id == "D"){
-                //$data_r = $this->Driver_model->get_data_pelanggan($cond)->row();
-                //$nama_r = $data_r->nama_driver;
+                $data_r = $this->Driver_model->get_data_pelanggan($cond)->row();
+                $nama_r = $data_r->nama_driver;
+                
                 $role_r = 'to Driver';
                 $i_d++;
 
             }elseif($initial_id == "M"){
                 $data_r  = $this->Mitra_model->getmitrabyid($id_r);
                 $nama_r  = $data_r['nama_mitra'] . ' - ' . $data_r['nama_merchant'];
+                
                 $role_r  = 'to Merch'; 
                 $i_m++;
 
@@ -3053,6 +3077,14 @@ function update_saldo_post()
                 $x = $role_r;
                 $y = $i_m;
 
+            }
+
+            //Error Handling!!
+            if($data_r == NULL){
+                $e_msg  = $code410;
+                $nama_r = $code410;
+                $e_code = TRUE;
+            
             }
 
             $arr[$x][$y] = 
@@ -3080,12 +3112,39 @@ function update_saldo_post()
            
         }
         
+        //VALIDASI Response code
+        if($e_code == TRUE ){
+            $code = 410;
+            
+            $message = array(
+                'code'   => $code,
+                'message'=> $e_msg,
+                'status' => true,
+                'data'   => $arr
+            );
+            
+        }elseif($this->server_error() != TRUE){
+            $code = 500;
+            $e_msg = $code500;
 
-        $message = array(
-            'code' => 200,
-            'status' => true,
-            'data' => $arr
-        );
-        $this->response($message, 200);
+            $message = array(
+                'code'   => $code,
+                'message'=> $e_msg,
+                'status' => FALSE,
+                'data'   => $arr
+            );
+
+        }else{
+            $code = 200;
+
+            $message = array(
+                'code'   => 200,
+                'message'=> 'Success',
+                'status' => true,
+                'data'   => $arr
+            );
+        }
+
+        $this->response($message, $code);
     }
 }
