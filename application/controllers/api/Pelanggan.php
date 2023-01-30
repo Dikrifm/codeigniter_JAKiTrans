@@ -3036,7 +3036,7 @@ function update_saldo_post()
             'data'   => 'test'
         );
 
-        $this->response($message, $code);
+        $this->response($message, 200);
 
 
     }
