@@ -3028,15 +3028,35 @@ function update_saldo_post()
         $decoded_data = json_decode($data);
 
         $init_r = "P";
+        $i = 1;
 
         $cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r);
-        //$cekdata->result();
-        
+        $query = $cekdata->result();
+
+        foreach($query as $q){
+            $arr[] = [
+                'id'                 => $q['id'],
+                'invoice'            => $q['invoice'],
+                'receiver_user_id'   => $q['receiver_user_id'],
+                'receiver_name'      => $q['fullnama'],
+                //'receiver_role'      => $role_r,
+
+                'sender_user_id'     => $q['sender_user_id'],
+                'saldo_sender_awal'  => $q['saldo_sender_awal'],
+                'saldo_receiver_awal'=> $q['saldo_receiver_awal'],
+                'nominal'            => $q['nominal'],
+                'note'               => $q['note'],
+                'regtime'            => $q['regtime'],
+                'i'                  => $i++
+            ];
+        }
+
+
         $message = array(
             'code'   => 200,
             'message'=> 'Success',
             'status' => true,
-            'data'   => $cekdata->result()
+            'data'   => $arr
         );
 
         $this->response($message, 200);
