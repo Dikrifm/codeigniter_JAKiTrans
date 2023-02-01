@@ -3032,7 +3032,7 @@ function update_saldo_post()
 
         $cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r);
         $query = $cekdata->result();
-
+        /*
         foreach($query as $q){
             $arr[] = [
                 'id'                 => $q['id'],
@@ -3050,13 +3050,13 @@ function update_saldo_post()
                 'i'                  => $i++
             ];
         }
-
+        */
 
         $message = array(
             'code'   => 200,
             'message'=> 'Success',
             'status' => true,
-            'data'   => $arr
+            'data'   => $query
         );
 
         $this->response($message, 200);
