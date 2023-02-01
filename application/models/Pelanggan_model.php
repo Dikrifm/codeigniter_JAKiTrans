@@ -2709,7 +2709,7 @@ public function merchantnearby($long, $lat)
         $this->db->where('transaksi_saldo.sender_user_id', $id);
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
-        $query = $this->db->get()->result_array();
+        $query = $this->db->get();//->result_array();
 
         //VALIDASI Receiver
         $num_item = count($query);
