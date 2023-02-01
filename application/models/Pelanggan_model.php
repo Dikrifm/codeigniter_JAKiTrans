@@ -2700,7 +2700,7 @@ public function merchantnearby($long, $lat)
         return $query;
     }
 
-    public function get_transaksi_saldo_by_r($id)
+    public function get_transaksi_saldo_by_r($id_sender, $init_r)
     {   
         $this->db->select('transaksi_saldo.*');
         
