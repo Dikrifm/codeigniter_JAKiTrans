@@ -2699,32 +2699,31 @@ public function merchantnearby($long, $lat)
         
         return $query;
     }
-
-    public function get_transaksi_saldo_by_r($id_user, $initial_r){
+    
+    public function get_transaksi_saldo_by_r($id_sender, $init_r){
         $p  = 'pelanggan.*';
         $d  = 'driver.*';
         $m1 = 'mitra.*, merchant.*';
 
         $l_join1 = "";
 
-        if($initial_r == "P"){
+        if($init_r == "P"){
             $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
             $s      = $p;
             $f      = "pelanggan";
 
-        }elseif($initial_r == "D"){
+        }elseif($init_r == "D"){
             $l_join = "transaksi_saldo.receiver_user_id = driver.id";
             $s      = $d;
             $f      = "driver";
 
-        }elseif($initial_r == "M"){
+        }elseif($init_r == "M"){
             $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
             $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
 
             $s = $m1;
 
         }
-
 
         $this->db->select('transaksi_saldo.*');
 
