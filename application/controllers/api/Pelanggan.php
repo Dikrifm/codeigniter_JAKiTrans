@@ -3029,7 +3029,7 @@ function update_saldo_post()
 
         $init_r = "P";
 
-        //$cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->$id, $init_r);
+        $cekdata = $this->Pelanggan_model->get_transaksi_saldo($decoded_data->id);
         //$cekdata->result();
         
         $message = array(
