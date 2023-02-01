@@ -3036,7 +3036,7 @@ function update_saldo_post()
             'code'   => 200,
             'message'=> 'Success',
             'status' => true,
-            'data'   => 'test'
+            'data'   => $cekdata
         );
 
         $this->response($message, 200);
