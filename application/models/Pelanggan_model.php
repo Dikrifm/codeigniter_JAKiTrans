@@ -2742,7 +2742,7 @@ public function merchantnearby($long, $lat)
         
         }
 
-        $this->db->join('pelanggan', $l_join);
+        //$this->db->join('pelanggan', $l_join);
         
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
         $this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
