@@ -2725,11 +2725,11 @@ public function merchantnearby($long, $lat)
             $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
 
             $s = $m1;
-            $name_r  = "nama_merchant";
+            $name_r  = "nama_mitra";
 
         }
 
-        $this->db->select('transaksi_saldo.*', $s);
+        $this->db->select('transaksi_saldo.*'. $s);
         
         $this->db->from('transaksi_saldo');
         
