@@ -2699,8 +2699,25 @@ public function merchantnearby($long, $lat)
         
         return $query;
     }
-    
-    public function get_transaksi_saldo_by_r($id_sender, $init_r){
+
+    public function get_transaksi_saldo_by_r($id)
+    {   
+        $this->db->select('transaksi_saldo.*');
+        
+        $this->db->from('transaksi_saldo');
+        
+        $this->db->where('transaksi_saldo.sender_user_id', $id);
+        $this->db->order_by('transaksi_saldo.regtime', 'DESC');
+        
+        $query = $this->db->get()->result_array();
+
+        //VALIDASI Receiver
+        $num_item = count($query);
+        
+        return $query;
+    }
+
+    public function get_transaksi_saldo_by_r2($id_sender, $init_r){
         $p  = 'pelanggan.*';
         $d  = 'driver.*';
         $m1 = 'mitra.*, merchant.*';
