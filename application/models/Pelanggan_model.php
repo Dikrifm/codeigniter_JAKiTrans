@@ -2706,20 +2706,66 @@ public function merchantnearby($long, $lat)
         $d  = ',driver.*';
         $m1 = ',mitra.*, merchant.*';
 
-        $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
+        $l_join1 = "";
 
-        $this->db->select('transaksi_saldo.*');
+        if($init_r == "P"){
+            $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
+            $s      = $p;
+            $f      = "pelanggan";
+            $name_r = "fullnama";
+
+        }elseif($init_r == "D"){
+            $l_join = "transaksi_saldo.receiver_user_id = driver.id";
+            $s      = $d;
+            $f      = "driver";
+            $name_r = "nama_driver";
+
+        }elseif($init_r == "M"){
+            $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
+            $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
+
+            $s = $m1;
+            $name_r  = "nama_merchant";
+
+        }
+
+        $this->db->select('transaksi_saldo.*', $s);
         
         $this->db->from('transaksi_saldo');
         
-        //$this->db->join('pelanggan', $l_join);
+        if(empty($l_join)){
+            $this->db->join('mitra', $l_join1);
+            $this->db->join('merchant', $l_join2);
+        
+        }else{
+            $this->db->join($f, $l_join);
+        
+        }
+
+        $this->db->join('pelanggan', $l_join);
         
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
-        //$this->db->like('transaksi_saldo.receiver_user_id', "P", 'after');
+        $this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
         $query = $this->db->get();//->result_array();
+
+        foreach($query as $q){
+            $data[] = [
+                "id"                 => "94",
+                "invoice"            => "TRF-231001373023",
+                "receiver_user_id"   => "P1674801307",
+                "receiver_name"      => "Customer",
+                "receiver_role"      => "to Cust",
+                "sender_user_id"     => "P1670398947",
+                "saldo_sender_awal"  => "105496",
+                "saldo_receiver_awal"=> "850000",
+                "nominal"            => "12121",
+                "note"               => "Kirim Saldo \nCUST to CUST",
+                "regtime"            => "2023-01-30 10:37:23"
+            ];
+        }
 
         //VALIDASI Receiver
         $num_item = count($query);

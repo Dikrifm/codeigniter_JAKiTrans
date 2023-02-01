@@ -3027,10 +3027,30 @@ function update_saldo_post()
         $data = file_get_contents("php://input");
         $decoded_data = json_decode($data);
 
-        $init_r = "P";
+        $init_r;
         $i = 1;
+        
+        for($i; $i <= 3; $i++){
+            if($i == 1){
+                $init_r = "P";
+                $role_r = "to CUST";
 
-        $cekdata = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r);
+            }elseif($i == 2){
+                $init_r = "D";
+                $role_r = "to DRIVER";
+
+            }elseif($i == 3){
+                $init = "M";
+                $role_r = "to MERCH";
+
+            }
+            $arr[] = [
+                "role_r" => $role_r,
+                $body => $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r)
+            ];
+            
+        }
+        
         $query = $cekdata->result();
         /*
         foreach($query as $q){
