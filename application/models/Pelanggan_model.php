@@ -2708,11 +2708,11 @@ public function merchantnearby($long, $lat)
 
         $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
 
-        $this->db->select('transaksi_saldo.*', $p);
+        $this->db->select('transaksi_saldo.*');
         
         $this->db->from('transaksi_saldo');
         
-        $this->db->join('pelanggan', $l_join);
+        //$this->db->join('pelanggan', $l_join);
         
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
         //$this->db->like('transaksi_saldo.receiver_user_id', "P", 'after');
