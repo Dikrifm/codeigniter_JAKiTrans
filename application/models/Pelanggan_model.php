@@ -2770,7 +2770,7 @@ public function merchantnearby($long, $lat)
         //VALIDASI Receiver
         $num_item = count($query);
         
-        return $query;
+        return $data;
     }
 
     public function get_transaksi_saldo_by_r2($id_sender, $init_r){
