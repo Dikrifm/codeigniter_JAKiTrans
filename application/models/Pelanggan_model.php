@@ -2734,7 +2734,7 @@ public function merchantnearby($long, $lat)
         
         $this->db->from('transaksi_saldo');
         
-        if($l_join != ""){
+        if($l_join1 != ""){
             $this->db->join('mitra',    $l_join1);
             $this->db->join('merchant', $l_join2);
         
