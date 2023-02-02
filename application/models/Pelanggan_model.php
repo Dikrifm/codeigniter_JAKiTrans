@@ -2749,7 +2749,7 @@ public function merchantnearby($long, $lat)
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
-        $query = $this->db->get();//->result_array();
+        $query = $this->db->get()->result_array();
 
         foreach($query as $q){
             $data[] = [
