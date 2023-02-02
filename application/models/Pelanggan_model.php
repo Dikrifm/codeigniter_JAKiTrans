@@ -2758,9 +2758,9 @@ public function merchantnearby($long, $lat)
                 "invoice"            => $q['invoice'],
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
-                "receiver_name"      => $q[$name_r],
+                "receiver_name"      => $q[$name_r], //Nama mitra DRIVER atau penaggung jawab MERCH
                 "receiver_role"      => $f,
-                "nama_merchant"      => $q[$name_merch],
+                "name_merchant"      => $q[$name_merch], //nama_merchant FROM TABLE merchant 
 
                 "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
