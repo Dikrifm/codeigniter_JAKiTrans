@@ -3017,7 +3017,7 @@ function update_saldo_post()
     }
 
     //HISTORY TRANSFER antar pengguna --------------------------------------------------------------------
-    function cek_cek_post(){
+    function history_transfer_post(){
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
             header("WWW-Authenticate: Basic realm=\"Private Area\"");
             header("HTTP/1.0 401 Unauthorized");
@@ -3084,7 +3084,7 @@ function update_saldo_post()
 
     }
     
-    function history_transfer_post()
+    function history_transferx_post()
     {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
             header("WWW-Authenticate: Basic realm=\"Private Area\"");
