@@ -2801,7 +2801,7 @@ public function merchantnearby($long, $lat)
         }
 
         }//for
-
+        //cuecue
         return $data;
     }
 
