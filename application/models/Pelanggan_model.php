@@ -2683,8 +2683,22 @@ public function merchantnearby($long, $lat)
     }
 
     //HISTORY TRANSFER Model : antar all user -----------------------------------------------------------------
-    public function get_transaksi_saldo_by_r($id_sender, $init_r)
+    public function get_transaksi_saldo_by_r($id_sender/*, $init_r*/)
     {   
+        $ii = 1;
+
+        for($ii; $ii <= 3; $ii++){
+        if($ii == 1){
+            $init_r = "P";
+        
+        }elseif($ii == 2){
+            $init_r = "D";
+
+        }elseif($ii == 3){
+            $init_r = "M";
+
+        }
+
         //PREPARE RECEIVER
         $p  = ',pelanggan.*';
         $d  = ',driver.*';
@@ -2731,7 +2745,7 @@ public function merchantnearby($long, $lat)
         }
 
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
-        $this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
+        //$this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
@@ -2755,7 +2769,9 @@ public function merchantnearby($long, $lat)
                 "regtime"            => $q['regtime']
             ];
         }
-        
+
+        }//for
+
         return $data;
     }
 
