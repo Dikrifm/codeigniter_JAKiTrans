@@ -2704,6 +2704,7 @@ public function merchantnearby($long, $lat)
     {   
         $p  = ',pelanggan.*';
         $d  = ',driver.*';
+        $m  = ",merchant.*";
         $m1 = ',mitra.*, merchant.*';
 
         $l_join1 = "";
@@ -2721,29 +2722,20 @@ public function merchantnearby($long, $lat)
             $name_r = "nama_driver";
 
         }elseif($init_r == "M"){
-            $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
-            $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
-            $s = $m1;
-
-            $f       = "nama_merchant";
-            $name_r  = "nama_mitra";
+            //$l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
+            //$l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
+            $l_join = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
+            $s = $m;
+            $f       = "merchant";
+            $name_r  = "nama_merchant";
 
         }
 
+        //SELECT DATA from Transaksi_saldo
         $this->db->select('transaksi_saldo.*'. $s);
         
         $this->db->from('transaksi_saldo');
-        
-        if($l_join1 != ""){
-            $this->db->join('mitra',    $l_join1);
-            $this->db->join('merchant', $l_join2);
-        
-        }else{
-            $this->db->join($f, $l_join);
-        
-        }
-
-        //$this->db->join('pelanggan', $l_join);
+        $this->db->join($f, $l_join);
         
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
         $this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
@@ -2759,7 +2751,7 @@ public function merchantnearby($long, $lat)
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
                 "receiver_name"      => $q[$nama_r],
-                "receiver_role"      => $q[$f],
+                "receiver_role"      => $f,
 
                 "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
