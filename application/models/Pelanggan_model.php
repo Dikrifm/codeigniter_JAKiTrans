@@ -2753,17 +2753,17 @@ public function merchantnearby($long, $lat)
 
         foreach($query as $q){
             $data[] = [
-                "id"                 => "94",
-                "invoice"            => "TRF-231001373023",
-                "receiver_user_id"   => "P1674801307",
-                "receiver_name"      => "Customer",
-                "receiver_role"      => "to Cust",
-                "sender_user_id"     => "P1670398947",
-                "saldo_sender_awal"  => "105496",
-                "saldo_receiver_awal"=> "850000",
-                "nominal"            => "12121",
-                "note"               => "Kirim Saldo \nCUST to CUST",
-                "regtime"            => "2023-01-30 10:37:23"
+                "id"                 => $q['id'],
+                "invoice"            => $q['invoice'],
+                "receiver_user_id"   => $q['receiver_user_id'],
+                "receiver_name"      => $q['receiver_name'],
+                "receiver_role"      => $q['receiver_role'],
+                "sender_user_id"     => $q['sender_user_id'],
+                "saldo_sender_awal"  => $q['saldo_sender_awal'],
+                "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
+                "nominal"            => $q['nominal'],
+                "note"               => $q['note'],
+                "regtime"            => $q['regtime']
             ];
         }
 
