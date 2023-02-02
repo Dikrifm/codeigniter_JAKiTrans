@@ -2683,30 +2683,15 @@ public function merchantnearby($long, $lat)
     }
 
     //HISTORY TRANSFER Model : antar all user -----------------------------------------------------------------
-    public function get_transaksi_saldo($id)
-    {   
-        $this->db->select('transaksi_saldo.*');
-        
-        $this->db->from('transaksi_saldo');
-        
-        $this->db->where('transaksi_saldo.sender_user_id', $id);
-        $this->db->order_by('transaksi_saldo.regtime', 'DESC');
-        
-        $query = $this->db->get()->result_array();
-
-        //VALIDASI Receiver
-        $num_item = count($query);
-        
-        return $query;
-    }
-
     public function get_transaksi_saldo_by_r($id_sender, $init_r)
     {   
+        //PREPARE RECEIVER
         $p  = ',pelanggan.*';
         $d  = ',driver.*';
         $m  = ',merchant.*';
         $m1 = ',mitra.*, merchant.*';
 
+        //VALIDASI RECEIVER
         if($init_r == "P"){
             $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
             $s      = $p;
@@ -2731,7 +2716,7 @@ public function merchantnearby($long, $lat)
 
         }
 
-        //SELECT DATA from Transaksi_saldo
+        //SELECT DATA from Transaksi_saldo BY RECEIVER
         $this->db->select('transaksi_saldo.*, transaksi_saldo.id AS id_transaksi_saldo'. $s);
         
         $this->db->from('transaksi_saldo');
@@ -2758,7 +2743,7 @@ public function merchantnearby($long, $lat)
                 "invoice"            => $q['invoice'],
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
-                "receiver_name"      => $q[$name_r], //Nama mitra DRIVER atau penaggung jawab MERCH
+                "receiver_name"      => $q[$name_r], //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
                 "receiver_role"      => $f,
                 "name_merchant"      => $q[$name_merch], //nama_merchant FROM TABLE merchant 
 
@@ -2770,55 +2755,8 @@ public function merchantnearby($long, $lat)
                 "regtime"            => $q['regtime']
             ];
         }
-
-        //VALIDASI Receiver
-        $num_item = count($query);
         
         return $data;
-    }
-
-    public function get_transaksi_saldo_by_r2($id_sender, $init_r){
-        
-
-        $l_join1 = "";
-
-        if($init_r == "P"){
-            $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
-            $s      = $p;
-            $f      = "pelanggan";
-
-        }elseif($init_r == "D"){
-            $l_join = "transaksi_saldo.receiver_user_id = driver.id";
-            $s      = $d;
-            $f      = "driver";
-
-        }elseif($init_r == "M"){
-            $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
-            $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
-
-            $s = $m1;
-
-        }
-
-        $this->db->select('transaksi_saldo.*');
-
-        $this->db->from('transaksi_saldo');
-        /*
-        if($l_join1 != ""){
-            $this->db->join('mitra', $l_join1);
-            $this->db->join('merchant', $l_join2);
-        
-        }else{
-            $this->db->join($f, $l_join);
-
-        }
-        */
-        $this->db->where('transaksi_saldo.sender_user_id', $id_user);
-        //$this->db->like('transaksi_saldo.receiver_user_id', $init, 'after');
-
-        $this->db->order_by('transaksi_saldo.regtime', 'DESC');
-
-        return $this->db->get();
     }
 
 }
