@@ -2723,8 +2723,9 @@ public function merchantnearby($long, $lat)
         }elseif($init_r == "M"){
             $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
             $l_join2 = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
-
             $s = $m1;
+
+            $f       = "nama_merchant";
             $name_r  = "nama_mitra";
 
         }
@@ -2733,8 +2734,8 @@ public function merchantnearby($long, $lat)
         
         $this->db->from('transaksi_saldo');
         
-        if(empty($l_join)){
-            $this->db->join('mitra', $l_join1);
+        if($l_join != ""){
+            $this->db->join('mitra',    $l_join1);
             $this->db->join('merchant', $l_join2);
         
         }else{
@@ -2755,9 +2756,11 @@ public function merchantnearby($long, $lat)
             $data[] = [
                 "id"                 => $q['id'],
                 "invoice"            => $q['invoice'],
+                
                 "receiver_user_id"   => $q['receiver_user_id'],
-                "receiver_name"      => $q['receiver_name'],
-                "receiver_role"      => $q['receiver_role'],
+                "receiver_name"      => $q[$nama_r],
+                "receiver_role"      => $q[$f],
+
                 "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
                 "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
