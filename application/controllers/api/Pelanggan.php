@@ -3052,11 +3052,11 @@ function update_saldo_post()
             
         }
 
+        $datax = $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r);
         $message = array(
             'code'   => 200,
             'message'=> 'success',
-            'status' => true,
-            'data'   => $arr
+            'data'   => $datax
         );
 
         $this->response($message, 200);

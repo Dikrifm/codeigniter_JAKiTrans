@@ -2726,8 +2726,8 @@ public function merchantnearby($long, $lat)
             $this->db->join('merchant', $l_join2);
 
         }else{
-
             $this->db->join($f, $l_join);
+        
         }
 
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
