@@ -2732,7 +2732,7 @@ public function merchantnearby($long, $lat)
         }
 
         //SELECT DATA from Transaksi_saldo
-        $this->db->select('transaksi_saldo.*'. $s);
+        $this->db->select('transaksi_saldo.*, transaksi_saldo.id AS id_transaksi_saldo'. $s);
         
         $this->db->from('transaksi_saldo');
         
@@ -2754,7 +2754,7 @@ public function merchantnearby($long, $lat)
 
         foreach($query as $q){
             $data[] = [
-                "id"                 => $q['transaksi_saldo.id'],
+                "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
