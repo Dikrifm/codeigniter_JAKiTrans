@@ -2760,7 +2760,7 @@ public function merchantnearby($long, $lat)
                 "receiver_user_id"   => $q['receiver_user_id'],
                 "receiver_name"      => $q[$name_r],
                 "receiver_role"      => $f,
-                //"nama_merchant"        => $q[$nama_mitra],
+                "nama_merchant"      => $q[$name_merch],
 
                 "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
