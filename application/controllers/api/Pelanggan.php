@@ -3046,8 +3046,8 @@ function update_saldo_post()
             }
 
             $arr[] = [
-                "role_r" => $role_r//,
-                //$body => $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r)
+                "role_r" => $role_r,
+                "body"   => $this->Pelanggan_model->get_transaksi_saldo_by_r($decoded_data->id, $init_r)
             ];
             
         }
