@@ -363,9 +363,14 @@ class Pelanggan_model extends CI_model
         $url_foto = base_url() . 'images/fotodriver/';
 
         $result = $this->db->query("
-            SELECT f.jarak_minimum, f.wallet_minimum, d.id as id, d.nama_driver,d.rating,d.status, ld.latitude, ld.longitude, ld.bearing,ld.status, ld.update_at,
-            k.merek, k.nomor_kendaraan, k.warna, k.tipe, s.saldo,
-            d.no_telepon, CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, dj.driver_job,
+            SELECT f.jarak_minimum, f.wallet_minimum, 
+            d.id as id, d.nama_driver, d.rating,d.status, 
+            ld.latitude, ld.longitude, ld.bearing,ld.status, ld.update_at,
+            k.merek, k.nomor_kendaraan, k.warna, k.tipe, 
+            s.saldo,
+            d.no_telepon, 
+            CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, 
+            dj.driver_job,
                 (6371 * acos(cos(radians($lat)) * cos(radians( ld.latitude ))"
             . " * cos(radians(ld.longitude) - radians($lng))"
             . " + sin(radians($lat)) * sin( radians(ld.latitude)))) AS distance
@@ -421,13 +426,26 @@ class Pelanggan_model extends CI_model
         $url_foto = base_url() . 'images/fotodriver/';
 
         $result = $this->db->query("
-            SELECT f.jarak_minimum, f.wallet_minimum, d.id as id, d.nama_driver,d.rating,d.status, ld.latitude, ld.longitude, ld.bearing,ld.status, ld.update_at,
-            k.merek, k.nomor_kendaraan, k.warna, k.tipe, s.saldo,
-            d.no_telepon, CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, dj.driver_job,
+            SELECT 
+            f.jarak_minimum, f.wallet_minimum, 
+            d.id as id, d.nama_driver,d.rating,d.status, 
+            ld.latitude, ld.longitude, ld.bearing,ld.status, ld.update_at,
+            k.merek, k.nomor_kendaraan, k.warna, k.tipe, 
+            s.saldo,
+            d.no_telepon, CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, 
+            dj.driver_job,
                 (6371 * acos(cos(radians($lat)) * cos(radians( ld.latitude ))"
             . " * cos(radians(ld.longitude) - radians($lng))"
             . " + sin(radians($lat)) * sin( radians(ld.latitude)))) AS distance
-            FROM config_driver ld, driver d, driver_job dj, kendaraan k, saldo s,fitur f
+            
+            FROM 
+            config_driver ld, 
+            driver d, 
+            driver_job dj, 
+            kendaraan k, 
+            saldo s,
+            fitur f
+            
             WHERE f.driver_job IN (
                 SELECT id_job
                 FROM driver_job_select 
@@ -454,13 +472,25 @@ class Pelanggan_model extends CI_model
         $url_foto = base_url() . 'images/fotodriver/';
 
         $result = $this->db->query("
-            SELECT f.jarak_minimum, f.wallet_minimum, d.id as id, d.nama_driver, ld.latitude, ld.longitude, ld.bearing, ld.update_at,
-            k.merek, k.nomor_kendaraan, k.warna, k.tipe, s.saldo,
-            d.no_telepon, CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, dj.driver_job,
+            SELECT f.jarak_minimum, f.wallet_minimum, 
+            d.id as id, d.nama_driver, 
+            ld.latitude, ld.longitude, ld.bearing, ld.update_at,
+            k.merek, k.nomor_kendaraan, k.warna, k.tipe, 
+            s.saldo,
+            d.no_telepon, CONCAT('$url_foto', d.foto, '') as foto, d.reg_id, 
+            dj.driver_job,
                 (6371 * acos(cos(radians($lat)) * cos(radians( ld.latitude ))"
             . " * cos(radians(ld.longitude) - radians($lng))"
             . " + sin(radians($lat)) * sin( radians(ld.latitude)))) AS distance
-            FROM config_driver ld, driver d, driver_job dj, kendaraan k, saldo s,fitur f
+            
+            FROM 
+            config_driver ld, 
+            driver d, 
+            driver_job dj, 
+            kendaraan k, 
+            saldo s,
+            fitur f
+
             WHERE ld.id_driver = d.id 
                 AND f.id_fitur = $fitur
                 AND ld.status = '1'

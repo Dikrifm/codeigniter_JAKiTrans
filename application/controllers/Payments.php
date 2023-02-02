@@ -270,7 +270,7 @@ class Payments extends CI_Controller
         }
     }
 
-    //QR Payment Method ----------------------------------------------------------------------------
+    //QR Event Payment Method ----------------------------------------------------------------------------
     function qr(){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
@@ -347,7 +347,13 @@ class Payments extends CI_Controller
     }
 
     function delete_qr($id){
-        $this->payment->delete_qr_payment($id);
+        $groupLevel = $this->session->userdata('role');
+        $userId = $this->session->userdata('id');
+
+        $data['menu'] = $this->group->get_menu_user($groupLevel);
+        $data['allmenu'] = $this->group->get_all_menu();
+
+        $this->payment->delete_qr_payment_event($id);
 
         $this->session->set_flashdata('hapus', 'QR Event berhasil dihapus');
         
