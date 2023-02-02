@@ -3040,7 +3040,7 @@ function update_saldo_post()
                 $role_r = "to DRIVER";
 
             }elseif($i == 3){
-                $init = "M";
+                $init_r = "M";
                 $role_r = "to MERCH";
 
             }
