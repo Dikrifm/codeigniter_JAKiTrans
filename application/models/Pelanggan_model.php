@@ -2754,7 +2754,7 @@ public function merchantnearby($long, $lat)
 
         foreach($query as $q){
             $data[] = [
-                "id"                 => $q['id'],
+                "id"                 => $q['transaksi_saldo.id'],
                 "invoice"            => $q['invoice'],
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
