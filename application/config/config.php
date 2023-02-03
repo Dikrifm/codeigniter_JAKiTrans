@@ -3,7 +3,7 @@ $config['APPNAME'] = "Panel";
 $config['DEMO'] = FALSE;
 defined('BASEPATH') or exit('No direct script access allowed');
 $config['base_url'] = 'https://dev.jakitrans.my.id/';
-//new variable firebase;
+//new variable firebase;;
 $config['fcm_server'] = 'AAAA_71zdpg:APA91bEfXbJ55wI9H3rrsOxwENFzbrv-JFiHzfucvlhtK3llcecTVk2s_cAGvSQErHge0K_xld8FmYrTDE_5bVhofcuxmqq8w8qMWU0Cy1Xnr-T3DrGH-OkNQn7YzgJC7pAmEbGBS9y8';
 //mobilepulsa
 $config['mp_server'] = 'https://api.mobilepulsa.net/v1/legacy/index';
