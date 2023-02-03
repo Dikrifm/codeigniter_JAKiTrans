@@ -1,5 +1,5 @@
 <?php
-//'tes' => number_format(200 / 100, 0, ",", "."),
+//'tes' => number_format(200 / 100, 0, ",", "."),;;
 defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '/libraries/REST_Controller.php';
 require APPPATH . '/libraries/Veritrans.php';
