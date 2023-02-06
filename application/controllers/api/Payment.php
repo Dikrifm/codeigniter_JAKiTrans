@@ -599,7 +599,7 @@ class Payment extends REST_Controller{
         );
 
         //INSERT LOG qr_payment => sukses
-        $add_log = $this->payment_model->add_log_qr_payment($data_log);
+        //$add_log = $this->payment_model->add_log_qr_payment($data_log);
         
         //if($add_log){
           //  $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
