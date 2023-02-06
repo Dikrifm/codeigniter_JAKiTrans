@@ -623,7 +623,7 @@ class Payment extends REST_Controller{
                     'code'    => 200,
                     'status'  => 'success',
                     'message' => 'Payment Success',
-                    'data'    => $saldo_after
+                    'data'    => $data_valid
                 );
                 $this->response($message, 200);
             /*
