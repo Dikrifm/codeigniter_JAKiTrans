@@ -611,7 +611,7 @@ class Payment extends REST_Controller{
         
         //CUT SALDO user
         $saldo_curr = $this->db->get_saldo($saldo_curr);
-        $saldo_after= $saldo_curr['saldo'] - $data_valid['jumlah'];
+        $saldo_after= $saldo_curr->saldo - $data_valid['jumlah'];
         $this->Payment_model->min_saldo($id_user, $saldo_after);
         
         /*
