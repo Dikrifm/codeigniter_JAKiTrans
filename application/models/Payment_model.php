@@ -1047,7 +1047,7 @@ class Payment_model extends CI_model
         $data_qr = $this->get_qr_event_by_id($id_qris);
         
         $data_ins = array(
-            'invoice' => $trq,
+            'invoice' => $invoice,
             'id_user' => $id_user,
             
             'jumlah'  => $data_qr['jumlah'],
