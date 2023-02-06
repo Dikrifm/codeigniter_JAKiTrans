@@ -607,11 +607,11 @@ class Payment extends REST_Controller{
         
         //GET CURRENT RECORD
         $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
-        
+        /*
         if($pay_gen == TRUE){
         
             if($data_valid['invoice'] == $trq){
-
+        */
                 $message = array(
                     'code'    => 200,
                     'status'  => 'success',
@@ -619,7 +619,7 @@ class Payment extends REST_Controller{
                     'data'    => $data_valid
                 );
                 $this->response($message, 200);
-            
+            /*
             }else{
                 $message = array(
                     'code'    => 500,
@@ -639,7 +639,7 @@ class Payment extends REST_Controller{
             );
             $this->response($message, 200);
         }
-        
+        */
     } //payment_qris_event_post()
 
     function QRcode(){
