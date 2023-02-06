@@ -1042,4 +1042,26 @@ class Payment_model extends CI_model
 
         return $this->db->last_query();
     }
+
+    function pay_qr_payment($id_user, $id_qris, $invoice){
+        $data_qr = $this->get_qr_event_by_id($id_qris);
+        
+        $data_ins = array(
+            'invoice' => $trq,
+            'id_user' => $id_user,
+            
+            'jumlah'  => $data_qr['jumlah'],
+            'bank'    => 'QR Event',
+            'rekening'=> 'JPay',
+            'type'    => 'Pay-',
+            'status'  => 1,
+        );
+
+        $this->db->insert($data_ins);
+    }
+
+    function add_log_qr_payment($data){
+        $this->db->insert('qr_event_history', $data);
+
+    }
 }

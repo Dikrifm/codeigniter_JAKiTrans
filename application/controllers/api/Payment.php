@@ -583,46 +583,65 @@ class Payment extends REST_Controller{
 
     function payment_qris_event_post(){
         $input = file_get_contents("php://input");
-        log_message('debug',$input);
+        log_message('debug', $input);
 
-        $data_json = json_decode($input);
-        $req       = json_decode($input, true);
-        
-        $data = $this->Payment_model->insert_qr_payment($req);
+        $dec_data = json_decode($input);
 
-        
- 
-        $config['cacheable']    = true; 
-        $config['cachedir']     = './asset/log/'; 
-        $config['errorlog']     = './asset/log/'; 
-        $config['imagedir']     = './asset/images/'; 
-        $config['quality']      = true; 
-        $config['size']         = '1024'; 
-        $config['black']        = array(224,255,255); 
-        $config['white']        = array(70,130,180); 
-        
-        $this->ciqrcode->initialize($config);
- 
-        $image_name  = $req['id'].'.png'; 
- 
-        $params['data'] = $data_json; 
-        $params['level'] = 'H'; 
-        $params['size'] = 10;
-        $params['savename'] = FCPATH.$config['imagedir'].$image_name; //simpan image QR CODE ke folder assets/images/
-        
-        $this->ciqrcode->generate($params);
+        $pay_msg = "Payment QR success";
+        $invoice = "trq-". date("yHmids");
 
-        $resp['message'] = 'success';
-        $resp['data'] = $data;
+        //CREATE DATA LOG qr_payment
+        $data_log = array(
+            'id_qr_event' => $dec_data->id_qris,
+            'id_user'     => $dec_data->id_user,
+            'status'      => 1,
+            'invoice'     => $invoice
+        );
 
-        if(!empty($data->error)){
-            $resp['message'] = $data->error;
-            $resp['data'] = null;
+        //INSERT LOG qr_payment => sukses
+        $add_log = $this->payment_model->add_log_qr_payment($data_log);
+        
+        if($add_log){
+            $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         }
+        
+        $data_valid = $this->payment_model->get_qr_event_by_id($dec_data->id_user);
+        
+        if($pay_gen == TRUE){
+        
+            if($data_valid['invoice'] == $trq){
 
-        echo json_encode($data);
-        exit;
-    }
+                
+
+                $message = array(
+                    'code'    => 200,
+                    'status'  => 'success',
+                    'message' => 'Payment Success',
+                    'data'    => $data
+                );
+                $this->response($message, 200);    
+
+            }else{
+                $message = array(
+                    'code'    => 500,
+                    'status'  => 'error',
+                    'message' => 'Something went wrong, please try again!',
+                    'data'    => ""
+                );
+                $this->response($message, 500);
+            }
+        
+        }else{
+            $message = array(
+                'code'    => 409,
+                'status'  => 'error',
+                'message' => 'The request could not be completed due to a conflict with the current state of the resource.',
+                'data'    => ""
+            );
+            $this->response($message, 409);
+        }
+        
+    } //payment_qris_event_post()
 
     function QRcode(){
 
