@@ -1045,15 +1045,18 @@ class Payment_model extends CI_model
 
     function pay_qr_payment($id_user, $id_qris, $invoice){
         $data_qr = $this->get_qr_event_by_id($id_qris);
+        $type_w  = 'QR Payment : '. $data_qr['nama_event'];
         
         $data_ins = array(
             'invoice' => $invoice,
             'id_user' => $id_user,
             
             'jumlah'  => $data_qr['nominal'],
-            'bank'    => 'QR Event',
+            'tujuan'  => $type_w,
+
+            'bank'    => 'Saldo JPay',
             'rekening'=> 'JPay',
-            'type'    => 'Pay QR_Event',
+            'type'    => 'QR Payment',
             'status'  => 1
         );
 
