@@ -610,7 +610,7 @@ class Payment extends REST_Controller{
         $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
         
         //CUT SALDO user
-        $saldo_curr = $this->Payment_model-->get_saldo($cond);
+        $saldo_curr = $this->Payment_model->get_saldo($cond);
         $saldo_after= $saldo_curr->saldo - $data_valid['jumlah'];
         //$this->Payment_model->min_saldo($dec_data->id_user, $saldo_after);
         
