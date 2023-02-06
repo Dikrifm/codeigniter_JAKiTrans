@@ -1050,7 +1050,7 @@ class Payment_model extends CI_model
             'invoice' => $invoice,
             'id_user' => $id_user,
             
-            'jumlah'  => $data_qr['jumlah'],
+            'jumlah'  => $data_qr['nominal'],
             'bank'    => 'QR Event',
             'rekening'=> 'JPay',
             'type'    => 'Pay QR_Event',
