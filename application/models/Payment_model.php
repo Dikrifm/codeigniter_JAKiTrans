@@ -1015,8 +1015,7 @@ class Payment_model extends CI_model
 
         $this->db->update('saldo');
 
-        return true;
-
+        return TRUE;
     }
 
     //QR Payment Model ----------------------------------------------------------------------------------------------------------
@@ -1081,7 +1080,7 @@ class Payment_model extends CI_model
         $this->db->insert('wallet', $data_ins);
 
         //CUT SALDO user
-        $min_saldo = $this->db->min_saldo($id_user, $data_qr['nominal']);
+        $min_saldo = $this->min_saldo($id_user, $data_qr['nominal']);
 
         if($min_saldo == TRUE){
             return TRUE;
