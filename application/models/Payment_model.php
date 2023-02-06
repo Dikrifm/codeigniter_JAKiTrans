@@ -1058,6 +1058,8 @@ class Payment_model extends CI_model
         );
 
         $this->db->insert($data_ins);
+
+        return TRUE;
     }
 
     function add_log_qr_payment($data){
