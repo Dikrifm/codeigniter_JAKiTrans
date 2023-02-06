@@ -615,7 +615,7 @@ class Payment extends REST_Controller{
                     'code'    => 200,
                     'status'  => 'success',
                     'message' => 'Payment Success',
-                    'data'    => $pay_gen
+                    'data'    => $data_valid
                 );
                 $this->response($message, 200);
             
