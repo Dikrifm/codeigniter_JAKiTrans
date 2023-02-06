@@ -1008,7 +1008,7 @@ class Payment_model extends CI_model
         );
 
         $saldo_bef = $this->db->get_saldo($param);
-        $saldo_aft = $saldo_bef['saldo'] - $jumlah;
+        $saldo_aft = $saldo_bef->saldo - $jumlah;
 
         $this->db->set('saldo', $saldo_aft);
         $this->db->where('id_user', $id_user);
