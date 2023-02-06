@@ -8,6 +8,7 @@ class Payment extends REST_Controller{
         
         $this->load->helper("url");
         $this->load->database();
+        $this->load->model('Wallet_model');
         $this->load->model('Pelanggan_model');
         $this->load->model('Payment_model');
         $this->load->model('Merchantapi_model');
@@ -605,7 +606,7 @@ class Payment extends REST_Controller{
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         
         //GET CURRENT RECORD
-        $data_valid = $this->Payment_model->get_qr_event_by_id($dec_data->id_qris);
+        $data_valid = $this->Wallet_model->getwallet($invoice);
         
         //if($pay_gen == TRUE){
         
