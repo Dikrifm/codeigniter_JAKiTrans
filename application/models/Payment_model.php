@@ -1001,6 +1001,23 @@ class Payment_model extends CI_model
 
         return $data;
     }
+    //FUNCTION QUERY SALDO
+    function min_saldo($id_user, $jumlah){
+        $param = array(
+            'id_user' => $id_user
+        );
+
+        $saldo_bef = $this->db->get_saldo($param);
+        $saldo_aft = $saldo_bef['saldo'] - $jumlah;
+
+        $this->db->set('saldo', $saldo_aft);
+        $this->db->where('id_user', $id_user);
+
+        $this->db->update('saldo');
+
+        return true;
+
+    }
 
     //QR Payment Model ----------------------------------------------------------------------------------------------------------
     function get_data_qr_payment()
@@ -1048,21 +1065,30 @@ class Payment_model extends CI_model
         $type_w  = 'QR Payment : '. $data_qr['nama_event'];
         
         $data_ins = array(
-            'invoice' => $invoice,
-            'id_user' => $id_user,
-            
-            'jumlah'  => $data_qr['nominal'],
-            'tujuan'  => $type_w,
+            'id_payment_method' => $id_qris,
+            'invoice'           => $invoice,
+            'id_user'           => $id_user,
 
-            'bank'    => 'Saldo JPay',
-            'rekening'=> 'JPay',
-            'type'    => 'QR Payment',
-            'status'  => 1
+            'jumlah'            => $data_qr['nominal'],
+            'tujuan'            => $type_w,
+
+            'bank'              => 'Saldo JPay',
+            'rekening'          => 'JPay',
+            'type'              => 'QR Payment',
+            'status'            => 1
         );
 
         $this->db->insert('wallet', $data_ins);
 
-        return TRUE;
+        //CUT SALDO user
+        $min_saldo = $this->db->min_saldo($id_user, $data_qr['nominal']);
+
+        if($min_saldo == TRUE){
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+
     }
 
     function add_log_qr_payment($data){
