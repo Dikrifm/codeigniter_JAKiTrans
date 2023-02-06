@@ -628,7 +628,7 @@ class Payment extends REST_Controller{
                     'message' => 'Something went wrong, please try again!',
                     'data'    => ""
                 );
-                $this->response($message, 500);
+                $this->response($message, 200);
             }
         
         }else{
@@ -638,7 +638,7 @@ class Payment extends REST_Controller{
                 'message' => 'The request could not be completed due to a conflict with the current state of the resource.',
                 'data'    => ""
             );
-            $this->response($message, 409);
+            $this->response($message, 200);
         }
         
     } //payment_qris_event_post()
