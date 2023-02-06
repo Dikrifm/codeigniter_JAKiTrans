@@ -601,26 +601,26 @@ class Payment extends REST_Controller{
         //INSERT LOG qr_payment => sukses
         $add_log = $this->payment_model->add_log_qr_payment($data_log);
         
-        if($add_log){
-            $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
-        }
+        //if($add_log){
+          //  $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
+        //}
         
-        $data_valid = $this->payment_model->get_qr_event_by_id($dec_data->id_qris);
-        
+        //$data_valid = $this->payment_model->get_qr_event_by_id($dec_data->id_qris);
+        /*
         if($pay_gen == TRUE){
         
             if($data_valid['invoice'] == $trq){
 
                 
-
+        */
                 $message = array(
                     'code'    => 200,
                     'status'  => 'success',
                     'message' => 'Payment Success',
-                    'data'    => $data_valid
+                    'data'    => $data_log
                 );
                 $this->response($message, 200);    
-        
+        /*
             }else{
                 $message = array(
                     'code'    => 500,
@@ -640,7 +640,7 @@ class Payment extends REST_Controller{
             );
             $this->response($message, 200);
         }
-        
+        */
     } //payment_qris_event_post()
 
     function QRcode(){
