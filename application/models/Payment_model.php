@@ -1053,11 +1053,11 @@ class Payment_model extends CI_model
             'jumlah'  => $data_qr['jumlah'],
             'bank'    => 'QR Event',
             'rekening'=> 'JPay',
-            'type'    => 'Pay-',
-            'status'  => 1,
+            'type'    => 'Pay QR_Event',
+            'status'  => 1
         );
 
-        $this->db->insert($data_ins);
+        $this->db->insert('wallet', $data_ins);
 
         return TRUE;
     }

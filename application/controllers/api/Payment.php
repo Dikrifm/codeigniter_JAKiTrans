@@ -601,23 +601,24 @@ class Payment extends REST_Controller{
         //INSERT LOG qr_payment => sukses
         $add_log = $this->Payment_model->add_log_qr_payment($data_log);
         
+        //INSERT QR_PAYMENT history to wallet
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         
-        //$data_valid = $this->payment_model->get_qr_event_by_id($dec_data->id_qris);
-        /*
-        if($pay_gen == TRUE){
+        //GET CURRENT RECORD
+        $data_valid = $this->Payment_model->get_qr_event_by_id($dec_data->id_qris);
         
-            if($data_valid['invoice'] == $trq){
+        //if($pay_gen == TRUE){
+        
+            //if($data_valid['invoice'] == $trq){
 
-                
-        */
                 $message = array(
                     'code'    => 200,
                     'status'  => 'success',
                     'message' => 'Payment Success',
                     'data'    => $pay_gen
                 );
-                $this->response($message, 200);    
+                $this->response($message, 200);
+            
         /*
             }else{
                 $message = array(
