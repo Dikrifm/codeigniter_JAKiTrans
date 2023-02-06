@@ -1003,19 +1003,10 @@ class Payment_model extends CI_model
     }
     //FUNCTION QUERY SALDO
     function min_saldo($id_user, $jumlah){
-        $param = array(
-            'id_user' => $id_user
-        );
-
-        $saldo_bef = $this->db->get_saldo($param);
-        $saldo_aft = $saldo_bef->saldo - $jumlah;
-
-        $this->db->set('saldo', $saldo_aft);
+        $this->db->set('saldo', $jumlah);
         $this->db->where('id_user', $id_user);
 
         $this->db->update('saldo');
-
-        return TRUE;
     }
 
     //QR Payment Model ----------------------------------------------------------------------------------------------------------
@@ -1079,15 +1070,7 @@ class Payment_model extends CI_model
 
         $this->db->insert('wallet', $data_ins);
 
-        //CUT SALDO user
-        $min_saldo = $this->min_saldo($id_user, $data_qr['nominal']);
-
-        if($min_saldo == TRUE){
-            return TRUE;
-        }else{
-            return FALSE;
-        }
-
+        return TRUE;
     }
 
     function add_log_qr_payment($data){

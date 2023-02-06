@@ -588,6 +588,7 @@ class Payment extends REST_Controller{
 
         $dec_data = json_decode($input);
 
+        $cond = array('id_user' => $dec_data->id_user);
         $pay_msg = "Payment QR success";
         $invoice = "trq-". date("yHmids");
 
@@ -605,8 +606,14 @@ class Payment extends REST_Controller{
         //INSERT QR_PAYMENT history to wallet
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         
-        //GET CURRENT RECORD
+        //GET CURRENT RECORD wallet
         $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
+        
+        //CUT SALDO user
+        $saldo_curr = $this->db->get_saldo($saldo_curr);
+        $saldo_after= $saldo_curr['saldo'] - $data_valid['jumlah'];
+        $this->Payment_model->min_saldo($id_user, $saldo_after);
+        
         /*
         if($pay_gen == TRUE){
         
