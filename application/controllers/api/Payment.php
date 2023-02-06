@@ -606,7 +606,7 @@ class Payment extends REST_Controller{
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         
         //GET CURRENT RECORD
-        $data_valid = $this->Wallet_model->getwallet($invoice);
+        $data_valid = $this->Wallet_model->getwalletbyinvoice()($invoice);
         
         //if($pay_gen == TRUE){
         
