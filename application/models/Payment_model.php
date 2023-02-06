@@ -1055,7 +1055,7 @@ class Payment_model extends CI_model
         $type_w  = 'QR Payment : '. $data_qr['nama_event'];
         
         $data_ins = array(
-            'id_payment_method' => $id_qris,
+            'uuid' => $id_qris,
             'invoice'           => $invoice,
             'id_user'           => $id_user,
 
