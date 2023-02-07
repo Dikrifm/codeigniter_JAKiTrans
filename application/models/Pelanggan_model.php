@@ -2717,70 +2717,15 @@ public function merchantnearby($long, $lat)
     }
 
     //HISTORY TRANSFER Model : antar all user -----------------------------------------------------------------
-    public function get_transaksi_saldo_by_r($id_sender/*, $init_r*/)
+    public function get_transaksi_saldo_by_r($id_sender)
     {   
-        $ii = 1;
-
-        for($ii; $ii <= 3; $ii++){
-        if($ii == 1){
-            $init_r = "P";
-        
-        }elseif($ii == 2){
-            $init_r = "D";
-
-        }elseif($ii == 3){
-            $init_r = "M";
-
-        }
-
-        //PREPARE RECEIVER
-        $p  = ',pelanggan.*';
-        $d  = ',driver.*';
-        $m  = ',merchant.*';
-        $m1 = ',mitra.*, merchant.*';
-
-        //VALIDASI RECEIVER
-        if($init_r == "P"){
-            $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
-            $s      = $p;
-            $f      = "pelanggan";
-            $name_r = "fullnama";
-
-        }elseif($init_r == "D"){
-            $l_join = "transaksi_saldo.receiver_user_id = driver.id";
-            $s      = $d;
-            $f      = "driver";
-            $name_r = "nama_driver";
-
-        }elseif($init_r == "M"){
-            $l_join1 = "transaksi_saldo.receiver_user_id = mitra.id_mitra";
-            $l_join2 = "mitra.id_merchant = merchant.id_merchant";
-            
-            $l_join  = "transaksi_saldo.receiver_user_id = merchant.id_merchant";
-            $s       = $m1;
-            $f       = "merchant";
-            $name_r  = "nama_mitra";
-            $name_merch = "nama_merchant";
-
-        }
-
         //SELECT DATA from Transaksi_saldo BY RECEIVER
         $this->db->select('transaksi_saldo.*, transaksi_saldo.id AS id_transaksi_saldo'. $s);
         
         $this->db->from('transaksi_saldo');
-        
-        if($init_r == "M"){
-            $this->db->join('mitra', $l_join1);
-            $this->db->join('merchant', $l_join2);
-
-        }else{
-            $this->db->join($f, $l_join);
-        
-        }
 
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
         $this->db->or_where('transaksi_saldo.receiver_user_id', $id_sender);
-        //$this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
@@ -2789,6 +2734,8 @@ public function merchantnearby($long, $lat)
 
         foreach($query as $q){
             $init_s = substr($q['sender_user_id'], 0, 1);
+            $init_r = substr($q['receiver_user_id'], 0, 1);
+
             //VALIDASI STATUS TRANSFER SALDO
             if($q['sender_user_id'] == $id_sender){
                 $status_t = "Send";
@@ -2814,6 +2761,25 @@ public function merchantnearby($long, $lat)
                 $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
 
             }
+
+            //VALIDASI RECEIVER
+            if($init_r == "P"){
+                $cond_id = array('id' => $q['receiver_user_id']);
+                $query_r = $this->get_data_pelanggan($cond_id)->row_array();
+                $name_r  = $query_s['fullnama'];
+
+            }elseif($init_r == "D"){
+                $cond_id = array('id' => $q['receiver_user_id']);
+                $query_r = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
+                $name_r  = $query_s['nama_driver'];
+
+            }elseif($init_r == "M"){
+                //$cond_id         = array('id' => $q['receiver_user_id']);
+                //$query_s         = $this->mitra_model->getmitrabyid($q['receiver_user_id']);
+                $name_r          = "mitra_s";//$query_s['nama_mitra'];
+                $name_merchant_r = "merch_s";//$query_s['nama_merchant'];
+
+            }
             
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
@@ -2821,9 +2787,9 @@ public function merchantnearby($long, $lat)
                 "transfer_type"      => $status_t,
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
-                "receiver_name"      => $q[$name_r], //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
+                "receiver_name"      => $name_r, //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
                 "receiver_role"      => $f,
-                "name_merchant"      => $q[$name_merch], //nama_merchant FROM TABLE merchant 
+                "name_merchant"      => $name_merchant_r, //nama_merchant FROM TABLE merchant 
 
                 "sender_user_id"     => $q['sender_user_id'],
                 "sender_name"        => $name_s, //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
@@ -2839,8 +2805,6 @@ public function merchantnearby($long, $lat)
             //$name_s = ""; $name_merchant_s = "";
         }
 
-        }//for
-        //cuecuesss
         return $data;
     }
 
