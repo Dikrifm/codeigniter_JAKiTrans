@@ -2787,7 +2787,7 @@ public function merchantnearby($long, $lat)
         $query = $this->db->get()->result_array();
 
         foreach($query as $q){
-            $init_s = $q['sender_user_id'];
+            /*$init_s = $q['sender_user_id'];
 
             //VALIDASI SENDER
             if($init_s == "P"){
@@ -2807,7 +2807,7 @@ public function merchantnearby($long, $lat)
                 $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
 
             }
-            
+            */
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
@@ -2828,7 +2828,7 @@ public function merchantnearby($long, $lat)
                 "regtime"            => $q['regtime']
             ];
 
-            $name_s = ""; $name_merchant_s = "";
+            //$name_s = ""; $name_merchant_s = "";
         }
 
         }//for
