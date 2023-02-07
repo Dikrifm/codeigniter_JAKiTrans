@@ -2818,7 +2818,7 @@ public function merchantnearby($long, $lat)
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
-                "status"             => $status_t,
+                "transfer_type"      => $status_t,
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
                 "receiver_name"      => $q[$name_r], //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
