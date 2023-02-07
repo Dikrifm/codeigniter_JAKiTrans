@@ -9,6 +9,9 @@ class Pelanggan_model extends CI_model
     {
         parent::__construct();
 
+        $this->load->model('driver_model');
+        $htis->load->model('mitra_model');
+
         $this->load->helper('array');
     }
 
