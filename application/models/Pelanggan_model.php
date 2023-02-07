@@ -2775,6 +2775,7 @@ public function merchantnearby($long, $lat)
         }
 
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
+        $this->db->or_where('transaksi_saldo.receiver_user_id', $id_sender);
         //$this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
