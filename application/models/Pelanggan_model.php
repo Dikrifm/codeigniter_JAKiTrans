@@ -8,11 +8,12 @@ class Pelanggan_model extends CI_model
     function __construct()
     {
         parent::__construct();
-
-        $this->load->model('Driver_model');
-        $this->load->model('Mitra_model');
-
         $this->load->helper('array');
+        
+        $this->load->model("Driver_model");
+        $this->load->model("Mitra_model");
+
+        
     }
 
     public function count_user()
@@ -2797,7 +2798,7 @@ public function merchantnearby($long, $lat)
 
             }elseif($init_s == "D"){
                 $cond_id = array('id' => $q['sender_user_id']);
-                $query_s = $this->driver_model->get_data_pelanggan($cond_id)->row_array();
+                $query_s = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
                 $name_s  = $query_s['nama_driver'];
 
             }elseif($init_s == "M"){
