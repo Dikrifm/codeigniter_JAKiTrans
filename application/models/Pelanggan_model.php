@@ -2789,8 +2789,8 @@ public function merchantnearby($long, $lat)
             //VALIDASI SENDER
             if($init_s == "P"){
                 $cond_id = array('id' => $q['sender_user_id']);
-                $query_s = $this->get_data_pelanggan($cond_id)->result();
-                $name_s  = $query_s->fullnama;
+                $query_s = $this->get_data_pelanggan($cond_id)->row_array();
+                $name_s  = $query_s['fullnama'];
 
             }elseif($init_s == "D"){
                 //$cond_id = array('id' => $q['sender_user_id']);
