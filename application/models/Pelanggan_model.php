@@ -2784,7 +2784,7 @@ public function merchantnearby($long, $lat)
 
 
         foreach($query as $q){
-            /*$init_s = $q['sender_user_id'];
+            $init_s = $q['sender_user_id'];
 
             //VALIDASI SENDER
             if($init_s == "P"){
@@ -2795,7 +2795,7 @@ public function merchantnearby($long, $lat)
             }elseif($init_s == "D"){
                 //$cond_id = array('id' => $q['sender_user_id']);
                 //$query_s = $this->driver_model->get_data_pelanggan($cond_id)->result();
-                $name_s  = "driver_s";$query_s->nama_driver;
+                $name_s  = "driver_s";//$query_s->nama_driver;
 
             }elseif($init_s == "M"){
                 //$cond_id         = array('id' => $q['sender_user_id']);
@@ -2804,7 +2804,7 @@ public function merchantnearby($long, $lat)
                 $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
 
             }
-            */
+            
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
