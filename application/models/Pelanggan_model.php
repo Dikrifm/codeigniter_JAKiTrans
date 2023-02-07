@@ -2749,14 +2749,14 @@ public function merchantnearby($long, $lat)
                 $query_s = $this->get_data_pelanggan($cond_id)->row_array();
                 $name_s  = $query_s['fullnama'];
 
-                $role_r  = "User JAKiTrans";
+                $role_s  = "User JAKiTrans";
 
             }elseif($init_s == "D"){
                 $cond_id = array('id' => $q['sender_user_id']);
                 $query_s = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
                 $name_s  = $query_s['nama_driver'];
 
-                $role_r  = "Driver JAKiTrans";
+                $role_s  = "Driver JAKiTrans";
 
             }elseif($init_s == "M"){
                 //$cond_id         = array('id' => $q['sender_user_id']);
@@ -2764,7 +2764,7 @@ public function merchantnearby($long, $lat)
                 $name_s          = "mitra_s";//$query_s['nama_mitra'];
                 $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
                 
-                $role_r          = "Mitra Merchant JAKFood";
+                $role_s          = "Mitra Merchant JAKFood";
             }
 
             //VALIDASI RECEIVER
