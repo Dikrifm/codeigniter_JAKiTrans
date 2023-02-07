@@ -9,10 +9,6 @@ class Pelanggan_model extends CI_model
     {
         parent::__construct();
 
-        $this->load->model('driver_model');
-        $this->load->model('merchant_model');
-        $this->load->model('mitra_model');
-
         $this->load->helper('array');
     }
 
@@ -2785,6 +2781,7 @@ public function merchantnearby($long, $lat)
         
         $query = $this->db->get()->result_array();
 
+
         foreach($query as $q){
             /*$init_s = $q['sender_user_id'];
 
@@ -2816,9 +2813,7 @@ public function merchantnearby($long, $lat)
                 "receiver_role"      => $f,
                 "name_merchant"      => $q[$name_merch], //nama_merchant FROM TABLE merchant 
 
-                "sender_user_id"     => $q['sender_user_id'], //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
-                "sender_name"        => $name_s,
-                "sender_merchant"    => $name_merchant_s, //nama_merchant FROM TABLE merchant 
+                "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
                 "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
                 "nominal"            => $q['nominal'],
