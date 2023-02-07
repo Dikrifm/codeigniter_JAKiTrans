@@ -2712,8 +2712,8 @@ public function merchantnearby($long, $lat)
             }
     }
 
-    //HISTORY TRANSFER Model : antar all user -----------------------------------------------------------------
-    public function get_transaksi_saldo_by_r($id_sender/*, $init_r*/)
+    //HISTORY TRANSFER Model : cust to all user -----------------------------------------------------------------
+    public function get_transaksi_saldo_by_r($id_sender)
     {   
         $ii = 1;
 
@@ -2735,6 +2735,7 @@ public function merchantnearby($long, $lat)
         $m  = ',merchant.*';
         $m1 = ',mitra.*, merchant.*';
 
+        
         //VALIDASI RECEIVER
         if($init_r == "P"){
             $l_join = "transaksi_saldo.receiver_user_id = pelanggan.id";
@@ -2775,11 +2776,12 @@ public function merchantnearby($long, $lat)
         }
 
         $this->db->where('transaksi_saldo.sender_user_id', $id_sender);
-        //$this->db->like('transaksi_saldo.receiver_user_id', $init_r, 'after');
+        $this->db->or_where('transaksi_saldo.receiver_user_id', $id_sender);
 
         $this->db->order_by('transaksi_saldo.regtime', 'DESC');
         
         $query = $this->db->get()->result_array();
+
 
         foreach($query as $q){
             $data[] = [
@@ -2794,6 +2796,7 @@ public function merchantnearby($long, $lat)
                 "sender_user_id"     => $q['sender_user_id'],
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
                 "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
+
                 "nominal"            => $q['nominal'],
                 "note"               => $q['note'],
                 "regtime"            => $q['regtime']
@@ -2801,7 +2804,7 @@ public function merchantnearby($long, $lat)
         }
 
         }//for
-        //cuecuesss
+
         return $data;
     }
 
