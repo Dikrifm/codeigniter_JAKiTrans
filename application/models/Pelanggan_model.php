@@ -2762,7 +2762,7 @@ public function merchantnearby($long, $lat)
                 //$cond_id         = array('id' => $q['sender_user_id']);
                 $query_s         = $this->Mitra_model->getmitrabyid($q['sender_user_id']);
                 $name_s          = $query_s['nama_mitra'];
-                //$name_merchant_s = $query_s['nama_merchant'];
+                $name_merchant_s = $query_s['nama_merchant'];
                 
                 $role_s          = "Mitra Merchant JAKFood";
             }
@@ -2787,7 +2787,7 @@ public function merchantnearby($long, $lat)
                 //$cond_id         = array('id' => $q['receiver_user_id']);
                 $query_r         = $this->Mitra_model->getmitrabyid($q['receiver_user_id']);
                 $name_r          = $query_r['nama_mitra'];
-                $name_merchant_r = "null merch";//$query_r['nama_merchant'];
+                $name_merchant_r = $query_r['nama_merchant'];
 
                 $role_r          = "merchant";
             }
