@@ -2793,9 +2793,9 @@ public function merchantnearby($long, $lat)
                 $name_s  = $query_s['fullnama'];
 
             }elseif($init_s == "D"){
-                //$cond_id = array('id' => $q['sender_user_id']);
-                //$query_s = $this->driver_model->get_data_pelanggan($cond_id)->result();
-                $name_s  = "driver_s";//$query_s->nama_driver;
+                $cond_id = array('id' => $q['sender_user_id']);
+                $query_s = $this->driver_model->get_data_pelanggan($cond_id)->row_array();
+                $name_s  = $query_s['nama_driver'];
 
             }elseif($init_s == "M"){
                 //$cond_id         = array('id' => $q['sender_user_id']);
