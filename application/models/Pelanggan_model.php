@@ -2772,22 +2772,22 @@ public function merchantnearby($long, $lat)
                 $cond_id = array('id' => $q['receiver_user_id']);
                 $query_r = $this->get_data_pelanggan($cond_id)->row_array();
                 
-                $name_r  = $query_s['fullnama'];
-                $role_s       = "pelanggan";
+                $name_r  = $query_r['fullnama'];
+                $role_r  = "pelanggan";
 
 
             }elseif($init_r == "D"){
                 $cond_id = array('id' => $q['receiver_user_id']);
                 $query_r = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
                 
-                $name_r  = $query_s['nama_driver'];
-                $role_s       = "driver";
+                $name_r  = $query_r['nama_driver'];
+                $role_r  = "driver";
 
             }elseif($init_r == "M"){
                 //$cond_id         = array('id' => $q['receiver_user_id']);
                 //$query_s         = $this->mitra_model->getmitrabyid($q['receiver_user_id']);
-                $name_r          = "mitra_s";//$query_s['nama_mitra'];
-                $name_merchant_r = "merch_s";//$query_s['nama_merchant'];
+                $name_r          = "mitra_r";//$query_r['nama_mitra'];
+                $name_merchant_r = "merch_r";//$query_r['nama_merchant'];
 
                 $role_r          = "merchant";
             }
@@ -2806,7 +2806,7 @@ public function merchantnearby($long, $lat)
                 "sender_name"        => $name_s, //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
                 "sender_merchant"    => $name_merchant_s, //nama_merchant FROM TABLE merchant
                 "sender_role"        => $role_s,
-                
+
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
                 "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
                 
