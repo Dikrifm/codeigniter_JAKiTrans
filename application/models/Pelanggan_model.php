@@ -9,7 +9,7 @@ class Pelanggan_model extends CI_model
     {
         parent::__construct();
         $this->load->helper('array');
-        
+
         $this->load->model("Driver_model");
         $this->load->model("Mitra_model");
 
@@ -2789,6 +2789,12 @@ public function merchantnearby($long, $lat)
 
         foreach($query as $q){
             $init_s = substr($q['sender_user_id'], 0, 1);
+            //VALIDASI STATUS TRANSFER SALDO
+            if($q['sender_user_id'] == $id_sender){
+                $status_t = "Send";
+            }else{
+                $status_t = "Receive";
+            }
 
             //VALIDASI SENDER
             if($init_s == "P"){
@@ -2812,6 +2818,7 @@ public function merchantnearby($long, $lat)
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
+                "status"             => $status_t,
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
                 "receiver_name"      => $q[$name_r], //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
