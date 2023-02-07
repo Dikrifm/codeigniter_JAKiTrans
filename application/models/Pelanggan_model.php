@@ -2785,8 +2785,8 @@ public function merchantnearby($long, $lat)
 
             }elseif($init_r == "M"){
                 //$cond_id         = array('id' => $q['receiver_user_id']);
-                //$query_r         = $this->mitra_model->getmitrabyid($q['receiver_user_id']);
-                $name_r          = "null mit";//$query_r['nama_mitra'];
+                $query_r         = $this->mitra_model->getmitrabyid($q['receiver_user_id']);
+                $name_r          = $query_r['nama_mitra'];
                 $name_merchant_r = "null merch";//$query_r['nama_merchant'];
 
                 $role_r          = "merchant";
