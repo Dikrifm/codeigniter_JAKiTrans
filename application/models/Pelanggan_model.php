@@ -2784,7 +2784,7 @@ public function merchantnearby($long, $lat)
 
 
         foreach($query as $q){
-            $init_s = $q['sender_user_id'];
+            $init_s = substr($q['sender_user_id'], 0, 1);
 
             //VALIDASI SENDER
             if($init_s == "P"){
