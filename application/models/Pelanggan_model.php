@@ -2749,29 +2749,39 @@ public function merchantnearby($long, $lat)
                 $query_s = $this->get_data_pelanggan($cond_id)->row_array();
                 $name_s  = $query_s['fullnama'];
 
+                $role_r  = "User JAKiTrans";
+
             }elseif($init_s == "D"){
                 $cond_id = array('id' => $q['sender_user_id']);
                 $query_s = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
                 $name_s  = $query_s['nama_driver'];
+
+                $role_r  = "Driver JAKiTrans";
 
             }elseif($init_s == "M"){
                 //$cond_id         = array('id' => $q['sender_user_id']);
                 //$query_s         = $this->mitra_model->getmitrabyid($q['sender_user_id']);
                 $name_s          = "mitra_s";//$query_s['nama_mitra'];
                 $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
-
+                
+                $role_r          = "Mitra Merchant JAKFood";
             }
 
             //VALIDASI RECEIVER
             if($init_r == "P"){
                 $cond_id = array('id' => $q['receiver_user_id']);
                 $query_r = $this->get_data_pelanggan($cond_id)->row_array();
+                
                 $name_r  = $query_s['fullnama'];
+                $role_s       = "pelanggan";
+
 
             }elseif($init_r == "D"){
                 $cond_id = array('id' => $q['receiver_user_id']);
                 $query_r = $this->Driver_model->get_data_pelanggan($cond_id)->row_array();
+                
                 $name_r  = $query_s['nama_driver'];
+                $role_s       = "driver";
 
             }elseif($init_r == "M"){
                 //$cond_id         = array('id' => $q['receiver_user_id']);
@@ -2779,6 +2789,7 @@ public function merchantnearby($long, $lat)
                 $name_r          = "mitra_s";//$query_s['nama_mitra'];
                 $name_merchant_r = "merch_s";//$query_s['nama_merchant'];
 
+                $role_r          = "merchant";
             }
             
             $data[] = [
@@ -2788,12 +2799,14 @@ public function merchantnearby($long, $lat)
                 
                 "receiver_user_id"   => $q['receiver_user_id'],
                 "receiver_name"      => $name_r, //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
-                "receiver_role"      => $f,
+                "receiver_role"      => $role_r,
                 "name_merchant"      => $name_merchant_r, //nama_merchant FROM TABLE merchant 
 
                 "sender_user_id"     => $q['sender_user_id'],
                 "sender_name"        => $name_s, //Nama CUST/DRIVER/MITRA penanggung jawab MERCH
                 "sender_merchant"    => $name_merchant_s, //nama_merchant FROM TABLE merchant
+                "sender_role"        => $role_s,
+                
                 "saldo_sender_awal"  => $q['saldo_sender_awal'],
                 "saldo_receiver_awal"=> $q['saldo_receiver_awal'],
                 
@@ -2802,7 +2815,6 @@ public function merchantnearby($long, $lat)
                 "regtime"            => $q['regtime']
             ];
 
-            //$name_s = ""; $name_merchant_s = "";
         }
 
         return $data;
