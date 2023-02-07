@@ -2791,24 +2791,23 @@ public function merchantnearby($long, $lat)
 
             //VALIDASI SENDER
             if($init_s == "P"){
-                $cond_id = array('id' => $q['sender_user_id']);
-                $query_s = $this->get_data_pelanggan($cond_id)->result();
-                $name_s  = $query_s->fullnama;
+                //$cond_id = array('id' => $q['sender_user_id']);
+                //$query_s = $this->get_data_pelanggan($cond_id)->result();
+                $name_s  = "cust_s";//$query_s->fullnama;
 
             }elseif($init_s == "D"){
-                $cond_id = array('id' => $q['sender_user_id']);
-                $query_s = $this->driver_model->get_data_pelanggan($cond_id)->result();
-                $name_s  = $query_s->nama_driver;
+                //$cond_id = array('id' => $q['sender_user_id']);
+                //$query_s = $this->driver_model->get_data_pelanggan($cond_id)->result();
+                $name_s  = "driver_s";$query_s->nama_driver;
 
             }elseif($init_s == "M"){
-                $cond_id         = array('id' => $q['sender_user_id']);
-                $query_s         = $this->mitra_model->getmitrabyid($q['sender_user_id']);
-                $name_s          = $query_s['nama_mitra'];
-                $name_merchant_s = $query_s['nama_merchant'];
-                
-                
+                //$cond_id         = array('id' => $q['sender_user_id']);
+                //$query_s         = $this->mitra_model->getmitrabyid($q['sender_user_id']);
+                $name_s          = "mitra_s";//$query_s['nama_mitra'];
+                $name_merchant_s = "merch_s";//$query_s['nama_merchant'];
 
             }
+            
             $data[] = [
                 "id"                 => $q['id_transaksi_saldo'],
                 "invoice"            => $q['invoice'],
