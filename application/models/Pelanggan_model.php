@@ -2815,7 +2815,8 @@ public function merchantnearby($long, $lat)
                 "regtime"            => $q['regtime']
             ];
 
-            $name_merchant_r.$name_merchant_s = "";
+            $name_merchant_r = NULL;
+            $name_merchant_s = NULL;
 
         }
 
