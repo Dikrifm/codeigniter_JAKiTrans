@@ -25,7 +25,7 @@
                 <?php
                     }else{
                 ?>
-                        <img max-width="200" height="auto" src='<?= base_url("images/qr/no_image.php")?>' class="img" alt="QR_Image">
+                        <img max-width="200" height="auto" src='<?= base_url("images/qr/no_image.png")?>' class="img" alt="QR_Image">
                 <?php
                     }
                 ?>
