@@ -12,9 +12,11 @@ class Payments extends CI_Controller
         }
         $this->load->model('Payment_model', 'payment');
         $this->load->model('Group_model', 'group');
+        
         $this->load->library('form_validation');
-
         $this->load->library('Ciqrcode');
+
+        $this->load->helper('download');
     }
     
     public function index()
@@ -379,6 +381,14 @@ class Payments extends CI_Controller
         
         $this->session->set_flashdata('hapus', 'QR Event :' . $data['nama_event'] . '( '. $data['id']. ' )' .' Berhasil dihapus! '.$image_status);
         redirect('payments/qr');
+    }
+
+    function  qr_download($id){
+        $data_qr = $this->payment->get_qr_event_by_id($id);
+
+        $image = base_url('images/qr/'. $data_qr['image_path']);
+
+        force_download($image, 'QR-JPay('.$data_qr['nama_event'].')');
     }
 
 
