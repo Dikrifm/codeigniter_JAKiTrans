@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
         <?php
-            if($image_path == NULL || $image_path == ""){
+            if(file_exists(base_url('images/qr/'.$image_path))){
         ?>
             <img src="<?= base_url('images/no_image.png')?>" alt="QR_CODE_Image">
             
