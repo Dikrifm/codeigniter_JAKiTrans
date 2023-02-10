@@ -341,14 +341,14 @@ class Payments extends CI_Controller
         if(!empty($_POST)){
 
             $id_qr = html_escape($this->input->post('id'), TRUE);
-            
+
             $data_update = array(
                 
-                'nama_event'    => html_escape($this->input->post('nama_event'), TRUE),
-                'nominal'       => html_escape($this->input->post('nominal'), TRUE),        
-                'tipe'          => html_escape($this->input->post('tipe'), TRUE),
-                'status'        => html_escape($this->input->post('status'), TRUE),
-                'expired_date'  => html_escape($this->input->post('expired_date'), TRUE)
+                'nama_event'    => $this->input->post('nama_event'),
+                'nominal'       => $this->input->post('nominal'),        
+                'tipe'          => $this->input->post('tipe'),
+                'status'        => $this->input->post('status'),
+                'expired_date'  => $this->input->post('expired_date')
                 
             );
             $this->session->set_flashdata('ubah', 'Data QR Event berhasil di ubah');
