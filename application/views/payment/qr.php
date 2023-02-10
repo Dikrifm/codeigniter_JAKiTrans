@@ -78,7 +78,7 @@
                                                             ?>
                                                                     <img width="80" height="80" class="avatar-img" src="<?= base_url().'images/'.'no_image.png'; ?>">
                                                             <?php }else{ ?>
-                                                                    <img width="80" height="80" class="avatar-img" src="<?= $path_valid; ?>">
+                                                                    <img width="80" height="80" class="avatar-img" src="<?= $path_valid;?>" alt="QR_Image_Path">
                                                                     
                                                             <?php
                                                                 }

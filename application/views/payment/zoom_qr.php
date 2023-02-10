@@ -1,8 +1,19 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-
+        <?php
+            if($image_path == NULL || $image_path == ""){
+        ?>
+            <img src="<?= base_url('images/no_image.png')?>" alt="QR_CODE_Image">
+            
+        <?php
+            }else{
+        ?>
             <img src="<?= base_url('images/qr/'.$image_path)?>" alt="QR_CODE_Image">
+        <?php
+            }
+        ?>
+            
             <h4>Nama Event   : <?= $nama_event ?></h4>
             <h4>Nominal      : <?= $nominal ?></h4>
             <h4>Tipe         : <?= $tipe ?></h4>
