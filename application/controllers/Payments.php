@@ -388,7 +388,7 @@ class Payments extends CI_Controller
 
         $image = base_url('images/qr/'. $data_qr['image_path']);
 
-        return force_download($image, 'QR-JPay('.$data_qr['nama_event'].').png');
+        return force_download($image, NULL);
     }
 
 
