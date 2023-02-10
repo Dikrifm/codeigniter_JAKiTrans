@@ -300,38 +300,39 @@ class Payments extends CI_Controller
 
     function insert_qr(){
     
-    if(!empty($_POST)){
-        
-        $id_qr = 'qr-'. date('yHmids');
-        $image_name = $id_qr . '.png';
-        
-        $data_ins = array(
-            'id'            => $id_qr,
-            'nama_event'    => $this->input->post('nama_event'),
-            'nominal'       => $this->input->post('nominal'),        
-            'tipe'          => $this->input->post('tipe'),
-            'status'        => $this->input->post('status'),
-            'expired_date'  => $this->input->post('expired_date'),
-            'image_path'    => $image_name
-        );
+        if(!empty($_POST)){
+            
+            $id_qr = 'qr-'. date('yHmids');
+            $image_name = $id_qr . '.png';
+            
+            $data_ins = array(
+                'id'            => $id_qr,
+                'nama_event'    => $this->input->post('nama_event'),
+                'nominal'       => $this->input->post('nominal'),        
+                'tipe'          => $this->input->post('tipe'),
+                'status'        => $this->input->post('status'),
+                'expired_date'  => $this->input->post('expired_date'),
+                'image_path'    => $image_name
+            );
 
-        $this->payment->insert_qr_payment($data_ins); //simpan ke database
+            $this->payment->insert_qr_payment($data_ins); //simpan ke database
 
-        $qr_json = json_encode($data_ins);
+            $qr_json = json_encode($data_ins);
 
-        $params['data'] = $qr_json; 
-        $params['level'] = 'H'; //H=High
-        $params['size'] = 10;
-        $params['savename'] = FCPATH.'images/qr/'.$image_name; 
-        
-        $this->ciqrcode->generate($params); 
-        
+            $params['data'] = $qr_json; 
+            $params['level'] = 'H'; //H=High
+            $params['size'] = 10;
+            $params['savename'] = FCPATH.'images/qr/'.$image_name; 
+            
+            $this->ciqrcode->generate($params); 
+            
 
-        redirect('payments/qr');
-    }else{
-        $this->load->view('includes/header', $data);
-        $this->load->view('payment/addqr', $data);
-        $this->load->view('includes/footer');
+            redirect('payments/qr');
+        }else{
+            $this->load->view('includes/header', $data);
+            $this->load->view('payment/addqr', $data);
+            $this->load->view('includes/footer');
+        }
     }
 
     function edit_qr($id){
@@ -347,26 +348,19 @@ class Payments extends CI_Controller
     }
 
     function delete_qr($id){
-        $groupLevel = $this->session->userdata('role');
-        $userId = $this->session->userdata('id');
-
-        $data['menu'] = $this->group->get_menu_user($groupLevel);
-        $data['allmenu'] = $this->group->get_all_menu();
+        $data = $this->payment->get_qr_event_by_id($id);
+        unlink('images/qr/'. $data['image_path']);
 
         $this->payment->delete_qr_payment_event($id);
-
-        $this->session->set_flashdata('hapus', 'QR Event berhasil dihapus');
         
+        $this->session->set_flashdata('hapus', 'QR Event :' . $data['nama_event'] . '( '. $data['id']. ' )');
         redirect('payments/qr');
     }
 
-    }
 
     function QRcode(){
 
-        $qr = $this->payment->get_qr_event_by_id($id);
-
-        
+        $qr = $this->payment->get_qr_event_by_id($id);      
 
         QRcode::png(
 
