@@ -348,12 +348,21 @@ class Payments extends CI_Controller
     }
 
     function delete_qr($id){
+        $image_status = "";
+
         $data = $this->payment->get_qr_event_by_id($id);
         unlink('images/qr/'. $data['image_path']);
+        
+        if(file_exists(base_url().$data['image_path'])){
+            unlink('images/qr/'. $data['image_path']);
+            
+        }else{
+            $image_status =  "Nothing happen";
+        }
 
         $this->payment->delete_qr_payment_event($id);
         
-        $this->session->set_flashdata('hapus', 'QR Event :' . $data['nama_event'] . '( '. $data['id']. ' )');
+        $this->session->set_flashdata('hapus', 'QR Event :' . $data['nama_event'] . '( '. $data['id']. ' )' .' Berhasil dihapus! '.$image_status);
         redirect('payments/qr');
     }
 

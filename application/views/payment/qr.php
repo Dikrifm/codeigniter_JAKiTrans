@@ -72,7 +72,16 @@
                                                     </td>
                                                     <td>
                                                         <div class="badge badge-primary">
-                                                            <img width="80" height="80" class="avatar-img" src="<?= base_url('images/qr/') . $qr['image_path']; ?>">
+                                                            <?php
+                                                                if(file_exists(base_url('images/qr/') . $qr['image_path'])){
+                                                            ?>
+                                                                <img width="80" height="80" class="avatar-img" src="<?= base_url('images/qr/') . $qr['image_path']; ?>">
+                                                            <?php }else{ ?>
+                                                                <img width="80" height="80" class="avatar-img" src="<?= base_url('images/') . 'no_image.png'; ?>">
+                                                            <?php
+                                                                }
+                                                            ?>
+
                                                         </div>
                                                     </td>
                                                     <td>
