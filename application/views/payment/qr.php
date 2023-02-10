@@ -74,7 +74,7 @@
                                                         <div class="badge badge-primary">
                                                             <?php
                                                                 $path_valid = base_url()."images/qr/".$qr['image_path'];
-                                                                if(file_exists($path_valid)){
+                                                                if($qr['image_path'] != NULL){
                                                             ?>
                                                                     <img width="80" height="80" class="avatar-img" src="<?= $path_valid; ?>">
                                                             <?php }else{ ?>

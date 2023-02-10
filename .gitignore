@@ -19,3 +19,4 @@ application/logs/*
 /vendor/
 composer
 application/views/payment/zoom_qr.php
+application/views/payment/zoom_qr.php
