@@ -352,7 +352,7 @@ class Payments extends CI_Controller
                 
             );
             $this->session->set_flashdata('ubah', 'Data QR Event berhasil di ubah');
-            $this->payment->update_qr_payment($id, $data_update);
+            $this->payment->update_qr_payment($id_qr, $data_update);
 
             redirect('payments/qr');
         }else{
