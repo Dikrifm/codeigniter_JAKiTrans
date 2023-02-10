@@ -9,13 +9,7 @@
                         Ubah Data QR Code Event
                     </h4>
 
-                    <?= form_open_multipart('payments/edit_qr/' . $id); ?>
-                    <input type="hidden" name="id" value='<?= $id ?>'>
-                    
-                    
-                    <div class="form-group">
-                        <input type="file" class="dropify" name="qr_image" data-max-file-size="3mb" data-default-file="<?= base_url('images/qr/') . $image_path ?>"/>
-                    </div>
+                    <?= form_open_multipart('payments/edit_qr'); ?>
 
                     <div class="form-group">
                 <?php

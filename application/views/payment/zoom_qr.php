@@ -1,18 +1,17 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-        <?php
+        <?php   
             if(file_exists(base_url('images/qr/'.$image_path))){
-        ?>
-            <img src="<?= base_url('images/no_image.png')?>" alt="QR_CODE_Image">
-            
-        <?php
+        ?>  
+            <img style="max-width:500px;height:auto" src="<?= base_url('images/no_image.png')?>" alt="QR_CODE_Image">
+        <?php   
             }else{
-        ?>
-            <img src="<?= base_url('images/qr/'.$image_path)?>" alt="QR_CODE_Image">
-        <?php
+        ?>  
+            <img style="max-width:500px;height:auto" src="<?= base_url('images/qr/'.$image_path)?>" alt="QR_CODE_Image">
+        <?php   
             }
-        ?>
+        ?>  
             
             <h4>Nama Event   : <?= $nama_event ?></h4>
             <h4>Nominal      : <?= $nominal ?></h4>

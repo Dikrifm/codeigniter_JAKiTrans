@@ -1038,6 +1038,11 @@ class Payment_model extends CI_model
         return $this->db->insert('qr_event', $data);
     }
 
+    function update_qr_payment($id, $data){
+        $this->db->where('id', $id);
+        return $this->db->update('qr_event', $data);
+    }
+
     function delete_qr_payment_event($id){
         $this->db->where('id', $id);
         return $this->db->delete('qr_event');

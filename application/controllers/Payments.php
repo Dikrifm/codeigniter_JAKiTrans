@@ -62,10 +62,10 @@ class Payments extends CI_Controller
         $data['menu'] = $this->group->get_menu_user($groupLevel);
         $data['allmenu'] = $this->group->get_all_menu();
         if ($this->form_validation->run() == TRUE) {
-            $config['upload_path']     = './images/promo/';
-            $config['allowed_types'] = 'gif|jpg|png|jpeg';
+            $config['upload_path']      = './images/promo/';
+            $config['allowed_types']    = 'gif|jpg|png|jpeg';
             $config['max_size']         = '10000';
-            $config['file_name']     = 'name';
+            $config['file_name']        = 'name';
             $config['encrypt_name']     = true;
             $this->load->library('upload', $config);
 
@@ -340,6 +340,21 @@ class Payments extends CI_Controller
 
         if(!empty($_POST)){
 
+            $id_qr = html_escape($this->input->post('id'), TRUE);
+            
+            $data_update = array(
+                
+                'nama_event'    => html_escape($this->input->post('nama_event'), TRUE),
+                'nominal'       => html_escape($this->input->post('nominal'), TRUE),        
+                'tipe'          => html_escape($this->input->post('tipe'), TRUE),
+                'status'        => html_escape($this->input->post('status'), TRUE),
+                'expired_date'  => html_escape($this->input->post('expired_date'), TRUE)
+                
+            );
+            $this->session->set_flashdata('ubah', 'Data QR Event berhasil di ubah');
+            $this->payment->update_qr_payment($id, $data_update);
+
+            redirect('payments/qr');
         }else{
             $this->load->view('includes/header', $data);
             $this->load->view('payment/editqr', $data);
@@ -357,7 +372,7 @@ class Payments extends CI_Controller
             unlink('images/qr/'. $data['image_path']);
             
         }else{
-            $image_status =  "Nothing happen";
+            $image_status =  "x101";
         }
 
         $this->payment->delete_qr_payment_event($id);
