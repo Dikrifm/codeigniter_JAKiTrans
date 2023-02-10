@@ -21,11 +21,11 @@
                 <?php
                     if(file_exists(base_url("images/qr/".$image_path))){
                 ?>    
-                        <img max-width="200" height="auto" src='<?= base_url("images/qr/".$image_path)?>' class="img">
+                        <img max-width="200" height="auto" src='<?= base_url("images/qr/".$image_path)?>' class="img" alt="no_image.png>
                 <?php
                     }else{
                 ?>
-                        <img max-width="200" height="auto" src='<?= base_url("images/qr/no_image.php")?>' class="img">
+                        <img max-width="200" height="auto" src='<?= base_url("images/qr/no_image.php")?>' class="img" alt="QR_Image">
                 <?php
                     }
                 ?>
