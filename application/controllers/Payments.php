@@ -383,7 +383,7 @@ class Payments extends CI_Controller
         redirect('payments/qr');
     }
 
-    function  qr_download($id){
+    function qr_download($id){
         $data_qr = $this->payment->get_qr_event_by_id($id);
 
         $image = base_url('images/qr/'. $data_qr['image_path']);

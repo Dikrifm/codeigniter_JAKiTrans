@@ -20,7 +20,9 @@
             <h4>create date  : <?= $qrstring ?></h4>
             <h4>expired date : <?= $nama_event ?></h4>
 
-            <a href=<?= base_url().'images/qr/'.$image_path ?> class="btnn btn-outline-warning">Download QR</a>
+            <a href=<?= base_url().'payments/qr_download'.$image_path ?>>
+                <button class="btn btn-outline-warning">Download QR</button>
+            </a>
         </div><!-- /.CARD-Body -->
     </div><!-- /.CARD-->
 </div><!-- /.Content-wrapper
