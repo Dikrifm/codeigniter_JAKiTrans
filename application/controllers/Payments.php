@@ -386,9 +386,9 @@ class Payments extends CI_Controller
     function qr_download($id){
         $data_qr = $this->payment->get_qr_event_by_id($id);
 
-        $image = base_url('images/qr/'. $data_qr['image_path']);
+        $image_file = base_url('images/qr/'. $data_qr['image_path']);
 
-        return force_download($image, NULL);
+        return force_download($image_file, 'testaswe');
     }
 
 
