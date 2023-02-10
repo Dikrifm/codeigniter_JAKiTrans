@@ -73,7 +73,7 @@
                                                     <td>
                                                         <div class="badge badge-primary">
                                                             <?php
-                                                                if(is_file(base_url() ."images/qr/". $qr['image_path'])) {
+                                                                if(base_url()."images/qr/". $qr['image_path']) {
                                                             ?>
                                                                     <img width="80" height="80" class="avatar-img" src="<?= base_url('images/qr/') . $qr['image_path']; ?>">
                                                             <?php }else{ ?>
