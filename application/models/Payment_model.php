@@ -1040,7 +1040,6 @@ class Payment_model extends CI_model
 
     function delete_qr_payment_event($id){
         $this->db->where('id', $id);
-
         return $this->db->delete('qr_event');
     }
 
