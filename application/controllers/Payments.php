@@ -385,12 +385,28 @@ class Payments extends CI_Controller
     }
     
     function qrcode(){
+        /* 
+        param 
+        (1)qrcontent,
+        (2)filename,
+        (3)errorcorrectionlevel,
+        (4)pixelwidth,
+        (5)margin,
+        (6)saveandprint,
+        (7)forecolor,
+        (8)backcolor 
+        */
+
         QRcode::png(
             "cekcek",
-            false,
+            "images/test1.png",
             "H",
-            6, 
-            4
+            20, 
+            4,
+            0,
+            "0,0,0",
+            "255,255,255",
+            "images/logo.png"
         );
     }
     
