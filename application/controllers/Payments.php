@@ -389,7 +389,7 @@ class Payments extends CI_Controller
 
         $image_file = base_url('images/qr/'.$data_qr['image_path']);
 
-        force_download($image_file, NULL);
+        return force_download($image_file, NULL);
     }
 
 
