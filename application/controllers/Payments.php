@@ -399,12 +399,12 @@ class Payments extends CI_Controller
 
         QRcode::png(
             "cekcek",
-            false,
+            'images/test1.png',
             "H",
             20, 
             4,
             0,
-            "0,0,0",
+            "0,255,0",
             "255,255,255",
             false
         );
