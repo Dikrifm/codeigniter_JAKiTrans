@@ -384,6 +384,15 @@ class Payments extends CI_Controller
         redirect('payments/qr');
     }
     
+    function qrcode(){
+        QRcode::png(
+            "cekcek",
+            false,
+            "H",
+            6, 
+            4
+        );
+    }
     
     function reportqr(){
         $groupLevel = $this->session->userdata('role');
