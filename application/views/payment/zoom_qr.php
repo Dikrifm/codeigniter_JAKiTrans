@@ -23,6 +23,10 @@
             <a href=<?= base_url().'payments/qr_download/'.$id ?>>
                 <button class="btn btn-outline-warning">Download QR</button>
             </a>
+
+            <a href=<?= base_url().'payments/donwload_test' ?>>
+                <button class="btn btn-outline-warning">Download test</button>
+            </a>
         </div><!-- /.CARD-Body -->
     </div><!-- /.CARD-->
 </div><!-- /.Content-wrapper

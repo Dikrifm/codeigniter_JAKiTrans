@@ -393,6 +393,10 @@ class Payments extends CI_Controller
         return force_download($image, NULL);
     }
 
+    function download_test(){
+        return force_download('/images/no_image.png', NULL);
+    }
+
 
     function QRcode(){
 
