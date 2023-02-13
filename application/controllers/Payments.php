@@ -384,7 +384,7 @@ class Payments extends CI_Controller
         redirect('payments/qr');
     }
 
-    function QRcode(){
+    function qrcode(){
         /* 
         param 
         (1)qrcontent,
@@ -401,21 +401,23 @@ class Payments extends CI_Controller
         $img_path = date('Ymd').'.png';
         $logo_path= base_url('images/logo.png');
         
-        $data['datacek'] =  QRcode::png(
+        $data = QRcode::png(
 
             $kodenya = 'cekcek123', //Content QR
-            $outfile = base_url('images/'.$img_path), 
+            $outfile = false,//base_url('images/'.$img_path), 
             $level   = 'H', //default = "H"
             $size    = 5,      
             $margin  = 2,
-            0,
-            "0,0,0",
-            "255,255,255",
-            $logo_path
+           // 0,
+            //"0,0,0",
+            //"255,255,255",
+            //$logo_path
             
         );
 
-        $this->load->view('testcatch', $data);
+        return $data;
+
+        //$this->load->view('testcatch', $data);
     }
 
     function reportqr(){

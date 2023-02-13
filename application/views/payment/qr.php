@@ -19,7 +19,7 @@
                 <a class="btn btn-info" href="<?= base_url(); ?>payments/insert_qr"><i class="mdi mdi-plus-circle-outline"></i>Tambah QR Code Event</a>
             </div>
             <div>
-                <a class='btn btn-secondary' href='<?= base_url(); ?>payments/QRcode'>test QRcode Gen</a>
+                <a class='btn btn-secondary' href='<?= base_url(); ?>payments/qrcode'>test QRcode Gen</a>
             </div>
             <br>
             
