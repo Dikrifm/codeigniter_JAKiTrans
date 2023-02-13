@@ -383,43 +383,8 @@ class Payments extends CI_Controller
         $this->session->set_flashdata('hapus', 'QR Event :' . $data['nama_event'] . '( '. $data['id']. ' )' .' Berhasil dihapus! '.$image_status);
         redirect('payments/qr');
     }
-
-    function qrcode(){
-        /* 
-        param 
-        (1)qrcontent,
-        (2)filename,
-        (3)errorcorrectionlevel,
-        (4)pixelwidth,
-        (5)margin,
-        (6)saveandprint,
-        (7)forecolor,
-        (8)backcolor 
-        */
-        //$qr = $this->payment->get_qr_event_by_id($id);      
-
-        $img_path = date('Ymd').'.png';
-        $logo_path= base_url('images/logo.png');
-        
-        $data = QRcode::png(
-
-            $kodenya = 'cekcek123', //Content QR
-            $outfile = false,//base_url('images/'.$img_path), 
-            $level   = 'H', //default = "H"
-            $size    = 5,      
-            $margin  = 2,
-           // 0,
-            //"0,0,0",
-            //"255,255,255",
-            //$logo_path
-            
-        );
-
-        return $data;
-
-        //$this->load->view('testcatch', $data);
-    }
-
+    
+    
     function reportqr(){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
