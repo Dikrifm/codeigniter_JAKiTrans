@@ -396,7 +396,7 @@ class Payments extends CI_Controller
         $params['size'] = 10;
         $params['savename'] = $qr_url1;
         
-        $this->Ciqrcode->generate($params);
+        $this->ciqrcode->generate($params);
         /*
         $QR = imagecreatefrompng($qr_url1);
 
