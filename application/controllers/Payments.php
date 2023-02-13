@@ -370,7 +370,7 @@ class Payments extends CI_Controller
         $data = $this->payment->get_qr_event_by_id($id);
         unlink('images/qr/'. $data['image_path']);
         
-        if(file_exists(base_url().$data['image_path'])){
+        if(file_exists(base_url().'images/qr/'.$data['image_path'])){
             unlink('images/qr/'. $data['image_path']);
             
         }else{
@@ -386,7 +386,7 @@ class Payments extends CI_Controller
     function qr_download($id){
         $data_qr = $this->payment->get_qr_event_by_id($id);
 
-        $image_file = base_url('images/qr/'. $data_qr['image_path']);
+        $image_file = base_url('images/qr/'. 'qr-230702011021.png');//$data_qr['image_path']);
 
         return force_download($image_file, 'testaswe');
     }
