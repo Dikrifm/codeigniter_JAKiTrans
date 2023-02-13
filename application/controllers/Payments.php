@@ -386,7 +386,7 @@ class Payments extends CI_Controller
     }
     
     function qrcode(){
-        /*
+        
         $qr_url1 = FCPATH.'images/qr/testqr1.png';
         $qr_url2 = FCPATH.'images/qr/testqr2.png';
         $logo_url = FCPATH.'images/logo.png';
@@ -400,7 +400,7 @@ class Payments extends CI_Controller
 
         $QR = imagecreatefrompng($qr_url1);
 
-        memulai menggambar logo dalam file qrcode
+        //memulai menggambar logo dalam file qrcode
         $logo = imagecreatefromstring(file_get_contents($logo_url));
         
         imagecolortransparent($logo , imagecolorallocatealpha($logo , 0, 0, 0, 127));
@@ -412,16 +412,16 @@ class Payments extends CI_Controller
 
         $logo_width = imagesx($logo);
         $logo_height = imagesy($logo);
-        Scale logo to fit in the QR Code
+        //Scale logo to fit in the QR Code
         $logo_qr_width = $QR_width/2;
         $scale = $logo_width/$logo_qr_width;
         $logo_qr_height = $logo_height/$scale;
 
         imagecopyresampled($QR, $logo, $QR_width/4, $QR_height/3.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
         
-        Simpan kode QR lagi, dengan logo di atasnya
-        imagepng($QR,$qr_url);
-        */
+        //Simpan kode QR lagi, dengan logo di atasnya
+        imagepng($QR,$qr_url2);
+        
         
         /* 
         param 
@@ -434,7 +434,7 @@ class Payments extends CI_Controller
         (7)forecolor,
         (8)backcolor 
         */
-        
+        /*
         QRcode::png(
             "cekcek with logo",
             'images/test1.png',
@@ -447,6 +447,7 @@ class Payments extends CI_Controller
             //false
             'images/logo.png'
         );
+        */
         
     }
     
