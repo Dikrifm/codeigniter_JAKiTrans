@@ -16,17 +16,23 @@
             <h4>Nama Event   : <?= $nama_event ?></h4>
             <h4>Nominal      : <?= $nominal ?></h4>
             <h4>Tipe         : <?= $tipe ?></h4>
-            <h4>Status       : <?= $status ?></h4>
+            <?php 
+            if($status == 1){
+                $status_qr = 'Active';
+                $color     = 'success';
+            }else{
+                $status_qr = 'non-Active';
+                $color     = 'danger';
+            } 
+            ?>
+            <h4>
+                Status       : <span class="badge badge-<?= $color ?>">
+                               <?= $status_qr ?>
+                               </span>
+            </h4>
             <h4>created date : <?= $created_date ?></h4>
             <h4>expired date : <?= $expired_date ?></h4>
 
-            <a href=<?= base_url().'payments/qr_download/'.$id ?>>
-                <button class="btn btn-outline-warning">Download QR</button>
-            </a>
-
-            <a href=<?= base_url().'payments/download_test' ?>>
-                <button class="btn btn-outline-warning">Download test</button>
-            </a>
         </div><!-- /.CARD-Body -->
     </div><!-- /.CARD-->
 </div><!-- /.Content-wrapper
