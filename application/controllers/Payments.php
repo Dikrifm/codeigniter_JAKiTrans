@@ -397,7 +397,7 @@ class Payments extends CI_Controller
         $params['savename'] = $qr_url1;
         
         $this->Ciqrcode->generate($params);
-
+        /*
         $QR = imagecreatefrompng($qr_url1);
 
         //memulai menggambar logo dalam file qrcode
@@ -412,16 +412,16 @@ class Payments extends CI_Controller
 
         $logo_width = imagesx($logo);
         $logo_height = imagesy($logo);
-        //Scale logo to fit in the QR Code
+        Scale logo to fit in the QR Code
         $logo_qr_width = $QR_width/2;
         $scale = $logo_width/$logo_qr_width;
         $logo_qr_height = $logo_height/$scale;
 
         imagecopyresampled($QR, $logo, $QR_width/4, $QR_height/3.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
         
-        //Simpan kode QR lagi, dengan logo di atasnya
+        Simpan kode QR lagi, dengan logo di atasnya
         imagepng($QR,$qr_url2);
-        
+        */
         
         /* 
         param 
