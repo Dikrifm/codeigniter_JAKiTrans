@@ -385,17 +385,49 @@ class Payments extends CI_Controller
     }
 
     function QRcode(){
+        /* 
+        param 
+        (1)qrcontent,
+        (2)filename,
+        (3)errorcorrectionlevel,
+        (4)pixelwidth,
+        (5)margin,
+        (6)saveandprint,
+        (7)forecolor,
+        (8)backcolor 
+        */
+        //$qr = $this->payment->get_qr_event_by_id($id);      
 
-        $qr = $this->payment->get_qr_event_by_id($id);      
+        $img_path = date('Ymd').'.png';
+        $logo_path= base_url('images/logo.png');
+        
+        return QRcode::png(
 
-        QRcode::png(
-
-            $kodenya,
-            $outfile = false,
-            $level = QR_ECLEVEL_H,
-            $size = 5,
-            $margin = 2
-
+            $kodenya = 'cekcek123', //Content QR
+            $outfile = base_url('images/'.$img_path), 
+            $level   = 'H', //default = "H"
+            $size    = 5,      
+            $margin  = 2,
+            0,
+            "0,0,0",
+            "255,255,255",
+            $logo_path
+            
         );
+
+        
+    }
+
+    function reportqr(){
+        $groupLevel = $this->session->userdata('role');
+        $userId = $this->session->userdata('id');
+
+        $data['menu'] = $this->group->get_menu_user($groupLevel);
+        $data['allmenu'] = $this->group->get_all_menu();
+        $data['qr_data'] = $this->payment->get_data_qr_payment();
+
+        $this->load->view('includes/header', $data);
+        $this->load->view('payment/report_qr', $data);
+        $this->load->view('includes/footer');
     }
 }
