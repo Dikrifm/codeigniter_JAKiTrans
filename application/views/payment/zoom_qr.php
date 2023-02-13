@@ -24,7 +24,7 @@
                 <button class="btn btn-outline-warning">Download QR</button>
             </a>
 
-            <a href=<?= base_url().'payments/donwload_test' ?>>
+            <a href=<?= base_url().'payments/download_test' ?>>
                 <button class="btn btn-outline-warning">Download test</button>
             </a>
         </div><!-- /.CARD-Body -->
