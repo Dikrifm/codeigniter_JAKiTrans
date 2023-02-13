@@ -401,7 +401,7 @@ class Payments extends CI_Controller
         $img_path = date('Ymd').'.png';
         $logo_path= base_url('images/logo.png');
         
-        return QRcode::png(
+        $data['datacek'] =  QRcode::png(
 
             $kodenya = 'cekcek123', //Content QR
             $outfile = base_url('images/'.$img_path), 
@@ -415,7 +415,7 @@ class Payments extends CI_Controller
             
         );
 
-        
+        $this->load->view('testcatch', $data);
     }
 
     function reportqr(){
