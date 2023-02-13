@@ -17,6 +17,7 @@ class Payments extends CI_Controller
         $this->load->library('Ciqrcode');
 
         $this->load->helper('download');
+        $this->load->helper('url');
         //$this->load->helper('file');
     }
     
@@ -399,7 +400,7 @@ class Payments extends CI_Controller
 
         QRcode::png(
             "cekcek",
-            false,
+            base_url('images/test1.png'),
             "H",
             20, 
             4,
