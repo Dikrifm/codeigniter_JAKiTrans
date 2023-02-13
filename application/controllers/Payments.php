@@ -17,6 +17,7 @@ class Payments extends CI_Controller
         $this->load->library('Ciqrcode');
 
         $this->load->helper('download');
+        $this->load->helper('file');
     }
     
     public function index()
@@ -388,7 +389,7 @@ class Payments extends CI_Controller
 
         $image_file = base_url('images/qr/'. 'qr-230702011021.png');//$data_qr['image_path']);
 
-        return force_download($image_file, 'testaswe');
+        return force_download($image_file, NULL);
     }
 
 
