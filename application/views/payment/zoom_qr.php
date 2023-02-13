@@ -34,7 +34,7 @@
             <h4>expired date : <?= $expired_date ?></h4>
             <a>
                 <button class='btn btn-outline-secondary' onclick='window.print()' >
-                Print QR <?= substr($nama_event, 0, 15).' . . .' ?>
+                Print QR : <?= substr($nama_event, 0, 15).' . . .' ?>
                 </button>
             </a>
         </div><!-- /.CARD-Body -->
