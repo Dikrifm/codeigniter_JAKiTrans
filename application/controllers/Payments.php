@@ -17,7 +17,7 @@ class Payments extends CI_Controller
         $this->load->library('Ciqrcode');
 
         $this->load->helper('download');
-        $this->load->helper('file');
+        //$this->load->helper('file');
     }
     
     public function index()
