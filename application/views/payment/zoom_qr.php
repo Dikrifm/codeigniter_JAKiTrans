@@ -37,6 +37,9 @@
                 Print QR : <?= substr($nama_event, 0, 15).' . . .' ?>
                 </button>
             </a>
+            <a href="<?= base_url('images/no_image.png')?>" class="btn btn-outline-secondary" download>
+            Download QR
+            </a>
         </div><!-- /.CARD-Body -->
     </div><!-- /.CARD-->
 </div><!-- /.Content-wrapper
