@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-
+            <h2>QR Event</h2>
             <!-- FLASH DATA-> Notification -->
             <?php if ($this->session->flashdata('ubah')) : ?>
                 <div class="alert alert-success" role="alert">
@@ -21,6 +21,9 @@
             <div>
                 <a class='btn btn-secondary' href='<?= base_url(); ?>payments/qrcode'>test QRcode Gen</a>
             </div>
+            <div>
+                <a class='btn btn-secondary' href='<?= base_url(); ?>payments/reportqr'>Report QR event</a>
+            </div>
             <br>
             
             <!-- TAB-MINIMAL -->
@@ -36,6 +39,7 @@
                         <a class="nav-link" id="nav-withdraw" data-toggle="tab" href="#tab-withdraw" role="tab" aria-controls="tab-withdraw" aria-selected="false">
                             <i class="mdi mdi-import"></i>QR Event Expired</a>
                     </li>
+                    
                 </ul>
                 
                 <div class="tab-content">
