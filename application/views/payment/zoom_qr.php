@@ -13,19 +13,21 @@
             }
         ?>  
 
-        <table>
+        <table class="table">
             <tr>
                 <th>Nama Event</th>
-                <th>Nominal</th>
-                <th>Tipe</th>
-                <th>Status</th>
-                <th>Created Date</th>
-                <th>Expired Date</th>
+                <td><h4><?= $nama_event ?></h4>
             </tr>
             <tr>
-                <td><h4><?= $nama_event ?></h4>
-                <td><h4><?= $nominal ?></h4></td>
+                <th>Nominal</th>
+                <td><h4><?= $nominal ?></h4></td>    
+            </tr>
+            <tr>
+                <th>Tipe</th>
                 <td><h4><?= $tipe ?></h4></td>
+            </tr>
+            <tr>
+                <th>Status</th>
                 <?php 
                 if($status == 1){
                     $status_qr = 'Active';
@@ -35,13 +37,20 @@
                     $color     = 'danger';
                 } 
                 ?>
-                <td><h4>
-                    Status       : <span class="badge badge-<?= $color ?>">
-                                <?= $status_qr ?>
-                                </span>
-                </h4></td>
-                <td><h4>created date : <?= $created_date ?></h4></td>
-                <td><h4>expired date : <?= $expired_date ?></h4></td>
+                <td>
+                    <h4>
+                        <span class="badge badge-<?= $color ?>">
+                        <?= $status_qr ?>
+                        </span>
+                    </h4>
+                </td>
+            <tr>
+                <th>Created Date</th>
+                <td><h4><?= $created_date ?></h4></td>
+            </tr>
+            <tr>
+                <th>Expired Date</th>
+                <td><h4><?= $expired_date ?></h4></td>
             </tr>
         </table>
                 <a>
