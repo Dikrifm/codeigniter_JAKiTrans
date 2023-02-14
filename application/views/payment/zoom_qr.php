@@ -20,11 +20,11 @@
             </tr>
             <tr>
                 <th>Nominal</th>
-                <td><h4><?= $nominal ?></h4></td>    
+                <td><h4><?= number_format($nominal,0,'.','.') ?></h4></td>    
             </tr>
             <tr>
                 <th>Tipe</th>
-                <td><h4><?= $tipe ?></h4></td>
+                <td><h4><?= "'".$tipe."'" ?></h4></td>
             </tr>
             <tr>
                 <th>Status</th>
