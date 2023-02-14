@@ -28,8 +28,8 @@
                 <td><?=$i?></td>
                 <td><?=$log['invoice']?></td>
                 <td><?=$log['regtime']?></td>
-                <td><?php //$log['id_user_p']?></td>
-                <td><?php //$log['nama_user_p']?></td><!-- nama user -->
+                <td><?php //$log['id_user_p']?>--</td>
+                <td><?php //$log['nama_user_p']?>--</td><!-- nama user -->
                 <td><?php $log['id_qr_event']?></td>
                 <td><?php $log['nama_event']?></td>
             </tr>
