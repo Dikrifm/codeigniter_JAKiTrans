@@ -1083,11 +1083,11 @@ class Payment_model extends CI_model
     }
 
     function get_qr_event_history(){
-        $this->db->select('qr_event_history.*, qr_event.id, qr_event.nama_event');//, pelanggan.fullnama AS nama_user_p, pelanggan.id AS id_user_p');
+        $this->db->select('qr_event_history.*, qr_event.id, qr_event.nama_event, pelanggan.id AS id_user_p, pelanggan.fullnama AS nama_user_p');
         
         $this->db->join('qr_event', 'qr_event_history.id_qr_event = qr_event.id', 'LEFT');
-        /*$this->db->join('pelanggan', 'qr_event_history.id_user = pelanggan.id');
-        */
+        $this->db->join('pelanggan', 'qr_event_history.id_user = pelanggan.id');
+        
         $this->db->order_by('qr_event_history.regtime', DESC);
 
         return $this->db->get('qr_event_history')->result_array();
