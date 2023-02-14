@@ -1086,7 +1086,7 @@ class Payment_model extends CI_model
         $this->db->select('qr_event.*, qr_event_history.*, pelanggan.fullnama AS nama_user_p, pelanggan.id AS id_user_p');
         
         $this->db->join('qr_event', 'qr_event_history.id_qr_event = qr_event.id');
-        $this->db->join('pelanggan', 'qr_event_history.id_user = id_user_p');
+        $this->db->join('pelanggan', 'qr_event_history.id_user = pelanggan.id');
         
         $this->db->order_by('qr_event_history.regtime', DESC);
 
