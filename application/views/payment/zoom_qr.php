@@ -66,7 +66,7 @@
                 </a>
         
         <div class='card'>
-            <div class='card'>
+            <div class='card-body'>
                 <h4>History QR : <?=$nama_event?> Total saldo : Rp. <?=number_format($saldo_qr,0,',','.')?>
                 <table class="table" id="table_detail_qr">
                 <tr>
@@ -85,11 +85,12 @@
                     <td><?=$i?></td>
                     <td><?=$d['invoice_w']?></td>
                     <td><?=$d['regtime']?></td>
-                    <td><?=$d['jumlah']?></td>
+                    <td><?=number_format($d['jumlah_w'],0,',','.')?></td>
                     <td><?=$d['id_user_w']?></td>
                     <td><?=$d['nama_user']?></td>
                 <tr>
                 <?php
+                    $i++;
                     }
                 ?>
                 </table>
