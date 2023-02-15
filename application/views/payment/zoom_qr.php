@@ -90,7 +90,7 @@
                 <td><?=number_format($d['jumlah_w'],0,',','.')?></td>
                 <td><?=$d['id_user_w']?></td>
                 <td><?=$d['nama_user']?></td>
-            <tr>
+            </tr>
             <?php
                 $i++;
                 }
