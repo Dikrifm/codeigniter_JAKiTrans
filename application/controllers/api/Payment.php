@@ -604,6 +604,7 @@ class Payment extends REST_Controller{
         $add_log = $this->Payment_model->add_log_qr_payment($data_log);
         
         //INSERT QR_PAYMENT history to wallet
+            //PLUS saldo QR
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
         
         //GET CURRENT RECORD wallet
