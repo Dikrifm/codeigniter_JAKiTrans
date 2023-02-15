@@ -1008,6 +1008,13 @@ class Payment_model extends CI_model
 
         $this->db->update('saldo');
     }
+    function plus_saldo($id_user, $jumlah){
+        $saldo_plus = 'saldo+'.$jumlah;
+
+        $this->db->set('saldo', $saldo_plus, false);
+        $this->db->where('id_user', $id_user);
+        return $this->db->update('saldo');
+    }
 
     //QR Payment Model ----------------------------------------------------------------------------------------------------------
     function get_data_qr_payment()
@@ -1080,11 +1087,15 @@ class Payment_model extends CI_model
             'status'            => 1
         );
 
+        //PLUS saldo QR
+        $this->plus_saldo($id_qris, $data_qr['nominal']);
+        /*
         $this->db->update(
             'saldo',
             array('saldo'  => 'saldo+'.intval($data_qr['nominal'])),
             array('id_user'=> $id_user)
         );
+        */
         $this->db->insert('wallet', $data_ins);
 
         return TRUE;

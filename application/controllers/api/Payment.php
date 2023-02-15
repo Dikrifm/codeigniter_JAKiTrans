@@ -604,9 +604,8 @@ class Payment extends REST_Controller{
         $add_log = $this->Payment_model->add_log_qr_payment($data_log);
         
         //INSERT QR_PAYMENT history to wallet
-            //PLUS saldo QR
         $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
-        
+
         //GET CURRENT RECORD wallet
         $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
         
@@ -649,6 +648,27 @@ class Payment extends REST_Controller{
         }
         */
     } //payment_qris_event_post()
+
+    function cekcek(){
+
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $data = file_get_contents("php://input");
+        $dec_data = json_decode($data);
+
+        $this->payment_model->plus_saldo($dec_data->id_user, $dec_data->nominal);
+
+        $message = array(
+            'code' => 200,
+            'status' => 'Ok',
+            'message' => 'Sukses',
+        );
+        $this->response($message, 200);
+    }
 
     function QRcode(){
 
