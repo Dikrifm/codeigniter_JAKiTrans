@@ -67,9 +67,31 @@
         
         <div class='card'>
             <div class='card'>
-                History QR : <?=$nama_event?> Total saldo : <?=$saldo_qr?>
-                <table>
-
+                <h4>History QR : <?=$nama_event?> Total saldo : Rp. <?=number_format($saldo_qr,0,',','.')?>
+                <table class="table" id="table_detail_qr">
+                <tr>
+                    <th>No</th>                    
+                    <th>Invoice</th>
+                    <th>Date Time</th>
+                    <th>Nominal</th>
+                    <th>ID User</th>
+                    <th>Nama User</th>
+                </tr>
+                <?php 
+                    $i = 1;
+                    foreach($detail_qr as $d){       
+                ?>
+                <tr>
+                    <td><?=$i?></td>
+                    <td><?=$d['invoice_w']?></td>
+                    <td><?=$d['regtime']?></td>
+                    <td><?=$d['jumlah']?></td>
+                    <td><?=$d['id_user_w']?></td>
+                    <td><?=$d['nama_user']?></td>
+                <tr>
+                <?php
+                    }
+                ?>
                 </table>
             </div>
         </div>

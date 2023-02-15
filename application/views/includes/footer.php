@@ -202,6 +202,12 @@ success();
     } );
 </script>
 
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#table_detail_qr').DataTable();
+    } );
+</script>
+
 
 <script type="text/javascript">
   $(document).ready( function () {

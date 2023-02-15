@@ -302,6 +302,7 @@ class Payments extends CI_Controller
 
         $data = $this->payment->get_qr_event_by_id($id);
         $data['saldo_qr'] = $data_saldo->saldo;
+        $data['detail_qr']= $this->payment->get_detail_qr_event($id);
 
         $this->load->view('includes/header', $data);
         $this->load->view('payment/zoom_qr', $data);
