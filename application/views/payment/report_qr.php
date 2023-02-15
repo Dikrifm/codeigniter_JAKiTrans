@@ -7,7 +7,7 @@
 </h1>
 <div class="card">
     <div class="card-body">
-        <table class="table">
+        <table class="table" id="qr_report">
         <thead>
             <tr>
                 <th>No</th>

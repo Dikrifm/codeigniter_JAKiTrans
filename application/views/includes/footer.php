@@ -193,10 +193,17 @@ success();
     <script src="<?= base_url(); ?>vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
     <script src="<?= base_url(); ?>vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="<?= base_url(); ?>dist/js/dataTables-data.js"></script>
-	 <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
-	  <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.js"></script>
+	<script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+	<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.js"></script>
 
-	  <script type="text/javascript">
+<script type="text/javascript">
+    $(document).ready( function () {
+        $('#qr_report').DataTable();
+    } );
+</script>
+
+
+<script type="text/javascript">
   $(document).ready( function () {
   var table = $('#mwtable').DataTable({
     responsive: {
