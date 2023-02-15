@@ -649,7 +649,7 @@ class Payment extends REST_Controller{
         */
     } //payment_qris_event_post()
 
-    function cekcek_cek(){
+    function cekcek_post(){
 
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
             header("WWW-Authenticate: Basic realm=\"Private Area\"");
