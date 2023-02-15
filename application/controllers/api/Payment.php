@@ -665,6 +665,9 @@ class Payment extends REST_Controller{
         $message = array(
             'code' => 200,
             'status' => 'Ok',
+            'id_user' => $dec_data->id_user,
+            'id_qris' => $dec_data->id_qris,
+            'nominal' => $dec_data->nominal,
             'message' => $cekcek
         );
         
