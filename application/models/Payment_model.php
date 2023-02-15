@@ -1030,8 +1030,8 @@ class Payment_model extends CI_model
     //QR Payment Model ----------------------------------------------------------------------------------------------------------
     function get_data_qr_payment()
     {
-        $this->db->select('qr_event.*, saldo.id, saldo.saldo');
-        $this->db->join('saldo', 'qr_event.id_saldo = saldo.id');
+        $this->db->select('qr_event.*, saldo.id_user, saldo.saldo');
+        $this->db->join('saldo', 'qr_event.id = saldo.id_user');
         $this->db->order_by('qr_event.created_date', 'ASC');
         return  $this->db->get('qr_event')->result_array();
     }
