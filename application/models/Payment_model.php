@@ -1035,7 +1035,7 @@ class Payment_model extends CI_model
         );
         */
         $data_saldo = array(
-            'id_user' => 'test1',
+            'id_user' => $data['id'],
             'saldo'   => 0
         );
 
