@@ -291,14 +291,16 @@ class Payments extends CI_Controller
     function detail_qr($id){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
-
+        
+        $data['menu'] = $this->group->get_menu_user($groupLevel);
+        $data['allmenu'] = $this->group->get_all_menu();
+        
         $cond_id_qr = array(
             'id_user' => $id
         );
         $data_saldo = $this->payment->get_saldo($cond_id_qr);
 
-        $data['menu'] = $this->group->get_menu_user($groupLevel);
-        $data['allmenu'] = $this->group->get_all_menu();
+        
 
         $data = $this->payment->get_qr_event_by_id($id);
         $data['saldo_qr'] = $data_saldo->saldo;
