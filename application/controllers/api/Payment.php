@@ -657,8 +657,8 @@ class Payment extends REST_Controller{
             return false;
         }
 
-        $data = file_get_contents("php://input");
-        $dec_data = json_decode($data);
+        $input = file_get_contents("php://input");
+        $dec_data = json_decode($input);
 
         $this->payment_model->plus_saldo($dec_data->id_user, $dec_data->nominal);
 
