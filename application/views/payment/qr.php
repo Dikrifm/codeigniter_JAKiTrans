@@ -120,7 +120,7 @@
                                                         <?= $qr['expired_date'] ?>
                                                     </td>
                                                     <td>
-                                                        <h4>Rp. <?= number_format($qr['saldo'], 0,',','.') ?></h4>
+                                                        <h6>Rp. <?= number_format($qr['saldo'], 0,',','.') ?></h6>
                                                     </td>
                                                     <td>
                                                         <a href="<?= base_url(); ?>payments/detail_qr/<?= $qr['id']; ?>">
