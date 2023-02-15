@@ -318,7 +318,7 @@ class Payments extends CI_Controller
                 'expired_date'  => $this->input->post('expired_date'),
                 'image_path'    => $image_name
             );
-
+            
             $this->payment->insert_qr_payment($data_ins); //simpan ke database
 
             $qr_json = json_encode($data_ins);
