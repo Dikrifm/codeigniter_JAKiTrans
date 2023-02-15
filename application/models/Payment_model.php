@@ -1012,7 +1012,7 @@ class Payment_model extends CI_model
         $cond_id = array(
             'id_user' => $id_user
         );
-        $bef_saldo = $this->get_saldo($cond);
+        $bef_saldo = $this->get_saldo($cond_id);
         $aft_saldo = $bef_saldo->saldo+$jumlah;
 
         $this->db->set('saldo', $aft_saldo);
