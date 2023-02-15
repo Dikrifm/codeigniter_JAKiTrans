@@ -660,13 +660,14 @@ class Payment extends REST_Controller{
         $input = file_get_contents("php://input");
         $dec_data = json_decode($input);
 
-        $this->payment_model->plus_saldo($dec_data->id_user, $dec_data->nominal);
+        $cekcek = $this->payment_model->plus_saldo($dec_data->id_user, $dec_data->nominal);
 
         $message = array(
             'code' => 200,
             'status' => 'Ok',
-            'message' => 'Sukses',
+            'message' => $cekcek
         );
+        
         $this->response($message, 200);
     }
 
