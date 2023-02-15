@@ -15,6 +15,9 @@
 
         <table class="table">
             <tr>
+                <th>ID QR</th>
+                <td><h4><?= $id ?></h4></td>
+            <tr>
                 <th>Nama Event</th>
                 <td><h4><?= $nama_event ?></h4>
             </tr>

@@ -1051,7 +1051,7 @@ class Payment_model extends CI_model
     function delete_qr_payment_event($id){
         $this->db->where('id_user', $id);
         $this->db->delete('saldo');
-        
+
         $this->db->where('id', $id);
         return $this->db->delete('qr_event');
     }
@@ -1080,6 +1080,11 @@ class Payment_model extends CI_model
             'status'            => 1
         );
 
+        $this->db->update(
+            'saldo',
+            array('saldo'  => 'saldo+'.intval($data_qr['nominal'])),
+            array('id_user'=> $id_user)
+        );
         $this->db->insert('wallet', $data_ins);
 
         return TRUE;
