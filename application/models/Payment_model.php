@@ -1011,7 +1011,7 @@ class Payment_model extends CI_model
     function plus_saldo($id_user, $jumlah){
         $saldo_plus = 'saldo+'.intval($jumlah);
 
-        $this->db->set('saldo', $jumlah);
+        $this->db->set('saldo', $saldo_plus);
         $this->db->where('id_user', $id_user);
         return $this->db->update('saldo');
     }
