@@ -288,14 +288,20 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    function print_qr($id){
+    function detail_qr($id){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
+
+        $cond_id_qr = array(
+            'id_user' => $id
+        );
+        $data_saldo = $this->payment->get_saldo($cond_id_qr);
 
         $data['menu'] = $this->group->get_menu_user($groupLevel);
         $data['allmenu'] = $this->group->get_all_menu();
 
         $data = $this->payment->get_qr_event_by_id($id);
+        $data['saldo_qr'] = $data_saldo->saldo;
 
         $this->load->view('includes/header', $data);
         $this->load->view('payment/zoom_qr', $data);
@@ -318,7 +324,7 @@ class Payments extends CI_Controller
                 'expired_date'  => $this->input->post('expired_date'),
                 'image_path'    => $image_name
             );
-            
+
             $this->payment->insert_qr_payment($data_ins); //simpan ke database
 
             $qr_json = json_encode($data_ins);

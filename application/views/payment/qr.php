@@ -63,6 +63,7 @@
                                                     <th>Nama</th>
                                                     <th>Nominal</th>
                                                     <th>Expired</th>
+                                                    <th>Saldo Total</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -119,6 +120,9 @@
                                                         <?= $qr['expired_date'] ?>
                                                     </td>
                                                     <td>
+                                                        <h4>Rp. <?= number_format($qr['saldo'], 0,',','.') ?></h4>
+                                                    </td>
+                                                    <td>
                                                         <a href="<?= base_url(); ?>payments/detail_qr/<?= $qr['id']; ?>">
                                                             <button class="btn btn-success">Detail</button>
                                                         </a>
@@ -127,9 +131,6 @@
                                                         </a>
                                                         <a href="<?= base_url(); ?>payments/delete_qr/<?= $qr['id']; ?>" onclick="return confirm ('Are you sure?')">
                                                             <button class="btn btn-outline-danger">Delete</button>
-                                                        </a>
-                                                        <a href="<?= base_url(); ?>payments/print_qr/<?= $qr['id']; ?>">
-                                                            <button class="btn btn-outline-secondary">Cetak</button>
                                                         </a>
                                                     </td>
 

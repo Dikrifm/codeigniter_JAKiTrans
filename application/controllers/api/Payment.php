@@ -609,10 +609,11 @@ class Payment extends REST_Controller{
         //GET CURRENT RECORD wallet
         $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
         
+        //ADD SALDO QR
+        $cekcek = $this->Payment_model->plus_saldo($dec_data->id_qris, $dec_data->nominal);
+
         //CUT SALDO user
-        $saldo_curr = $this->Payment_model->get_saldo($cond);
-        $saldo_after= $saldo_curr->saldo - $data_valid['jumlah'];
-        $this->Payment_model->min_saldo($dec_data->id_user, $saldo_after);
+        $this->Payment_model->min_saldo($dec_data->id_user, $data_valid['jumlah']);
         
         /*
         if($pay_gen == TRUE){
@@ -670,7 +671,6 @@ class Payment extends REST_Controller{
             'nominal' => $dec_data->nominal,
             'message' => $cekcek
         );
-        
         $this->response($message, 200);
     }
 

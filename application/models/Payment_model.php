@@ -1001,13 +1001,20 @@ class Payment_model extends CI_model
 
         return $data;
     }
-    //FUNCTION QUERY SALDO
+    //-FUNCTION QUERY SALDO--------------------------------------------------------
     function min_saldo($id_user, $jumlah){
-        $this->db->set('saldo', $jumlah);
+        $cond_id = array(
+            'id_user' => $id_user
+        );
+        $bef_saldo = $this->get_saldo($cond_id);
+        $aft_saldo = $bef_saldo->saldo-$jumlah;
+
+        $this->db->set('saldo', $aft_saldo);
         $this->db->where('id_user', $id_user);
 
-        $this->db->update('saldo');
+        return $this->db->update('saldo');
     }
+
     function plus_saldo($id_user, $jumlah){
         $cond_id = array(
             'id_user' => $id_user
@@ -1091,15 +1098,6 @@ class Payment_model extends CI_model
             'status'            => 1
         );
 
-        //PLUS saldo QR
-        $this->plus_saldo($id_qris, $data_qr['nominal']);
-        /*
-        $this->db->update(
-            'saldo',
-            array('saldo'  => 'saldo+'.intval($data_qr['nominal'])),
-            array('id_user'=> $id_user)
-        );
-        */
         $this->db->insert('wallet', $data_ins);
 
         return TRUE;
@@ -1111,10 +1109,11 @@ class Payment_model extends CI_model
     }
 
     function get_qr_event_history(){
-        $this->db->select('qr_event_history.*, qr_event.id, qr_event.nama_event, pelanggan.id AS id_user_p, pelanggan.fullnama AS nama_user_p');
+        $this->db->select('qr_event_history.*, saldo.id_user, saldo.saldo, qr_event.id, qr_event.nama_event, pelanggan.id AS id_user_p, pelanggan.fullnama AS nama_user_p');
         
         $this->db->join('qr_event', 'qr_event_history.id_qr_event = qr_event.id', 'LEFT');
         $this->db->join('pelanggan', 'qr_event_history.id_user = pelanggan.id');
+        $this->db->join('saldo', 'qr_event_history.id_user = saldo.id_user');
         
         $this->db->order_by('qr_event_history.regtime', DESC);
 

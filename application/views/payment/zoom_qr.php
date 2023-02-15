@@ -64,6 +64,16 @@
                 <a href="<?= base_url('images/qr/'.$image_path)?>" class="btn btn-outline-secondary" download="QR - <?= $nama_event ?>">
                 Download QR
                 </a>
+        
+        <div class='card'>
+            <div class='card'>
+                History QR : <?=$nama_event?> Total saldo : <?=$saldo_qr?>
+                <table>
+
+                </table>
+            </div>
+        </div>
+
         </div><!-- /.CARD-Body -->
     </div><!-- /.CARD-->
 </div><!-- /.Content-wrapper
