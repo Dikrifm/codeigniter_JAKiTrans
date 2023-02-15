@@ -1034,7 +1034,12 @@ class Payment_model extends CI_model
             $data['expired_path']
         );
         */
+        $data_saldo = array(
+            'id_user' => $data['id_qr'],
+            'saldo'   => 0
+        );
 
+        $this->db->insert('saldo', $data_saldo);
         return $this->db->insert('qr_event', $data);
     }
 
@@ -1059,7 +1064,7 @@ class Payment_model extends CI_model
         $type_w  = 'QR Payment : '. $data_qr['nama_event'];
         
         $data_ins = array(
-            'uuid' => $id_qris,
+            'uuid'              => $id_qris,
             'invoice'           => $invoice,
             'id_user'           => $id_user,
 
