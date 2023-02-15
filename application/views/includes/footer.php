@@ -204,7 +204,7 @@ success();
 
 <script type="text/javascript">
     $(document).ready( function () {
-        $('#table_detail_qr').DataTable();
+        $('#detail_qr').DataTable();
     } );
 </script>
 

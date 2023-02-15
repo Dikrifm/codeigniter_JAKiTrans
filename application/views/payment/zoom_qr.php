@@ -68,7 +68,7 @@
         <div class='card'>
             <div class='card-body'>
                 <h4>History QR : <?=$nama_event?> Total saldo : Rp. <?=number_format($saldo_qr,0,',','.')?>
-                <table class="table" id="table_detail_qr">
+                <table class="table" id="detail_qr">
                 <tr>
                     <th>No</th>                    
                     <th>Invoice</th>
