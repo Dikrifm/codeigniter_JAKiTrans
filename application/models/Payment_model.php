@@ -1009,9 +1009,13 @@ class Payment_model extends CI_model
         $this->db->update('saldo');
     }
     function plus_saldo($id_user, $jumlah){
-        $saldo_plus = 'saldo+'.intval($jumlah);
+        $cond_id = array(
+            'id_user' => $id_user
+        );
+        $bef_saldo = $this->get_saldo($cond);
+        $aft_saldo = $bef_saldo->saldo+$jumlah;
 
-        $this->db->set('saldo', 'saldo'.'+'.$jumlah);
+        $this->db->set('saldo', $aft_saldo);
         $this->db->where('id_user', $id_user);
         return $this->db->update('saldo');
     }
