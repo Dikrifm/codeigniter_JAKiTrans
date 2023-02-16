@@ -66,6 +66,14 @@
                 </a>
         
         
+                
+                
+        </div><!-- /.CARD-Body -->
+    </div><!-- /.CARD-->
+</div><!-- /.Content-wrapper -->
+<div class='card'>
+    <div class='card-body'>
+
         <h4>History QR : <?=$nama_event?> Total saldo : Rp. <?=number_format($saldo_qr,0,',','.')?></h4>
         <table class="table table-striped table-hover dt-responsive display nowrap" id="detail_qr">
         <thead>
@@ -97,8 +105,5 @@
             ?>
         </tbody>
         </table>
-            
-
-        </div><!-- /.CARD-Body -->
-    </div><!-- /.CARD-->
-</div><!-- /.Content-wrapper
+    </div>
+</div>
