@@ -18,5 +18,3 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 composer
-application/views/payment/zoom_qr.php
-application/views/payment/zoom_qr.php
