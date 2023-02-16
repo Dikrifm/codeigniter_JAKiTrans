@@ -1011,8 +1011,11 @@ class Payment_model extends CI_model
 
         $this->db->set('saldo', $aft_saldo);
         $this->db->where('id_user', $id_user);
-
-        return $this->db->update('saldo');
+        if($aft_saldo <= 0){
+            return false;
+        }else{
+            return $this->db->update('saldo');
+        }
     }
 
     function plus_saldo($id_user, $jumlah){
@@ -1027,7 +1030,7 @@ class Payment_model extends CI_model
         return $this->db->update('saldo');
     }
 
-    //QR Payment Model ----------------------------------------------------------------------------------------------------------
+    //-QR Payment Model ----------------------------------------------------------------------------------------------------------
     function get_data_qr_payment()
     {
         $this->db->select('qr_event.*, saldo.id_user, saldo.saldo');

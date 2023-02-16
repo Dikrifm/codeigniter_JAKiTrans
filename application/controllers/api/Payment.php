@@ -599,7 +599,25 @@ class Payment extends REST_Controller{
             'status'      => 1,
             'invoice'     => $invoice
         );
+        //GET QR_Event
+        $data_qr = $this->Payment_model->get_qr_event_by_id($dec_data->id_qris);
 
+        //CUT SALDO user
+        $cek_saldo = $this->Payment_model->min_saldo($dec_data->id_user, $data_qr['nominal']);
+        
+        if($cek_saldo == false){
+            $message = array(
+
+                'code'    => 101,
+                'status'  => 'Failed',
+                'message' => 'Saldo kurang'
+                
+            );
+            $this->response($message, 200);
+
+        }else{
+
+        
         //INSERT LOG qr_payment => sukses
         $add_log = $this->Payment_model->add_log_qr_payment($data_log);
         
@@ -611,15 +629,21 @@ class Payment extends REST_Controller{
         
         //ADD SALDO QR
         $cekcek = $this->Payment_model->plus_saldo($dec_data->id_qris, $dec_data->nominal);
-
-        //CUT SALDO user
-        $this->Payment_model->min_saldo($dec_data->id_user, $data_valid['jumlah']);
+        
+        $message = array(
+            'code'    => 200,
+            'status'  => 'success',
+            'message' => 'Payment Success',
+            'data'    => $data_valid
+        );
+        $this->response($message, 200);
+        }
         
         /*
         if($pay_gen == TRUE){
         
             if($data_valid['invoice'] == $trq){
-        */
+        
                 $message = array(
                     'code'    => 200,
                     'status'  => 'success',
