@@ -1,6 +1,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
+    <div class="print-area">
         <?php   
             if(file_get_contents(base_url('images/qr/'.$image_path))){
         ?>  
@@ -56,8 +57,9 @@
                 <td><h4><?= $expired_date ?></h4></td>
             </tr>
         </table>
+    </div>
                 <a>
-                    <button class='btn btn-outline-secondary' onclick='window.print()' >
+                    <button class='btn btn-outline-secondary' onclick='window.print()' class='print-area'>
                     Print QR : <?= substr($nama_event, 0, 15).' . . .' ?>
                     </button>
                 </a>
