@@ -452,7 +452,7 @@ class Payments extends CI_Controller
     }
     
     function qrcode(){
-        /*
+        
         $qrpath   = FCPATH.'images/qr/qr-230902541525.png';
         $logopath = FCPATH.'images/logo.png';
 
@@ -474,8 +474,9 @@ class Payments extends CI_Controller
         
         imagecopyresampled($QR,$logo,$QR_width/2.5,$QR_height/2.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
         imagepng($QR, FCPATH.'images/qr/qrlogo2.png');
-        */
-        $this->load->view('testcatch');
+        
+        $data['testing1'] = FCPATH.'images/qr/qrlogo2.png'; 
+        $this->load->view('testcatch', $data);
         
         /* 
         param 
