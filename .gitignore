@@ -8,7 +8,7 @@ application/config/config.php
 !*/cache/.htaccess
 
 #Ignore folder image/*
-application/images/*
+images/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
