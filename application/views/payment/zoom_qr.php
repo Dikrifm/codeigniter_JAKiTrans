@@ -2,18 +2,29 @@
     <div class="card">
         <div class="card-body">
     <div class="print-area">
+        <?php if ($this->session->flashdata('ubah')) : ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $this->session->flashdata('ubah'); ?>
+                </div>
+        <?php endif; ?>
+        <h3> Detail QR Event</h3>
+
         <?php   
             if(file_get_contents(base_url('images/qr/'.$image_path))){
         ?>  
-            <img style="max-width:500px;height:auto" src="<?= base_url('images/no_image.png')?>" alt="QR_CODE_Image">
+            <img style="max-width:350px;height:auto" src="<?= base_url('images/qr/'.$image_path)?>" alt="QR_CODE_Image">
+            
         <?php   
             }else{
         ?>  
-            <img style="max-width:500px;height:auto" src="<?= base_url('images/qr/'.$image_path)?>" alt="QR_CODE_Image">
+            <img style="max-width:500px;height:auto" src="<?= base_url('images/no_image.png')?>" alt="no image exist">
         <?php   
             }
-        ?>  
-
+        ?>
+        <br>
+        <a href='<?= base_url(). 'payments/regen_qr/'.$id; ?>'>
+            <button class='btn btn-outline-warning'>Re-generate QR</button>
+        </a>
         <table class="table">
             <tr>
                 <th>ID QR</th>

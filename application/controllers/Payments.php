@@ -274,7 +274,7 @@ class Payments extends CI_Controller
         }
     }
 
-    //QR Event Payment Method ----------------------------------------------------------------------------
+    //-QR Event Payment Method ----------------------------------------------------------------------------
     function qr(){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
@@ -288,6 +288,43 @@ class Payments extends CI_Controller
         $this->load->view('includes/footer');
     }
 
+    function qr_gen($payload_qr, $image_name){
+        $fullpath = FCPATH.'images/qr/'.$image_name;
+        $logopath = FCPATH.'images/cek1.png';
+        /*
+        $params['data'] = 'cek QR Logo 3';//$payload_qr; 
+        $params['level'] = 'H'; //H=High
+        $params['size'] = 10;
+        $params['savename'] = $fullpath; 
+        
+        $this->ciqrcode->generate($params);
+        */
+        $QR = imagecreatefrompng($fullpath);
+        // memulai menggambar logo dalam file qrcode
+        $logo = imagecreatefromstring($logopath);
+        
+        imagecolortransparent($logo , imagecolorallocatealpha($logo , 0, 0, 0, 127));
+        imagealphablending($logo , false);
+        imagesavealpha($logo , true);
+        
+        $QR_width  = imagesx($QR);//get logo width
+        $QR_height = imagesy($QR);//get logo width
+
+        $logo_width  = imagesx($logo);
+        $logo_height = imagesy($logo);
+
+        // Scale logo to fit in the QR Code
+        $logo_qr_width  = $QR_width/3;
+        $scale          = $logo_width/$logo_qr_width;
+        $logo_qr_height = $logo_height/$scale;
+
+        imagecopyresampled($QR, $logo, $QR_width/4, $QR_height/3.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        
+        header('Content-Type: image/png');
+        // Simpan kode QR lagi, dengan logo di atasnya
+        imagepng($QR,FCPATH.'images/qr/ei.png');
+    }
+
     function detail_qr($id){
         $groupLevel = $this->session->userdata('role');
         $userId = $this->session->userdata('id');
@@ -299,9 +336,7 @@ class Payments extends CI_Controller
             'id_user' => $id
         );
         $data_saldo = $this->payment->get_saldo($cond_id_qr);
-
         
-
         $data = $this->payment->get_qr_event_by_id($id);
         $data['saldo_qr'] = $data_saldo->saldo;
         $data['detail_qr']= $this->payment->get_detail_qr_event($id);
@@ -330,15 +365,9 @@ class Payments extends CI_Controller
 
             $this->payment->insert_qr_payment($data_ins); //simpan ke database
 
-            $qr_json = json_encode($data_ins);
+            $payload_qr = json_encode($data_ins);
 
-            $params['data'] = $qr_json; 
-            $params['level'] = 'H'; //H=High
-            $params['size'] = 10;
-            $params['savename'] = FCPATH.'images/qr/'.$image_name; 
-            
-            $this->ciqrcode->generate($params); 
-            
+            $this->qr_gen($payload_qr, $image_name);
 
             redirect('payments/qr');
         }else{
@@ -375,6 +404,34 @@ class Payments extends CI_Controller
         }
     }
 
+    function regen_qr($id){ //RE-GENERATE QR EVENT CODE
+        $qr = $this->payment->get_qr_event_by_id($id);
+        
+        //DELETE CURRENT image IF EXIST
+        //if(file_exist(FCPATH.'images/qr/'.$qr['image_path'])){
+          //  unlink('images/qr/'.$qr['image_path']);
+        //}
+
+        $payload_qr = array(
+            'id'            => $qr['id'],
+            'nama_event'    => $qr['nama_event'],
+            'nominal'       => $qr['nominal'],   
+            'tipe'          => $qr['tipe'],
+            'status'        => $qr['status'],
+            'expired_date'  => $qr['expired_date'],
+            'image_path'    => $qr['image_path']
+        ); 
+
+        //CALL QR-GENERATOR
+        $this->qr_gen(json_encode($payload_qr), $qr['image_path']);
+        
+        $this->session->set_flashdata('ubah','QR : ('.$qr['id'].'), Nama : ('.$qr['nama_event'].') Re-generate Berhasil ');
+
+        $curr_url = 'payments/detail_qr/'.$qr['id'];
+        redirect($curr_url);
+
+    }
+
     function delete_qr($id){
         $image_status = "";
 
@@ -395,44 +452,30 @@ class Payments extends CI_Controller
     }
     
     function qrcode(){
-        
-        $qr_url1  = FCPATH.'images/qr/qr-230702011021.png';
-        $qr_url2  = FCPATH.'images/qr/testqr2.png';
-        $logo_url = FCPATH.'images/logo.png';
-        
         /*
-        $params['data'] = 'cek123'; 
-        $params['level'] = 'H'; //H=High
-        $params['size'] = 10;
-        $params['savename'] = $qr_url1;
-        
-        $this->ciqrcode->generate($params);
-        */
-        // ambil file qrcode
-        $QR = imagecreatefrompng($qr_url1);
+        $qrpath   = FCPATH.'images/qr/qr-230902541525.png';
+        $logopath = FCPATH.'images/logo.png';
 
-        // memulai menggambar logo dalam file qrcode
-        $logo = imagecreatefromstring(file_get_contents($logo_url));
-        
-        imagecolortransparent($logo , imagecolorallocatealpha($logo , 0, 0, 0, 127));
-        imagealphablending($logo , false);
-        imagesavealpha($logo , true);
+        $QR   = imagecreatefrompng($qrpath);
+        $logo = imagecreatefromstring(file_get_contents($logoPath));
 
-        $QR_width = imagesx($QR);
-        $QR_height = imagesy($QR);
+        imagecolortransparent($logo, imagecolorallocatealpha($logo, 0, 0, 0, 200));
+        imagealphablending($logo, false);
+        imagesavealpha($logo, true);
 
-        $logo_width = imagesx($logo);
+        $QR_width    = imagesx($QR);
+        $QR_height   = imagesy($QR);
+        $logo_width  = imagesx($logo);
         $logo_height = imagesy($logo);
-
-        // Scale logo to fit in the QR Code
-        $logo_qr_width = $QR_width/8;
+        
+        $logo_qr_width = $QR_width/4;
         $scale = $logo_width/$logo_qr_width;
         $logo_qr_height = $logo_height/$scale;
-
-        imagecopyresampled($QR, $logo, $QR_width/2.3, $QR_height/2.3, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
-
-        // Simpan kode QR lagi, dengan logo di atasnya
-        imagepng($QR,$qr_url2);
+        
+        imagecopyresampled($QR,$logo,$QR_width/2.5,$QR_height/2.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
+        imagepng($QR, FCPATH.'images/qr/qrlogo2.png');
+        */
+        $this->load->view('testcatch');
         
         /* 
         param 
