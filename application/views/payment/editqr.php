@@ -9,16 +9,26 @@
                         Ubah Data QR Code Event
                     </h4>
 
-                    <?= form_open_multipart('payments/edit_qr/' . $id); ?>
-                    <input type="hidden" name="id" value='<?= $id ?>'>
-                    
+                    <?= form_open_multipart('payments/edit_qr'); ?>
+
                     <div class="form-group">
-                        <input type="file" class="dropify" name="logo" data-max-file-size="3mb" data-default-file="<?= base_url('images/qr/') . $image_path ?>"/>
+                <?php
+                    if(file_exists(base_url("images/qr/".$image_path))){
+                ?>    
+                        <img style='max-width:300px;height:auto;' src='<?= base_url("images/no_image.png")?>' class="img" alt="no_image"/>
+                <?php
+                    }else{
+                ?>
+                        <img style='max-width:300px;height:auto;' src="<?= base_url('images/qr/'.$image_path)?>" class="img" alt="QR_CODE_Image"/>
+                        <!--<img max-width="200" height="auto" src='<?php // base_url("images/qr/no_image.png")?>' class="img" alt="no_image"/>-->
+                <?php
+                    }
+                ?>
                     </div>
                     
                     <div class="form-group">
                         <label for="newstitle">ID QRIS</label>
-                        <input type="text" class="form-control" id="id" name="id" value="<?= $id ?>" required>
+                        <input type="text" class="form-control" id="id" name="id" value="<?= $id ?>" readonly required>
                     </div>
 
                     <div class="form-group">

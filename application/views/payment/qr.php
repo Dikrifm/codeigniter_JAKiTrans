@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-
+            <h2>QR Event</h2>
             <!-- FLASH DATA-> Notification -->
             <?php if ($this->session->flashdata('ubah')) : ?>
                 <div class="alert alert-success" role="alert">
@@ -18,6 +18,12 @@
             <div>
                 <a class="btn btn-info" href="<?= base_url(); ?>payments/insert_qr"><i class="mdi mdi-plus-circle-outline"></i>Tambah QR Code Event</a>
             </div>
+            <div>
+                <a class='btn btn-secondary' href='<?= base_url(); ?>payments/qrcode'>test QRcode Gen</a>
+            </div>
+            <div>
+                <a class='btn btn-secondary' href='<?= base_url(); ?>payments/reportqr'>Report QR event</a>
+            </div>
             <br>
             
             <!-- TAB-MINIMAL -->
@@ -33,6 +39,7 @@
                         <a class="nav-link" id="nav-withdraw" data-toggle="tab" href="#tab-withdraw" role="tab" aria-controls="tab-withdraw" aria-selected="false">
                             <i class="mdi mdi-import"></i>QR Event Expired</a>
                     </li>
+                    
                 </ul>
                 
                 <div class="tab-content">
@@ -56,6 +63,7 @@
                                                     <th>Nama</th>
                                                     <th>Nominal</th>
                                                     <th>Expired</th>
+                                                    <th>Saldo Total</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -72,7 +80,20 @@
                                                     </td>
                                                     <td>
                                                         <div class="badge badge-primary">
-                                                            <img width="80" height="80" class="avatar-img" src="<?= base_url('images/qr/') . $qr['image_path']; ?>">
+                                                            <?php
+                                                                $path_valid = base_url()."images/qr/".$qr['image_path'];
+                                                                if($qr['image_path'] == NULL){
+                                                            ?>  
+                                                                    <a href=<?= $path_valid ?>>
+                                                                    <img width="80" height="80" class="avatar-img" src="<?= base_url().'images/'.'no_image.png'; ?>">
+                                                                    </a>
+                                                            <?php }else{ ?>
+                                                                    <img width="80" height="80" class="avatar-img" src="<?= $path_valid;?>" alt="QR_Image_Path">
+                                                                    
+                                                            <?php
+                                                                }
+                                                            ?>
+
                                                         </div>
                                                     </td>
                                                     <td>
@@ -99,14 +120,17 @@
                                                         <?= $qr['expired_date'] ?>
                                                     </td>
                                                     <td>
+                                                        <h6>Rp. <?= number_format($qr['saldo'], 0,',','.') ?></h6>
+                                                    </td>
+                                                    <td>
+                                                        <a href="<?= base_url(); ?>payments/detail_qr/<?= $qr['id']; ?>">
+                                                            <button class="btn btn-success">Detail</button>
+                                                        </a>
                                                         <a href="<?= base_url(); ?>payments/edit_qr/<?= $qr['id']; ?>">
                                                             <button class="btn btn-primary">Edit</button>
                                                         </a>
                                                         <a href="<?= base_url(); ?>payments/delete_qr/<?= $qr['id']; ?>" onclick="return confirm ('Are you sure?')">
                                                             <button class="btn btn-outline-danger">Delete</button>
-                                                        </a>
-                                                        <a href="<?= base_url(); ?>payments/print_qr/<?= $qr['id']; ?>">
-                                                            <button class="btn btn-outline-secondary">Cetak</button>
                                                         </a>
                                                     </td>
 
@@ -166,4 +190,4 @@
 </div><!-- /.CARD-Body -->
 
 </div><!-- /.CARD-->
-</div><!-- /.Content-wrapper
+</div><!-- /.Content-wrapper -->

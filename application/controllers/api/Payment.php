@@ -8,6 +8,7 @@ class Payment extends REST_Controller{
         
         $this->load->helper("url");
         $this->load->database();
+        $this->load->model('Wallet_model');
         $this->load->model('Pelanggan_model');
         $this->load->model('Payment_model');
         $this->load->model('Merchantapi_model');
@@ -587,6 +588,7 @@ class Payment extends REST_Controller{
 
         $dec_data = json_decode($input);
 
+        $cond = array('id_user' => $dec_data->id_user);
         $pay_msg = "Payment QR success";
         $invoice = "trq-". date("yHmids");
 
@@ -597,30 +599,59 @@ class Payment extends REST_Controller{
             'status'      => 1,
             'invoice'     => $invoice
         );
+        //GET QR_Event
+        $data_qr = $this->Payment_model->get_qr_event_by_id($dec_data->id_qris);
 
-        //INSERT LOG qr_payment => sukses
-        $add_log = $this->payment_model->add_log_qr_payment($data_log);
+        //CUT SALDO user
+        $cek_saldo = $this->Payment_model->min_saldo($dec_data->id_user, $data_qr['nominal']);
         
-        if($add_log){
-            $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
+        if($cek_saldo == false){
+            $message = array(
+
+                'code'    => 101,
+                'status'  => 'Failed',
+                'message' => 'Saldo kurang'
+                
+            );
+            $this->response($message, 200);
+
+        }else{
+
+        
+        //INSERT LOG qr_payment => sukses
+        $add_log = $this->Payment_model->add_log_qr_payment($data_log);
+        
+        //INSERT QR_PAYMENT history to wallet
+        $pay_gen = $this->Payment_model->pay_qr_payment($dec_data->id_user, $dec_data->id_qris, $invoice);
+
+        //GET CURRENT RECORD wallet
+        $data_valid = $this->Wallet_model->getwalletbyinvoice($invoice);
+        
+        //ADD SALDO QR
+        $cekcek = $this->Payment_model->plus_saldo($dec_data->id_qris, $dec_data->nominal);
+        
+        $message = array(
+            'code'    => 200,
+            'status'  => 'success',
+            'message' => 'Payment Success',
+            'data'    => $data_valid
+        );
+        $this->response($message, 200);
         }
         
-        $data_valid = $this->payment_model->get_qr_event_by_id($dec_data->id_user);
-        
+        /*
         if($pay_gen == TRUE){
         
             if($data_valid['invoice'] == $trq){
-
-                
-
+        
                 $message = array(
                     'code'    => 200,
                     'status'  => 'success',
                     'message' => 'Payment Success',
-                    'data'    => $data
+                    'data'    => $data_valid
                 );
-                $this->response($message, 200);    
-
+                $this->response($message, 200);
+            /*
             }else{
                 $message = array(
                     'code'    => 500,
@@ -628,7 +659,7 @@ class Payment extends REST_Controller{
                     'message' => 'Something went wrong, please try again!',
                     'data'    => ""
                 );
-                $this->response($message, 500);
+                $this->response($message, 200);
             }
         
         }else{
@@ -638,10 +669,34 @@ class Payment extends REST_Controller{
                 'message' => 'The request could not be completed due to a conflict with the current state of the resource.',
                 'data'    => ""
             );
-            $this->response($message, 409);
+            $this->response($message, 200);
         }
-        
+        */
     } //payment_qris_event_post()
+
+    function cekcek_post(){
+
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $input = file_get_contents("php://input");
+        $dec_data = json_decode($input);
+
+        $cekcek = $this->Payment_model->plus_saldo($dec_data->id_qris, $dec_data->nominal);
+
+        $message = array(
+            'code' => 200,
+            'status' => 'Ok',
+            'id_user' => $dec_data->id_user,
+            'id_qris' => $dec_data->id_qris,
+            'nominal' => $dec_data->nominal,
+            'message' => $cekcek
+        );
+        $this->response($message, 200);
+    }
 
     function QRcode(){
 

@@ -10,7 +10,7 @@ License: You must have a valid license purchased only from themeforest to legall
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title><?=$this->config->item("APPNAME");?>-Admin Panel</title>
+    <title><?=$this->config->item("APPNAME");?>- Dev Panel</title>
     <meta name="description" content="A responsive bootstrap 4 admin dashboard template by hencework" />
 
     <!-- Favicon -->
@@ -92,11 +92,11 @@ License: You must have a valid license purchased only from themeforest to legall
 	<div class="hk-wrapper hk-vertical-nav">
 
         <!-- Top Navbar -->
-        <nav class="navbar navbar-expand-xl navbar-dark bg-primary fixed-top hk-navbar">
+        <nav class="navbar navbar-expand-xl navbar-dark bg-yellow-dark-3 fixed-top hk-navbar">
             <a class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" href="javascript:void(0);"><span class="feather-icon"><i data-feather="more-vertical"></i></span></a>
 			<a id="navbar_toggle_btn" class="navbar-toggle-btn nav-link-hover" href="javascript:void(0);"><span class="feather-icon"><i data-feather="menu"></i></span></a>
             <a class="navbar-brand" href="<?= base_url(); ?>">
-                <img class="brand-img d-inline-block" src="<?= base_url(); ?>dist/img/logo-dark.png" alt="brand" />
+                Dev Panel<!--<img class="brand-img d-inline-block" src="<?= base_url(); ?>dist/img/logo-dark.png" alt="brand" />-->
             </a>
 			<ul class="navbar-nav hk-navbar-content order-xl-2">
 				
@@ -132,13 +132,14 @@ License: You must have a valid license purchased only from themeforest to legall
             </ul>
 
 		</nav>
+        <!--
         <form role="search" class="navbar-search">
             <div class="position-relative">
                 <a href="javascript:void(0);" class="navbar-search-icon"><span class="feather-icon"><i data-feather="search"></i></span></a>
                 <input type="text" name="example-input1-group2" class="form-control" placeholder="Ketik ID Pesanan Mu Disini ...">
                 <a id="navbar_search_close" class="navbar-search-close" href="#"><span class="feather-icon"><i data-feather="x"></i></span></a>
             </div>
-        </form>
+        </form>-->
         <!-- /Top Navbar -->
 
         <!-- Vertical Nav -->

@@ -1001,12 +1001,41 @@ class Payment_model extends CI_model
 
         return $data;
     }
+    //-FUNCTION QUERY SALDO--------------------------------------------------------
+    function min_saldo($id_user, $jumlah){
+        $cond_id = array(
+            'id_user' => $id_user
+        );
+        $bef_saldo = $this->get_saldo($cond_id);
+        $aft_saldo = $bef_saldo->saldo-$jumlah;
 
-    //QR Payment Model ----------------------------------------------------------------------------------------------------------
+        $this->db->set('saldo', $aft_saldo);
+        $this->db->where('id_user', $id_user);
+        if($aft_saldo <= 0){
+            return false;
+        }else{
+            return $this->db->update('saldo');
+        }
+    }
+
+    function plus_saldo($id_user, $jumlah){
+        $cond_id = array(
+            'id_user' => $id_user
+        );
+        $bef_saldo = $this->get_saldo($cond_id);
+        $aft_saldo = $bef_saldo->saldo+$jumlah;
+
+        $this->db->set('saldo', $aft_saldo);
+        $this->db->where('id_user', $id_user);
+        return $this->db->update('saldo');
+    }
+
+    //-QR Payment Model ----------------------------------------------------------------------------------------------------------
     function get_data_qr_payment()
     {
-        $this->db->select('*');
-        $this->db->order_by('created_date', 'ASC');
+        $this->db->select('qr_event.*, saldo.id_user, saldo.saldo');
+        $this->db->join('saldo', 'qr_event.id = saldo.id_user');
+        $this->db->order_by('qr_event.created_date', 'ASC');
         return  $this->db->get('qr_event')->result_array();
     }
 
@@ -1027,13 +1056,25 @@ class Payment_model extends CI_model
             $data['expired_path']
         );
         */
+        $data_saldo = array(
+            'id_user' => $data['id'],
+            'saldo'   => 0
+        );
 
+        $this->db->insert('saldo', $data_saldo);
         return $this->db->insert('qr_event', $data);
     }
 
-    function delete_qr_payment_event($id){
+    function update_qr_payment($id, $data){
         $this->db->where('id', $id);
+        return $this->db->update('qr_event', $data);
+    }
 
+    function delete_qr_payment_event($id){
+        $this->db->where('id_user', $id);
+        $this->db->delete('saldo');
+
+        $this->db->where('id', $id);
         return $this->db->delete('qr_event');
     }
 
@@ -1045,23 +1086,70 @@ class Payment_model extends CI_model
 
     function pay_qr_payment($id_user, $id_qris, $invoice){
         $data_qr = $this->get_qr_event_by_id($id_qris);
+        $type_w  = 'QR Payment : '. $data_qr['nama_event'];
         
         $data_ins = array(
-            'invoice' => $trq,
-            'id_user' => $id_user,
-            
-            'jumlah'  => $data_qr['jumlah'],
-            'bank'    => 'QR Event',
-            'rekening'=> 'JPay',
-            'type'    => 'Pay-',
-            'status'  => 1,
+            'uuid'              => $id_qris,
+            'invoice'           => $invoice,
+            'id_user'           => $id_user,
+
+            'jumlah'            => $data_qr['nominal'],
+            'tujuan'            => $type_w,
+
+            'bank'              => 'Saldo JPay',
+            'rekening'          => 'JPay',
+            'type'              => 'QR Payment',
+            'status'            => 1
         );
 
-        $this->db->insert($data_ins);
+        $this->db->insert('wallet', $data_ins);
+
+        return TRUE;
     }
 
     function add_log_qr_payment($data){
         $this->db->insert('qr_event_history', $data);
 
+    }
+
+    function get_qr_event_history(){
+        $this->db->select('qr_event_history.*, saldo.id_user, saldo.saldo, qr_event.id, qr_event.nama_event, pelanggan.id AS id_user_p, pelanggan.fullnama AS nama_user_p');
+        
+        $this->db->join('qr_event', 'qr_event_history.id_qr_event = qr_event.id', 'LEFT');
+        $this->db->join('pelanggan', 'qr_event_history.id_user = pelanggan.id');
+        $this->db->join('saldo', 'qr_event_history.id_user = saldo.id_user');
+
+        $this->db->order_by('qr_event_history.regtime', DESC);
+
+        return $this->db->get('qr_event_history')->result_array();
+    }
+
+    function get_detail_qr_event($id_qr){
+        $this->db->select('qr_event_history.*, wallet.id_user as id_user_w, wallet.invoice as invoice_w,wallet.jumlah as jumlah_w, pelanggan.id, pelanggan.fullnama as nama_user');
+
+        $this->db->join('wallet', 'qr_event_history.invoice = wallet.invoice');
+        $this->db->join('pelanggan', 'wallet.id_user = pelanggan.id');
+
+        $this->db->where('qr_event_history.id_qr_event', $id_qr);
+        $this->db->order_by('qr_event_history.regtime', DESC);
+
+        return $this->db->get('qr_event_history')->result_array();
+    }
+
+    function get_report_qr_event(){
+        $data_qr = $this->get_qr_event_history();
+        foreach($data_qr as $qr){
+            $data_report = array(
+                'invoice'        => $qr['invoice'],
+                'id_user_p'      => $qr['id_user_p'],
+                'nama_user_p'    => $qr['nama_user_p'],
+                'id_qr_event'    => $qr['id_qr_event'],
+                'nama_event'     => $qr['nama_event'],
+                'regtime'        => $qr['regtime']
+            );
+            
+        }
+
+        return $data_report;
     }
 }

@@ -7,6 +7,9 @@ application/config/config.php
 !*/cache/index.html
 !*/cache/.htaccess
 
+#Ignore folder image/*
+images/*
+
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
@@ -17,3 +20,5 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
+composer
+.htaccess
