@@ -7,6 +7,9 @@
                     <?php echo $this->session->flashdata('ubah'); ?>
                 </div>
         <?php endif; ?>
+        <a href="<?=base_url('payments/qr')?>">
+            <button class="btn btn-outline-success">Kembali</button>
+        </a>
         <h3> Detail QR Event</h3>
 
         <?php   
@@ -24,6 +27,9 @@
         <br>
         <a href='<?= base_url(). 'payments/regen_qr/'.$id; ?>'>
             <button class='btn btn-outline-warning'>Re-generate QR</button>
+        </a>
+        <a href='<?= base_url(). 'payments/qr_gen_logo/'.$image_path; ?>'>
+            <button class='btn btn-outline-warning'>Generate with logo</button>
         </a>
         <table class="table">
             <tr>

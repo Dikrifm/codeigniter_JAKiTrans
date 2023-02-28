@@ -45,7 +45,7 @@ License: You must have a valid license purchased only from themeforest to legall
                                     </div>
                                 <?php endif; ?>
                                 <?= form_open_multipart('login/aksi_login'); ?>
-                                    <h1 class="display-4 mb-10">Development Kontrol</h1>
+                                    <h1 class="display-4 mb-10">Development Control *Local</h1>
                                     <p class="mb-30">Masuk Sebagai Admin.</p>
                                     <div class="form-group">
                                         <input class="form-control" id="exampleInputEmail1" placeholder="Username" name="user_name" type="text" required>
@@ -62,7 +62,7 @@ License: You must have a valid license purchased only from themeforest to legall
                                         <input class="custom-control-input" id="same-address" type="checkbox" checked>
                                         <label class="custom-control-label font-14" for="same-address">Tetap Masuk</label>
                                     </div>
-                                    <button class="btn btn-primary btn-block" type="submit">Login</button>
+                                    <button class="btn btn-warning btn-block" type="submit">Login</button>
                                 <?= form_close(); ?>
                             </div>
                         </div>

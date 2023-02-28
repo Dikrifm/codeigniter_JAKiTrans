@@ -291,14 +291,18 @@ class Payments extends CI_Controller
     function qr_gen($payload_qr, $image_name){
         $fullpath = FCPATH.'images/qr/'.$image_name;
         $logopath = FCPATH.'images/cek1.png';
-        /*
-        $params['data'] = 'cek QR Logo 3';//$payload_qr; 
+        
+        $params['data'] = $payload_qr; 
         $params['level'] = 'H'; //H=High
         $params['size'] = 10;
         $params['savename'] = $fullpath; 
         
         $this->ciqrcode->generate($params);
-        */
+        
+    }
+
+    function qr_gen_logo(){
+        
         $QR = imagecreatefrompng($fullpath);
         // memulai menggambar logo dalam file qrcode
         $logo = imagecreatefromstring($logopath);
@@ -452,9 +456,9 @@ class Payments extends CI_Controller
     }
     
     function qrcode(){
-        
-        $qrpath   = FCPATH.'images/qr/qr-230902541525.png';
-        $logopath = FCPATH.'images/logo.png';
+        /*
+        $qrpath   = base_url().'images/qr/qr-231402202518.png';
+        $logopath = base_url().'images/logo2.jpg';
 
         $QR   = imagecreatefrompng($qrpath);
         $logo = imagecreatefromstring(file_get_contents($logoPath));
@@ -468,15 +472,17 @@ class Payments extends CI_Controller
         $logo_width  = imagesx($logo);
         $logo_height = imagesy($logo);
         
-        $logo_qr_width = $QR_width/4;
+        $logo_qr_width = $QR_width/2;
         $scale = $logo_width/$logo_qr_width;
         $logo_qr_height = $logo_height/$scale;
         
         imagecopyresampled($QR,$logo,$QR_width/2.5,$QR_height/2.5, 0, 0, $logo_qr_width, $logo_qr_height, $logo_width, $logo_height);
-        imagepng($QR, FCPATH.'images/qr/qrlogo2.png');
+        header('Content-Type: image/png');
+        imagepng($QR, FCPATH.'images/qr/qrlogo1.png');
+        //imagedestroy($QR);
         
-        $data['testing1'] = FCPATH.'images/qr/qrlogo2.png'; 
-        $this->load->view('testcatch', $data);
+        //$data['testing1'] = base_url().'images/qr/qr-231402202518.png'; 
+        */$this->load->view('testcatch', $data);
         
         /* 
         param 
