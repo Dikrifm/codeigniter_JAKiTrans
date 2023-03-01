@@ -1,5 +1,6 @@
 /application/config/*
 /images/*
+/.htaccess
 
 */config/development
 */logs/log-*.php
